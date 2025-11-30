@@ -1,0 +1,18 @@
+<svg width="1600" height="900" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0F172A"/>
+  <rect x="40" y="40" width="1520" height="60" rx="8" fill="rgba(255,255,255,0.1)"/>
+  <rect x="40" y="120" width="360" height="740" rx="12" fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.3)" stroke-width="2"/>
+  <rect x="440" y="120" width="1120" height="740" rx="12" fill="rgba(30,41,59,0.5)" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  <rect x="480" y="160" width="1040" height="60" rx="8" fill="rgba(255,255,255,0.05)"/>
+  <rect x="480" y="260" width="1040" height="40" rx="4" fill="rgba(59,130,246,0.1)"/>
+  <rect x="480" y="320" width="1040" height="40" rx="4" fill="rgba(16,185,129,0.1)"/>
+  <rect x="480" y="380" width="1040" height="40" rx="4" fill="rgba(245,158,11,0.1)"/>
+  <rect x="480" y="440" width="1040" height="40" rx="4" fill="rgba(239,68,68,0.1)"/>
+  <rect x="480" y="500" width="1040" height="40" rx="4" fill="rgba(139,92,246,0.1)"/>
+  <rect x="480" y="560" width="1040" height="40" rx="4" fill="rgba(16,185,129,0.1)"/>
+  <rect x="480" y="620" width="1040" height="40" rx="4" fill="rgba(245,158,11,0.1)"/>
+  <rect x="480" y="680" width="1040" height="40" rx="4" fill="rgba(59,130,246,0.1)"/>
+  <rect x="480" y="740" width="1040" height="40" rx="4" fill="rgba(16,185,129,0.1)"/>
+  <text x="800" y="30" font-family="Arial" font-size="24" fill="rgba(255,255,255,0.7)" text-anchor="middle">Drill-Down Screens</text>
+</svg>
+

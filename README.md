@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 Portfolio
 
-## Getting Started
+Персональное портфолио дизайнера продуктов, созданное с использованием Next.js, TypeScript и Tailwind CSS.
 
-First, run the development server:
+## 🚀 Технологии
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** - React фреймворк для продакшена
+- **TypeScript** - Типизированный JavaScript
+- **Tailwind CSS** - Utility-first CSS фреймворк
+- **Framer Motion** - Библиотека для анимаций
+- **React Markdown** - Рендеринг Markdown контента
+
+## 📋 Структура проекта
+
+```
+portfolio/
+├── app/
+│   ├── cases/           # Страницы кейс-стади
+│   ├── data/            # Данные проектов
+│   ├── globals.css      # Глобальные стили
+│   ├── layout.tsx       # Основной layout
+│   └── page.tsx         # Главная страница
+├── components/          # React компоненты
+│   ├── CaseImage.tsx    # Компонент для изображений кейсов
+│   ├── Header.tsx       # Шапка сайта
+│   ├── Hero.tsx         # Hero секция
+│   ├── ProjectCard.tsx   # Карточка проекта
+│   └── SectionTitle.tsx # Заголовок секции
+├── public/              # Статические файлы
+│   ├── cases/           # Изображения кейс-стади
+│   └── projects/        # Изображения проектов
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Установка и запуск
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Установить зависимости
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Запустить dev сервер
+npm run dev
 
-## Learn More
+# Собрать для продакшена
+npm run build
 
-To learn more about Next.js, take a look at the following resources:
+# Запустить продакшен версию
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📝 Добавление нового проекта
 
-## Deploy on Vercel
+1. Добавьте данные проекта в `app/data/projects.ts`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```typescript
+{
+  id: 'project-id',
+  title: 'Название проекта',
+  description: 'Описание проекта',
+  image: '/projects/project-image.svg',
+  url: '/cases/project-id'
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Создайте страницу кейса в `app/cases/project-id/page.tsx`
+
+3. Добавьте изображения в `public/cases/project-id/images/`
+
+## 🎨 Дизайн
+
+Портфолио создано с фокусом на:
+- Минималистичный дизайн
+- Красивые карточки проектов
+- Плавные анимации
+- Адаптивная верстка
+- Темная тема
+
+## 🌐 Деплой
+
+Проект готов к деплою на:
+- **Vercel** (рекомендуется для Next.js)
+- **Netlify**
+- **Railway**
+- **Render**
+
+## 📄 Лицензия
+
+MIT
