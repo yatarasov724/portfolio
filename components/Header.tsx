@@ -8,11 +8,11 @@ export default function Header() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="max-w-5xl mx-auto px-6 py-8"
+      className="absolute top-0 left-0 right-0 max-w-5xl mx-auto px-6 py-8 z-20"
     >
       <nav className="flex justify-between items-center">
         <a href="/" className="text-xl font-semibold text-gray-50 hover:text-gray-100 transition-colors">
-          Your Name
+          Yaroslav Tarasov
         </a>
         <div className="flex gap-8">
           <a href="#projects" className="text-gray-400 hover:text-gray-100 transition-colors">

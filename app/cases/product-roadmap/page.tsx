@@ -9,7 +9,7 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import CaseImage from '@/components/CaseImage'
 
-export default function ISYCasePage() {
+export default function ProductRoadmapCasePage() {
   const heroRef = useRef<HTMLElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -53,99 +53,103 @@ export default function ISYCasePage() {
   
   const markdownContent = `## Обзор
 
-Проект — создание дашборда для C-level и комплаенса: единое окно метрик, рисков и статусов процессов.
+Проект — создание roadmap для согласования релизов и планирования сервисов на год: единый инструмент для упрощения согласования между командами, избежания конфликтов в карточках релизов и повышения прозрачности процессов.
 
 **Роль:** Product / UI/UX Designer  
 
-**Формат работы:** аналитика → архитектура → прототипы → UI → итоговый дизайн
+**Формат работы:** сбор требований → формирование статусной модели → проектирование архитектуры → создание сценариев → визуальная структура → рабочие артефакты
+
+**Коллаборация:** Работал вместе с Release Manager (Head of PM) над формированием статусной модели, сбором требований и проектированием архитектуры.
 
 ## Проблема
 
-- Метрики были разрознены, отчёты собирались вручную.  
+- Текущий сервис был непрозрачным для продакт-менеджеров: интерфейс был сложным, отсутствовали чёткие регламенты и правила работы.  
 
-- Руководство не имело единого источника правды.  
+- Это приводило к ошибкам, задержкам и разрозненному процессу согласования релизов.  
 
-- Комплаенс-подразделение тратили много времени на поиск отклонений.  
+- У всех участников были разные представления о том, как должен работать сервис.  
 
-- Не было удобной визуализации: трендов, рисков, глубокой аналитики.
+- Стейкхолдеры опирались на собственные гипотезы и привычные ярлыки — любой шаг требовал аргументации.  
+
+- Продакт-менеджеры не понимали, что именно нужно делать в интерфейсе, и какие шаги обязательны.
 
 ## Цели
 
-- Создать единый executive-дашборд для топ-менеджмента.  
+- Создать единый инструмент для планирования релизов и сервисов на год.  
 
-- Снизить время анализа отчётов.  
+- Упростить согласование между командами.  
 
-- Сделать визуально понятные KPI и risk-метрики.  
+- Избежать конфликтов в карточках релизов.  
 
-- Обеспечить drill-down: от общей картины → к деталям.
+- Повысить прозрачность процессов для всех участников.
 
 ## Процесс
 
-### 01. Исследование и анализ
+### 01. Сбор требований и исследование
 
-- Изучил источники данных и систему метрик.  
+- Выявлял требования совместно с Release Manager, уточнял их по ходу работы.  
 
-- Сегментировал целевую аудиторию: C-level, комплаенс, security-team.  
+- Собирал требования с участников процесса: продакт-менеджеров и топ-менеджмента.  
 
-- Определил ключевые сценарии использования: weekly review, risk overview, operational monitoring.
+- Изучил текущие проблемы и ограничения существующего сервиса.
 
 ### 02. Информационная архитектура
 
-- Построил структуру дашборда: KPI → Risks → Trends → Details.  
+- Проектировал информационную архитектуру и продумывал основные сценарии взаимодействия.  
 
-- Спроектировал логику фильтров и уровни вложенности.  
+- Разделил логику работы на два ключевых сценария: для продакт-менеджеров и для топ-менеджмента.  
 
-- Определил визуальный язык для уровней риска.
+- Проработал статусную модель roadmap'а и отдельную статусную модель релизов.  
 
-### 03. UX-каркасы и прототипирование
+- Учитывал технические ограничения: сервис на Angular, дизайн-система на React — адаптировал решения под существующую архитектуру.
 
-Создал варианты группировки метрик:  
+### 03. UX-проектирование и сценарии
 
-- карточки KPI;  
+- Разделил интерфейс на два сценария: заполнение и поддержание roadmap'а PM-ами, и согласование релизов топ-менеджментом.  
 
-- risk-heat-map;  
+- Создал поток действий для каждой роли.  
 
-- тренды и графики;  
+- Учитывал, что требования менялись по ходу — строил гибкую архитектуру.
 
-- таблицы для детального анализа.
+### 04. Визуальная структура и артефакты
 
-### 04. UI-дизайн
+- Визуализировал карточку продукта со статусами релизов и возможностью детального просмотра.  
 
-- Стиль: строгий, корпоративный, читаемый.  
+- Отвечал за визуальную структуру, логику интерфейса и подготовку рабочих артефактов.  
 
-- Компоненты: карточки, диаграммы, таблицы, статусы.  
-
-- Дизайн-системный набор блоков для аналитики.
+- Сформировал требования, которые будут донесены до продакт-менеджеров.
 
 ## Результаты
 
-- Руководство получило "единое окно" для еженедельных встреч.  
+- Готовая структура roadmap'а и правила его использования будут переданы продуктовым командам.  
 
-- Сократилось время анализа данных (в разы — если есть цифры, можно добавить).  
+- Создан единый стандарт поддержания данных.  
 
-- Комплаенс стал быстрее находить отклонения.  
+- Снижено количество ошибок при планировании релизов.  
 
-- Интерфейс стал визуально стандартизированным и понятным для non-tech пользователей.
+- Интерфейс стал понятным для продакт-менеджеров с чёткими регламентами и правилами работы.
 
 ## Выводы
 
-- Как показывать сложные метрики простым языком.  
+- Как работать с неопределёнными требованиями и выявлять их совместно со стейкхолдерами.  
 
-- Как строить информационную архитектуру для enterprise-дашборда.  
+- Как строить гибкую архитектуру, когда требования меняются по ходу работы.  
 
-- Как балансировать: много данных ≠ перегруженный интерфейс.  
+- Как учитывать технические ограничения (Angular vs React) при проектировании интерфейса.  
 
-- Как дизайн-система ускоряет работу над аналитикой.
+- Как разделять сценарии для разных ролей (PM и топ-менеджмент) в едином инструменте.
 
 ## Артефакты
 
 Можно добавить:  
 
-- mind-map структуры дашборда;  
+- статусная модель roadmap'а и релизов;  
 
-- варианты концептов;  
+- варианты концептов интерфейса для разных ролей;  
 
-- сравнение "каркас → финальный UI".`
+- сравнение "каркас → финальный UI";  
+
+- потоки действий для PM и топ-менеджмента.`
 
   return (
     <main className="min-h-screen">
@@ -176,7 +180,7 @@ export default function ISYCasePage() {
           >
             {/* Glow effect on hover */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-500 -z-10"
+              className="absolute inset-0 bg-gradient-to-r from-orange-500/20 via-red-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-500 -z-10"
               animate={{
                 opacity: isHovered ? 0.3 : 0,
               }}
@@ -185,8 +189,8 @@ export default function ISYCasePage() {
             
             <div className="relative w-full max-w-5xl h-full">
               <Image
-                src="/hero-image.png"
-                alt="Compliance & C-level Dashboard"
+                src="/projects/project-2.svg"
+                alt="Product Roadmap"
                 fill
                 priority
                 quality={100}
@@ -195,20 +199,19 @@ export default function ISYCasePage() {
                   imageRendering: 'crisp-edges',
                   WebkitImageRendering: 'crisp-edges',
                 }}
-              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                // Fallback to SVG if PNG fails
-                const target = e.currentTarget
-                target.src = '/cases/isy-iseeyou/images/hero.svg'
-                target.style.opacity = '0.25'
-              }}
-            />
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                  // Fallback to placeholder if image fails
+                  const target = e.currentTarget
+                  target.style.opacity = '0.25'
+                }}
+              />
             </div>
             
             {/* Animated border gradient */}
             <div
               className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               style={{
-                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, rgba(147, 51, 234, 0.4) 50%, rgba(236, 72, 153, 0.4) 100%)',
+                background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.4) 0%, rgba(239, 68, 68, 0.4) 50%, rgba(236, 72, 153, 0.4) 100%)',
                 filter: 'blur(8px)',
                 zIndex: -1,
               }}
@@ -216,7 +219,7 @@ export default function ISYCasePage() {
             <div
               className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border-2"
               style={{
-                borderImage: 'linear-gradient(135deg, rgba(59, 130, 246, 0.6) 0%, rgba(147, 51, 234, 0.6) 50%, rgba(236, 72, 153, 0.6) 100%) 1',
+                borderImage: 'linear-gradient(135deg, rgba(249, 115, 22, 0.6) 0%, rgba(239, 68, 68, 0.6) 50%, rgba(236, 72, 153, 0.6) 100%) 1',
               }}
             />
           </motion.div>
@@ -254,7 +257,7 @@ export default function ISYCasePage() {
                 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-50 leading-tight"
               >
                 <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-                  Compliance & C-level Dashboard
+                  Product Roadmap
                 </span>
               </motion.h1>
               <motion.p
@@ -263,7 +266,7 @@ export default function ISYCasePage() {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed"
               >
-                Executive-дашборд для единого представления метрик, рисков и статусов процессов
+                Инструмент согласования релизов и планирования сервисов на год
               </motion.p>
             </motion.div>
           </div>
@@ -326,82 +329,82 @@ export default function ISYCasePage() {
           <h2 className="text-xl font-semibold text-gray-50 mb-12">Решение</h2>
           
           <div className="space-y-24">
-            {/* Executive Dashboard */}
+            {/* Roadmap Overview */}
             <div>
-              <h3 className="text-xl font-semibold text-gray-50 mb-4">Executive Dashboard</h3>
+              <h3 className="text-xl font-semibold text-gray-50 mb-4">Roadmap Overview</h3>
               <p className="text-lg text-gray-400 mb-8 italic">
-                Главный экран для руководителей: ключевые метрики, статус процессов и риски.
+                Главный экран roadmap: временная шкала всех сервисов и релизов.
               </p>
               <div className="relative w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
                 <CaseImage
-                  src="/cases/isy-iseeyou/images/isy-exec-dashboard.png"
-                  alt="Executive Dashboard"
+                  src="/cases/product-roadmap/images/roadmap-overview.png"
+                  alt="Roadmap Overview"
                   className="object-cover"
-                  fallbackSrc="/cases/isy-iseeyou/images/isy-exec-dashboard.svg"
+                  fallbackSrc="/cases/product-roadmap/images/roadmap-overview.svg"
                 />
               </div>
             </div>
 
-            {/* KPI & Status Cards */}
+            {/* Service Timeline */}
             <div>
-              <h3 className="text-xl font-semibold text-gray-50 mb-4">KPI & Status Cards</h3>
+              <h3 className="text-xl font-semibold text-gray-50 mb-4">Service Timeline</h3>
               <p className="text-lg text-gray-400 mb-8 italic">
-                Быстрый просмотр состояния компании "в один взгляд".
+                Временная шкала релизов по сервисам с визуализацией зависимостей.
               </p>
               <div className="relative w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
                 <CaseImage
-                  src="/cases/isy-iseeyou/images/isy-kpi-cards.png"
-                  alt="KPI & Status Cards"
+                  src="/cases/product-roadmap/images/service-timeline.png"
+                  alt="Service Timeline"
                   className="object-cover"
-                  fallbackSrc="/cases/isy-iseeyou/images/isy-kpi-cards.svg"
+                  fallbackSrc="/cases/product-roadmap/images/service-timeline.svg"
                 />
               </div>
             </div>
 
-            {/* Risk Overview & Heat-Map */}
+            {/* Release Cards */}
             <div>
-              <h3 className="text-xl font-semibold text-gray-50 mb-4">Risk Overview & Heat-Map</h3>
+              <h3 className="text-xl font-semibold text-gray-50 mb-4">Release Cards</h3>
               <p className="text-lg text-gray-400 mb-8 italic">
-                Карта рисков по направлениям / департаментам.
+                Детальные карточки релизов с информацией о статусе, датах и зависимостях.
               </p>
               <div className="relative w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
                 <CaseImage
-                  src="/cases/isy-iseeyou/images/isy-risk-map.png"
-                  alt="Risk Overview & Heat-Map"
+                  src="/cases/product-roadmap/images/release-cards.png"
+                  alt="Release Cards"
                   className="object-cover"
-                  fallbackSrc="/cases/isy-iseeyou/images/isy-risk-map.svg"
+                  fallbackSrc="/cases/product-roadmap/images/release-cards.svg"
                 />
               </div>
             </div>
 
-            {/* Trends & Analytics */}
+            {/* Approval Workflow */}
             <div>
-              <h3 className="text-xl font-semibold text-gray-50 mb-4">Trends & Analytics</h3>
+              <h3 className="text-xl font-semibold text-gray-50 mb-4">Approval Workflow</h3>
               <p className="text-lg text-gray-400 mb-8 italic">
-                Графики изменений, паттерны, аномалии.
+                Процесс согласования roadmap топ-менеджментом с визуализацией статусов.
               </p>
               <div className="relative w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
                 <CaseImage
-                  src="/cases/isy-iseeyou/images/isy-trends.png"
-                  alt="Trends & Analytics"
+                  src="/cases/product-roadmap/images/approval-workflow.png"
+                  alt="Approval Workflow"
                   className="object-cover"
-                  fallbackSrc="/cases/isy-iseeyou/images/isy-trends.svg"
+                  fallbackSrc="/cases/product-roadmap/images/approval-workflow.svg"
                 />
               </div>
             </div>
 
-            {/* Drill-Down Screens */}
+            {/* Environment Publication */}
             <div>
-              <h3 className="text-xl font-semibold text-gray-50 mb-4">Drill-Down Screens</h3>
+              <h3 className="text-xl font-semibold text-gray-50 mb-4">Environment Publication</h3>
               <p className="text-lg text-gray-400 mb-8 italic">
-                Детализация метрик: от общей картины → к конкретным событиям или департаментам.
+                Публикация согласованного roadmap в среду для всех заинтересованных сторон.
               </p>
               <div className="relative w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
                 <CaseImage
-                  src="/cases/isy-iseeyou/images/isy-drilldown.png"
-                  alt="Drill-Down Screens"
+                  src="/cases/product-roadmap/images/environment-publication.png"
+                  alt="Environment Publication"
                   className="object-cover"
-                  fallbackSrc="/cases/isy-iseeyou/images/isy-drilldown.svg"
+                  fallbackSrc="/cases/product-roadmap/images/environment-publication.svg"
                 />
               </div>
             </div>
@@ -411,3 +414,5 @@ export default function ISYCasePage() {
     </main>
   )
 }
+
+

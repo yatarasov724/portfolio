@@ -19,7 +19,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-6xl md:text-7xl font-semibold mb-6 text-gray-50">
+          <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-50">
             Product Designer / UI & UX
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl">
@@ -38,7 +38,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <SectionTitle>Projects</SectionTitle>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          <div className="grid grid-cols-1 gap-8 mt-12">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -92,10 +92,10 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <a href="mailto:hello@example.com" className="text-gray-400 hover:text-gray-100 transition-colors">
-            hello@example.com
+          <a href="https://www.linkedin.com/in/yatarasov/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-100 transition-colors">
+            LinkedIn
           </a>
-          <a href="https://t.me/username" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-100 transition-colors">
+          <a href="https://t.me/yatarasov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-100 transition-colors">
             Telegram
           </a>
         </motion.div>
