@@ -6,6 +6,9 @@ import remarkGfm from 'remark-gfm'
 import Image from 'next/image'
 import Header from '@/components/Header'
 import CaseImage from '@/components/CaseImage'
+import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
+import AnimatedSection from '@/components/animations/AnimatedSection'
+import Stagger from '@/components/animations/Stagger'
 
 export default function AgroPlatformCasePage() {
   
@@ -108,8 +111,9 @@ export default function AgroPlatformCasePage() {
 - примеры визуализации данных о полях и культурах.`
 
   return (
-    <main className="min-h-screen">
-      <Header />
+    <SmoothScrollProvider>
+      <main className="min-h-screen">
+        <Header />
       {/* Hero Section */}
       <section className="relative w-full min-h-screen overflow-hidden">
         {/* Gradient Background with Grid Pattern */}
@@ -186,7 +190,7 @@ export default function AgroPlatformCasePage() {
                         style={{
                           imageRendering: 'crisp-edges',
                           WebkitImageRendering: 'crisp-edges',
-                        }}
+                        } as React.CSSProperties}
                         onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                           const target = e.currentTarget
                           target.src = '/projects/project-3.svg'
@@ -377,8 +381,66 @@ export default function AgroPlatformCasePage() {
             </div>
           </div>
         </section>
+
+        {/* Contact/CTA Section */}
+        <AnimatedSection className="mt-32 mb-16" amount={0.1}>
+          <div className="text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-2xl md:text-3xl font-bold text-gray-50 mb-4"
+            >
+              Have questions about this project?
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-lg text-gray-400 mb-8"
+            >
+              Let's discuss the details or check out other projects
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col sm:flex-row justify-center items-center gap-4"
+            >
+              <motion.a
+                href="https://t.me/yatarasov"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
+                </svg>
+                <span>Contact on Telegram</span>
+              </motion.a>
+              
+              <motion.a
+                href="/"
+                className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                <span>View other projects</span>
+              </motion.a>
+            </motion.div>
+          </div>
+        </AnimatedSection>
       </div>
-    </main>
+      </main>
+    </SmoothScrollProvider>
   )
 }
-

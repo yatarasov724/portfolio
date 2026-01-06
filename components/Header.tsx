@@ -15,13 +15,56 @@ export default function Header() {
           Yaroslav Tarasov
         </a>
         <div className="flex gap-8">
-          <a href="#projects" className="text-gray-400 hover:text-gray-100 transition-colors">
+          <a 
+            href="#projects" 
+            onClick={(e) => {
+              e.preventDefault()
+              const element = document.getElementById('projects')
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
+            className="text-gray-400 hover:text-gray-100 transition-colors"
+          >
             Projects
           </a>
-          <a href="#about" className="text-gray-400 hover:text-gray-100 transition-colors">
+          <a 
+            href="#about" 
+            onClick={(e) => {
+              e.preventDefault()
+              const element = document.getElementById('about')
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
+            className="text-gray-400 hover:text-gray-100 transition-colors"
+          >
             About
           </a>
-          <a href="#contact" className="text-gray-400 hover:text-gray-100 transition-colors">
+          <a 
+            href="#skills" 
+            onClick={(e) => {
+              e.preventDefault()
+              const element = document.getElementById('skills')
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
+            className="text-gray-400 hover:text-gray-100 transition-colors"
+          >
+            Skills
+          </a>
+          <a 
+            href="#contact" 
+            onClick={(e) => {
+              e.preventDefault()
+              const element = document.getElementById('contact')
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
+            className="text-gray-400 hover:text-gray-100 transition-colors"
+          >
             Contact
           </a>
         </div>
