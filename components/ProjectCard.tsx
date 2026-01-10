@@ -29,6 +29,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const [imageError, setImageError] = useState(false)
   const isExternal = project.url.startsWith('http')
   
+  // Определяем, является ли проект AgTech для применения специальных стилей
+  const isAgTech = project.url === '/cases/agro-platform' || project.domain === 'AgTech'
+  
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
     if (isExternal) {
@@ -52,8 +55,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="flex flex-col relative z-0">
         {/* Text Content - сверху */}
         <div className="flex flex-col p-8 md:p-10 bg-gradient-to-b from-gray-950/90 via-gray-950/60 to-transparent">
-          {/* Domain/Tag */}
-          {project.domain && (
+          {/* Tags */}
+          {project.tags && project.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {project.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="text-xs font-medium text-gray-400 uppercase tracking-wide px-2.5 py-1 rounded-full bg-gray-800/50 border border-gray-700/50"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          {/* Domain (fallback if no tags) */}
+          {(!project.tags || project.tags.length === 0) && project.domain && (
             <div className="mb-3">
               <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
                 {project.domain}
