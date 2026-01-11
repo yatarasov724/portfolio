@@ -30,13 +30,29 @@ export const projects: Project[] = [
     ]
   },
   {
+    id: '2',
+    title: 'ISY I See You — Executive Dashboard',
+    description: 'Executive dashboard for C-level and compliance team: unified view of infrastructure statistics, KPIs, and operational metrics. Automated reporting system that replaced manual Excel exports and chart building.',
+    image: '/cases/isy-iseeyou/images/laptop-dashboard.png',
+    url: '/cases/isy-iseeyou',
+    tags: ['B2B', 'Analytics', 'Enterprise'],
+    period: '2025',
+    domain: 'Security & Analytics',
+    whatIDid: [
+      'Designed automated dashboard for infrastructure statistics collection',
+      'Created unified view replacing manual Excel exports and chart building',
+      'Built real-time data visualization with detailed navigation from overview to specifics',
+      'Reduced report generation time from hours (manual process) to minutes (automated)'
+    ]
+  },
+  {
     id: '3',
     title: 'Agricultural enterprise management platform',
     description: 'Digital platform for farm management that optimizes land, equipment, and agricultural processes. It improves efficiency, decision-making, and data accuracy',
     image: '/cases/agro-platform/images/agro-platform-hero.png',
     url: '/cases/agro-platform',
     tags: ['B2B', 'AgTech'],
-    period: '2024',
+    period: '2023 – 2024',
     domain: 'AgTech',
     whatIDid: [
       'Designed field management interface with map visualization',

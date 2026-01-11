@@ -29,8 +29,6 @@ export default function ProductRoadmapCasePage() {
 
 Проект — создание roadmap для согласования релизов и планирования сервисов на год: единый инструмент для упрощения согласования между командами, избежания конфликтов в карточках релизов и повышения прозрачности процессов.
 
-**Роль:** Product / UI/UX Designer  
-
 **Формат работы:** сбор требований → формирование статусной модели → проектирование архитектуры → создание сценариев → визуальная структура → рабочие артефакты
 
 **Коллаборация:** Работал вместе с Release Manager (Head of PM) над формированием статусной модели, сбором требований и проектированием архитектуры.
@@ -109,6 +107,14 @@ export default function ProductRoadmapCasePage() {
         <Header />
         {/* Hero Section */}
         <section className="relative w-full overflow-hidden">
+          {/* Subtle radial gradient background glow */}
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 60% 45% at 50% 65%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 75%)',
+            }}
+          />
+          
           {/* Content Container */}
         <div className="relative z-10 flex flex-col items-center pt-36 sm:pt-40 md:pt-44 lg:pt-48 pb-6 sm:pb-8 md:pb-10 px-6">
           <div className="w-full max-w-5xl mx-auto">

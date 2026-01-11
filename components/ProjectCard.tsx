@@ -54,56 +54,44 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="flex flex-col relative z-0">
         {/* Text Content - сверху */}
-        <div className="flex flex-col p-8 md:p-10 bg-gradient-to-b from-gray-950/90 via-gray-950/60 to-transparent">
-          {/* Tags */}
-          {project.tags && project.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-3">
-              {project.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="text-xs font-medium text-gray-400 uppercase tracking-wide px-2.5 py-1 rounded-full bg-gray-800/50 border border-gray-700/50"
-                >
-                  {tag}
+        <div className="flex flex-col p-8 bg-gradient-to-b from-gray-950/90 via-gray-950/60 to-transparent">
+          {/* Заголовок и теги в одной строке */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
+            {/* Заголовок */}
+            <h3 className="text-xl md:text-2xl font-medium text-gray-100 leading-tight flex-1">
+              {project.title.split('\n').map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 && <br />}
                 </span>
               ))}
-            </div>
-          )}
-          
-          {/* Domain (fallback if no tags) */}
-          {(!project.tags || project.tags.length === 0) && project.domain && (
-            <div className="mb-3">
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
-                {project.domain}
-              </span>
-            </div>
-          )}
-          
-          {/* Заголовок */}
-          <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight mb-3">
-            {project.title.split('\n').map((line, i, arr) => (
-              <span key={i}>
-                {line}
-                {i < arr.length - 1 && <br />}
-              </span>
-            ))}
-          </h3>
+            </h3>
+            
+            {/* Tags справа от заголовка */}
+            {(project.tags && project.tags.length > 0) || project.domain ? (
+              <div className="flex flex-wrap gap-1.5 items-center sm:flex-shrink-0 sm:mt-1">
+                {project.tags && project.tags.length > 0 ? (
+                  project.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="text-[10px] font-normal text-gray-500 uppercase tracking-wide px-2 py-0.5 rounded bg-gray-800/30"
+                    >
+                      {tag}
+                    </span>
+                  ))
+                ) : project.domain ? (
+                  <span className="text-[10px] font-normal text-gray-500 uppercase tracking-wide px-2 py-0.5 rounded bg-gray-800/30">
+                    {project.domain}
+                  </span>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
           
           {/* Description */}
           <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-4">
             {project.description}
           </p>
-          
-          {/* What I did */}
-          {project.whatIDid && project.whatIDid.length > 0 && (
-            <ul className="space-y-2 mb-4">
-              {project.whatIDid.map((item, index) => (
-                <li key={index} className="flex items-start gap-3 text-sm text-gray-400">
-                  <span className="w-1.5 h-1.5 bg-gray-500 mt-1.5 flex-shrink-0 rotate-45" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          )}
           
           {/* Period */}
           {project.period && (
@@ -114,7 +102,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
         
         {/* Image - снизу */}
-        <div className="relative w-full h-[280px] md:h-[380px] lg:h-[480px] overflow-hidden px-8 md:px-10">
+        <div className="relative w-full h-[280px] md:h-[380px] lg:h-[480px] overflow-hidden px-8">
           <div className="relative w-full h-full overflow-hidden">
             <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden">
               {project.image && !imageError ? (
