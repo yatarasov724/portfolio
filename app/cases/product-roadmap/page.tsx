@@ -15,12 +15,12 @@ import Stagger from '@/components/animations/Stagger'
 const HERO_CONFIG = {
   image: {
     src: '/cases/product-roadmap/images/product-roadmap-hero.png',
-    alt: 'Product Roadmap Dashboard',
+    alt: 'Дашборд Product Roadmap',
     height: '125%' as const,
   },
   content: {
     headline: 'Product Roadmap',
-    subheadline: 'Roadmap tool for coordinating releases and planning services for the year. A unified instrument to simplify coordination between teams, avoid conflicts in release cards, and increase process transparency.',
+    subheadline: 'Инструмент для согласования релизов и планирования сервисов на год. Единый инструмент для упрощения координации между командами, избежания конфликтов в карточках релизов и повышения прозрачности процессов.',
   },
 } as const
 
@@ -315,7 +315,7 @@ export default function ProductRoadmapCasePage() {
               <div>
                 <Stagger className="mb-6" staggerDelay={0.08}>
                   <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                    Roadmap Overview
+                    Обзор Roadmap
                   </h3>
                   <p className="text-lg text-gray-400 max-w-3xl mb-6">
                     Реализована возможность переключения между годовыми периодами, внедрён годовой цикл роадмепа с чёткой статусной моделью, добавлена цветовая легенда для интуитивного понимания статусов и приоритетов. Главный экран roadmap: временная шкала всех сервисов и релизов.
@@ -331,7 +331,7 @@ export default function ProductRoadmapCasePage() {
                   <div className="relative w-full">
                     <Image
                       src="/cases/product-roadmap/images/roadmap%20main.png"
-                      alt="Roadmap Overview"
+                      alt="Обзор Roadmap"
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"
@@ -348,7 +348,7 @@ export default function ProductRoadmapCasePage() {
               <div>
                 <Stagger className="mb-6" staggerDelay={0.08}>
                   <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                    Product Card
+                    Карточка продукта
                   </h3>
                   <p className="text-lg text-gray-400 max-w-3xl">
                     Детальные карточки релизов с информацией о статусе, датах и зависимостях.
@@ -364,7 +364,7 @@ export default function ProductRoadmapCasePage() {
                   <div className="relative w-full">
                     <Image
                       src="/cases/product-roadmap/images/card.png"
-                      alt="Product Card"
+                      alt="Карточка продукта"
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"
@@ -381,7 +381,7 @@ export default function ProductRoadmapCasePage() {
               <div>
                 <Stagger className="mb-6" staggerDelay={0.08}>
                   <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                    History
+                    История изменений
                   </h3>
                   <p className="text-lg text-gray-400 max-w-3xl">
                     История изменений roadmap с возможностью отслеживания изменений.
@@ -397,7 +397,7 @@ export default function ProductRoadmapCasePage() {
                   <div className="relative w-full">
                     <Image
                       src="/cases/product-roadmap/images/history.png"
-                      alt="History"
+                      alt="История изменений"
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"

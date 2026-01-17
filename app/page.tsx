@@ -29,7 +29,7 @@ export default function Home() {
                 Product Designer / UI & UX
               </p>
               <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-                Product Designer focused on B2B, complex systems, dashboards, and internal tools. I design interfaces that simplify complex workflows and help teams work more efficiently.
+                Product Designer, специализируюсь на B2B продуктах, сложных системах, дашбордах и внутренних инструментах. Создаю интерфейсы, которые упрощают сложные рабочие процессы и помогают командам работать эффективнее.
               </p>
               
               {/* CTA Buttons */}
@@ -51,7 +51,7 @@ export default function Home() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  View projects
+                  Смотреть проекты
                 </motion.button>
                 <motion.a
                   href="/cv.pdf"
@@ -60,7 +60,7 @@ export default function Home() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Download CV
+                  Скачать резюме
                 </motion.a>
               </div>
             </motion.div>
@@ -76,16 +76,16 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle>About</SectionTitle>
+          <SectionTitle>О себе</SectionTitle>
           <div className="mt-12 max-w-3xl space-y-6">
             <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-              I'm a Product Designer with 5+ years of experience specializing in B2B products, complex systems, and enterprise tools. I've worked at T1 and Kaspersky, where I've designed interfaces for dashboards, internal platforms, and data-heavy applications.
+              Product Designer с опытом работы более 5 лет, специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1 и Kaspersky, где проектировал интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.
             </p>
             <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-              My focus is creating structured and scalable UX for systems where clarity is essential. I enjoy turning complicated processes into straightforward user journeys that help teams work more efficiently.
+              Моя основная задача — создавать структурированный и масштабируемый UX для систем, где важна ясность. Мне нравится превращать сложные процессы в понятные пользовательские сценарии, которые помогают командам работать эффективнее.
             </p>
             <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-              I collaborate closely with product managers, developers, and stakeholders to ensure designs are both user-friendly and technically feasible. I manage component libraries, improve design consistency, and work with development teams to ensure smooth implementation.
+              Тесно сотрудничаю с продакт-менеджерами, разработчиками и стейкхолдерами, чтобы обеспечить удобство использования и техническую реализуемость дизайна. Управляю библиотеками компонентов, улучшаю консистентность дизайна и работаю с командами разработки для плавной реализации.
             </p>
           </div>
         </motion.div>
@@ -99,7 +99,7 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle>Projects</SectionTitle>
+          <SectionTitle>Проекты</SectionTitle>
           <div className="grid grid-cols-1 gap-8 mt-12">
             {projects.map((project, index) => (
               <motion.div
@@ -124,16 +124,16 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle>Skills & Focus</SectionTitle>
+          <SectionTitle>Навыки и фокус</SectionTitle>
           <div className="mt-12">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <motion.div 
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">UX for Complex Flows</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">UX для сложных процессов</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Designing intuitive workflows for enterprise systems and data-heavy applications
+                  Проектирование интуитивных рабочих процессов для корпоративных систем и приложений с большим объемом данных
                 </p>
               </motion.div>
               
@@ -141,9 +141,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Design Systems</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Дизайн-системы</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Building and maintaining component libraries for scalable product development
+                  Создание и поддержка библиотек компонентов для масштабируемой разработки продуктов
                 </p>
               </motion.div>
               
@@ -151,9 +151,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Dashboards & Analytics</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Дашборды и аналитика</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Creating clear data visualizations and executive dashboards for decision-making
+                  Создание понятных визуализаций данных и дашбордов для топ-менеджмента для принятия решений
                 </p>
               </motion.div>
               
@@ -161,9 +161,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">User Research</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Исследование пользователей</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Conducting research to understand user needs and validate design decisions
+                  Проведение исследований для понимания потребностей пользователей и валидации дизайн-решений
                 </p>
               </motion.div>
               
@@ -171,9 +171,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Data-Informed Decisions</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Решения на основе данных</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Using analytics and metrics to guide design improvements and optimizations
+                  Использование аналитики и метрик для улучшения дизайна и оптимизации
                 </p>
               </motion.div>
               
@@ -181,9 +181,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Internal Tools</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Внутренние инструменты</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Designing efficient interfaces for internal platforms and operational tools
+                  Проектирование эффективных интерфейсов для внутренних платформ и операционных инструментов
                 </p>
               </motion.div>
               
@@ -191,9 +191,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Stakeholder Collaboration</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Работа со стейкхолдерами</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Working with product managers, developers, and leadership to align on solutions
+                  Сотрудничество с продакт-менеджерами, разработчиками и руководством для согласования решений
                 </p>
               </motion.div>
               
@@ -201,9 +201,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Information Architecture</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Информационная архитектура</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Structuring complex information and organizing content for optimal user navigation
+                  Структурирование сложной информации и организация контента для оптимальной навигации пользователей
                 </p>
               </motion.div>
               
@@ -211,9 +211,9 @@ export default function Home() {
                 className="p-6 bg-gray-900/50 rounded-lg border border-gray-800/50 hover:border-gray-700/50 transition-all h-full flex flex-col"
                 whileHover={{ scale: 1.02, y: -4 }}
               >
-                <h3 className="text-lg font-semibold text-gray-50 mb-2">Prototyping & Testing</h3>
+                <h3 className="text-lg font-semibold text-gray-50 mb-2">Прототипирование и тестирование</h3>
                 <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                  Creating interactive prototypes and validating designs through user testing
+                  Создание интерактивных прототипов и валидация дизайна через пользовательское тестирование
                 </p>
               </motion.div>
             </div>
@@ -231,10 +231,10 @@ export default function Home() {
           className="text-center"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-gray-50 mb-4">
-            Available for new opportunities
+            Открыт для новых возможностей
           </h2>
           <p className="text-lg text-gray-400 mb-8">
-            Let's connect and discuss how we can work together
+            Давайте свяжемся и обсудим, как мы можем работать вместе
           </p>
           
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">

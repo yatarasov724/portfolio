@@ -26,7 +26,7 @@ export default function Header() {
             }}
             className="text-gray-400 hover:text-gray-100 transition-colors"
           >
-            Projects
+            Проекты
           </a>
           <a 
             href="#about" 
@@ -39,7 +39,7 @@ export default function Header() {
             }}
             className="text-gray-400 hover:text-gray-100 transition-colors"
           >
-            About
+            О себе
           </a>
           <a 
             href="#skills" 
@@ -52,7 +52,7 @@ export default function Header() {
             }}
             className="text-gray-400 hover:text-gray-100 transition-colors"
           >
-            Skills
+            Навыки
           </a>
           <a 
             href="#contact" 
@@ -65,7 +65,7 @@ export default function Header() {
             }}
             className="text-gray-400 hover:text-gray-100 transition-colors"
           >
-            Contact
+            Контакты
           </a>
         </div>
       </nav>

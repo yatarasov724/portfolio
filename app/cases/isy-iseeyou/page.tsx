@@ -17,7 +17,6 @@ const HERO_CONFIG = {
   image: {
     src: '/cases/isy-iseeyou/images/laptop-dashboard.png',
     alt: 'Дашборд для топ-менеджмента',
-    height: '125%' as const,
   },
   content: {
     headline: 'Дашборд для топ-менеджмента',
@@ -67,74 +66,134 @@ export default function ISYCasePage() {
     <main className="min-h-screen">
       <Header />
       {/* Hero Section */}
-        <section className="relative w-full overflow-hidden">
-          {/* Subtle radial gradient background glow */}
-          <div 
-            className="absolute inset-0 z-0 pointer-events-none"
-              style={{
-              background: 'radial-gradient(ellipse 60% 45% at 50% 65%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 75%)',
-            }}
-          />
-          
+        <section className="relative w-full overflow-hidden min-h-screen flex items-center justify-center">
+          {/* Enhanced background with animated gradient glow */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+          <motion.div 
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5 }}
+            style={{ 
+                background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%)',
+              }}
+            />
+            <motion.div
+              className="absolute inset-0"
+              animate={{
+                background: [
+                  'radial-gradient(ellipse 60% 45% at 50% 65%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 75%)',
+                  'radial-gradient(ellipse 70% 50% at 50% 60%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 75%)',
+                  'radial-gradient(ellipse 60% 45% at 50% 65%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 75%)',
+                ],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            </div>
+            
           {/* Content Container */}
-          <div className="relative z-10 flex flex-col items-center pt-36 sm:pt-40 md:pt-44 lg:pt-48 pb-6 sm:pb-8 md:pb-10 px-6">
-            <div className="w-full max-w-5xl mx-auto">
+          <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-6 py-20 sm:py-24">
+            <div className="w-full flex flex-col items-center">
               {/* Text Content */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                 className="text-center max-w-4xl mx-auto mb-6 sm:mb-8"
               >
-                <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-3 leading-tight">
+                <motion.h1
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
+                >
                   {HERO_CONFIG.content.headline}
-                </h1>
-                <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                  {HERO_CONFIG.content.subheadline}
-                </p>
-              </motion.div>
-              
-              {/* Dashboard Mockup Image */}
-              <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative w-full h-[320px] sm:h-[380px] md:h-[450px] lg:h-[550px] xl:h-[650px] overflow-hidden flex items-start justify-center"
+              </motion.h1>
+              <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
               >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={HERO_CONFIG.image.src}
-                    alt={HERO_CONFIG.image.alt}
-                    unoptimized
-                    fill
-                    priority
-                    quality={100}
-                    className="object-contain object-top"
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
-                    style={{
-                      imageRendering: 'crisp-edges',
-                      WebkitImageRendering: 'crisp-edges',
-                    } as React.CSSProperties}
-                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                      const target = e.currentTarget
-                      target.src = '/cases/isy-iseeyou/images/isy-exec-dashboard.svg'
-                      target.style.opacity = '0.5'
-                    }}
-                  />
-                </div>
+                  {HERO_CONFIG.content.subheadline}
+              </motion.p>
             </motion.div>
+              
+              {/* Dashboard Mockup Image with glow effect */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.02 }}
+                viewport={{ amount: 0.3, once: false }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: 0.3,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  hover: { duration: 0.3 }
+                }}
+                className="relative w-full max-w-5xl"
+              >
+                {/* Glow effect behind image */}
+                <motion.div
+                  className="absolute inset-0 -z-10"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: [0.3, 0.5, 0.3],
+                    scale: [0.9, 1.1, 0.9],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                  style={{
+                    background: 'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)',
+                    filter: 'blur(60px)',
+                  }}
+                />
+                
+                {/* Image container */}
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-md">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={HERO_CONFIG.image.src}
+                      alt={HERO_CONFIG.image.alt}
+                      unoptimized
+                      fill
+                      priority
+                      quality={100}
+                      className="object-contain object-center"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
+                      style={{
+                        imageRendering: 'crisp-edges',
+                        WebkitImageRendering: 'crisp-edges',
+                      } as React.CSSProperties}
+                      onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                        const target = e.currentTarget
+                        target.src = '/cases/isy-iseeyou/images/isy-exec-dashboard.svg'
+                        target.style.opacity = '0.5'
+                      }}
+                    />
+          </div>
+        </div>
+              </motion.div>
 
-              {/* Scroll Indicator - ниже изображения */}
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-                className="relative mt-4 sm:mt-5 md:mt-6 flex justify-center"
+                transition={{ duration: 1, delay: 1.5 }}
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-gray-400 text-2xl"
+                  className="text-gray-400 text-3xl"
           >
             ↓
           </motion.div>
@@ -178,25 +237,42 @@ export default function ISYCasePage() {
                       initial={{ opacity: 0, y: 8 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ amount: 0.2, once: false }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                       className="text-lg text-gray-400 leading-relaxed mb-6"
                     >
                       {children}
                     </motion.p>
                   )
                 },
-                ul: ({node, ...props}) => (
-                  <ul
-                    className="list-none text-gray-400 mb-8 space-y-1"
-                    {...props}
-                  />
-                ),
-                li: ({node, ...props}) => (
-                  <li className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3">
-                    <span className="text-gray-500">•</span>
-                    <span>{props.children}</span>
-                  </li>
-                ),
+                ul: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.ul
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="list-none text-gray-400 mb-8 space-y-1"
+                    >
+                      {children}
+                    </motion.ul>
+                  )
+                },
+                li: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.li
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
+                    >
+                      <span className="text-gray-500">•</span>
+                      <span>{children}</span>
+                    </motion.li>
+                  )
+                },
               strong: ({node, ...props}) => <strong className="font-semibold text-gray-200" {...props} />,
               em: ({node, ...props}) => <em className="italic text-gray-300" {...props} />,
                 blockquote: ({node, ...props}) => (
@@ -224,18 +300,49 @@ export default function ISYCasePage() {
                     </motion.h2>
                   )
                 },
-                ul: ({node, ...props}) => (
-                  <ul
-                    className="list-none text-gray-400 mb-8 space-y-1"
-                    {...props}
-                  />
-                ),
-                li: ({node, ...props}) => (
-                  <li className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3">
-                    <span className="text-gray-500">•</span>
-                    <span>{props.children}</span>
-                  </li>
-                ),
+                p: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.p
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="text-lg text-gray-400 leading-relaxed mb-6"
+                    >
+                      {children}
+                    </motion.p>
+                  )
+                },
+                ul: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.ul
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="list-none text-gray-400 mb-8 space-y-1"
+                    >
+                      {children}
+                    </motion.ul>
+                  )
+                },
+                li: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.li
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
+                    >
+                      <span className="text-gray-500">•</span>
+                      <span>{children}</span>
+                    </motion.li>
+                  )
+                },
               strong: ({node, ...props}) => <strong className="font-semibold text-gray-200" {...props} />,
               em: ({node, ...props}) => <em className="italic text-gray-300" {...props} />,
                 blockquote: ({node, ...props}) => (
@@ -251,8 +358,12 @@ export default function ISYCasePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.02 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
+              transition={{ 
+                duration: 0.6,
+                hover: { duration: 0.3 }
+              }}
               className="relative"
             >
               <div className="text-center mb-4">
@@ -292,18 +403,49 @@ export default function ISYCasePage() {
                     </motion.h2>
                   )
                 },
-                ul: ({node, ...props}) => (
-                  <ul
-                    className="list-none text-gray-400 mb-8 space-y-1"
-                    {...props}
-                  />
-                ),
-                li: ({node, ...props}) => (
-                  <li className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3">
-                    <span className="text-gray-500">•</span>
-                    <span>{props.children}</span>
-                  </li>
-                ),
+                p: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.p
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="text-lg text-gray-400 leading-relaxed mb-6"
+                    >
+                      {children}
+                    </motion.p>
+                  )
+                },
+                ul: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.ul
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="list-none text-gray-400 mb-8 space-y-1"
+                    >
+                      {children}
+                    </motion.ul>
+                  )
+                },
+                li: ({node, ...props}) => {
+                  const { children } = props
+                  return (
+                    <motion.li
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ amount: 0.2, once: false }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
+                    >
+                      <span className="text-gray-500">•</span>
+                      <span>{children}</span>
+                    </motion.li>
+                  )
+                },
               strong: ({node, ...props}) => <strong className="font-semibold text-gray-200" {...props} />,
               em: ({node, ...props}) => <em className="italic text-gray-300" {...props} />,
                 blockquote: ({node, ...props}) => (
@@ -346,33 +488,73 @@ export default function ISYCasePage() {
                   className="relative pl-12 md:pl-16"
                 >
                   {/* Dot */}
-                  <div className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg z-10">
+                  <motion.div 
+                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg z-10"
+                    whileHover={{ scale: 1.3 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     <div className="absolute inset-0 w-4 h-4 rounded-full bg-blue-500/30 blur-md" />
-                  </div>
-                  
+                  </motion.div>
+
                   {/* Content */}
                   <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4">
+                    <motion.h3 
+                      className="text-xl md:text-2xl font-semibold text-gray-50 mb-4"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
                       01. Исследование и анализ
-                    </h3>
-                    <ul className="list-none text-gray-400 space-y-2">
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                    </motion.h3>
+                    <motion.ul 
+                      className="list-none text-gray-400 space-y-2"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                    >
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Изучил текущий процесс сбора статистики: ручная выгрузка в Excel, построение графиков вручную, время генерации отчётов — несколько часов.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Проанализировал источники данных инфраструктуры и систему метрик, которые нужно автоматизировать.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Сегментировал целевую аудиторию: C-level, комплаенс, security-team.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Определил ключевые сценарии использования: быстрый доступ к статистике инфраструктуры, weekly review, risk overview, operational monitoring.</span>
-                      </li>
-                    </ul>
+                      </motion.li>
+                    </motion.ul>
                   </div>
                 </motion.div>
 
@@ -385,33 +567,73 @@ export default function ISYCasePage() {
                   className="relative pl-12 md:pl-16"
                 >
                   {/* Dot */}
-                  <div className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-gray-900 shadow-lg z-10">
+                  <motion.div 
+                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-gray-900 shadow-lg z-10"
+                    whileHover={{ scale: 1.3 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     <div className="absolute inset-0 w-4 h-4 rounded-full bg-purple-500/30 blur-md" />
-                  </div>
+                  </motion.div>
                   
                   {/* Content */}
                   <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4">
+                    <motion.h3 
+                      className="text-xl md:text-2xl font-semibold text-gray-50 mb-4"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
                       02. Информационная архитектура
-                    </h3>
-                    <ul className="list-none text-gray-400 space-y-2">
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                    </motion.h3>
+                    <motion.ul 
+                      className="list-none text-gray-400 space-y-2"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                    >
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Построил структуру от общего к частному: начиная с главных общих сущностей, заканчивая детализированными авточеками по каждому сервису.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Спроектировал логику автоматического сбора данных и визуализации, заменившую ручной процесс в Excel.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Спроектировал фильтры и уровни вложенности для детальной навигации от общего к частному.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Определил визуальный язык для уровней риска и статусов инфраструктуры.</span>
-                      </li>
-                    </ul>
+                      </motion.li>
+                    </motion.ul>
                   </div>
                 </motion.div>
 
@@ -424,33 +646,73 @@ export default function ISYCasePage() {
                   className="relative pl-12 md:pl-16"
                 >
                   {/* Dot */}
-                  <div className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-pink-500 to-red-500 border-2 border-gray-900 shadow-lg z-10">
+                  <motion.div 
+                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-pink-500 to-red-500 border-2 border-gray-900 shadow-lg z-10"
+                    whileHover={{ scale: 1.3 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     <div className="absolute inset-0 w-4 h-4 rounded-full bg-pink-500/30 blur-md" />
-            </div>
-
+                  </motion.div>
+                  
                   {/* Content */}
-            <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4">
+                  <div>
+                    <motion.h3 
+                      className="text-xl md:text-2xl font-semibold text-gray-50 mb-4"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
                       03. UI-дизайн
-                    </h3>
-                    <ul className="list-none text-gray-400 space-y-2">
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                    </motion.h3>
+                    <motion.ul 
+                      className="list-none text-gray-400 space-y-2"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                    >
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Изначально сервис разрабатывался на Angular, но в связи с требованиями руководства стояла задача перейти на единую B2B дизайн-систему на React.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Переиспользовал виджеты и компоненты, которые были реализованы в другом продукте компании, адаптировав их под специфику дашборда инфраструктуры.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Вместе с командой дизайн-системы адаптировал существующие компоненты под наш сервис: автоматизированные карточки статистики, диаграммы, таблицы, статусы инфраструктуры.</span>
-                      </li>
-                      <li className="text-lg leading-relaxed flex items-baseline gap-3">
+                      </motion.li>
+                      <motion.li 
+                        className="text-lg leading-relaxed flex items-baseline gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                      >
                         <span className="text-gray-500">•</span>
                         <span>Стиль: строгий, корпоративный, читаемый, ориентированный на данные. Единообразие с другими B2B продуктами компании обеспечило быструю адаптацию пользователей.</span>
-                      </li>
-                    </ul>
+                      </motion.li>
+                    </motion.ul>
                   </div>
                 </motion.div>
               </div>
@@ -476,18 +738,49 @@ export default function ISYCasePage() {
                       </motion.h2>
                     )
                   },
-                  ul: ({node, ...props}) => (
-                    <ul
-                      className="list-none text-gray-400 mb-8 space-y-1"
-                      {...props}
-                    />
-                  ),
-                  li: ({node, ...props}) => (
-                    <li className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3">
-                      <span className="text-gray-500">•</span>
-                      <span>{props.children}</span>
-                    </li>
-                  ),
+                  p: ({node, ...props}) => {
+                    const { children } = props
+                    return (
+                      <motion.p
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ amount: 0.2, once: false }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="text-lg text-gray-400 leading-relaxed mb-6"
+                      >
+                        {children}
+                      </motion.p>
+                    )
+                  },
+                  ul: ({node, ...props}) => {
+                    const { children } = props
+                    return (
+                      <motion.ul
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ amount: 0.2, once: false }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="list-none text-gray-400 mb-8 space-y-1"
+                      >
+                        {children}
+                      </motion.ul>
+                    )
+                  },
+                  li: ({node, ...props}) => {
+                    const { children } = props
+                    return (
+                      <motion.li
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ amount: 0.2, once: false }}
+                        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
+                      >
+                        <span className="text-gray-500">•</span>
+                        <span>{children}</span>
+                      </motion.li>
+                    )
+                  },
                 }}
               >
                 {markdownContentResults}
@@ -608,8 +901,13 @@ export default function ISYCasePage() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ 
+                        duration: 0.6, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        hover: { duration: 0.3 }
+                      }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
                       <div className="relative w-full">
@@ -627,8 +925,14 @@ export default function ISYCasePage() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
-                      transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: 0.1, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        hover: { duration: 0.3 }
+                      }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
                       <div className="relative w-full">
@@ -660,8 +964,13 @@ export default function ISYCasePage() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.02 }}
                     viewport={{ amount: 0.3, once: false }}
-                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                    transition={{ 
+                      duration: 0.6, 
+                      ease: [0.25, 0.1, 0.25, 1],
+                      hover: { duration: 0.3 }
+                    }}
                     className="relative w-full rounded-lg overflow-hidden"
                   >
                     <div className="relative w-full">
@@ -694,8 +1003,13 @@ export default function ISYCasePage() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ 
+                        duration: 0.6, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        hover: { duration: 0.3 }
+                      }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
                       <div className="relative w-full">
@@ -713,8 +1027,14 @@ export default function ISYCasePage() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
-                      transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: 0.1, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        hover: { duration: 0.3 }
+                      }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
                       <div className="relative w-full">
@@ -725,8 +1045,8 @@ export default function ISYCasePage() {
                           height={1080}
                           className="w-full h-auto object-contain rounded-lg"
                           unoptimized
-                />
-              </div>
+                        />
+                      </div>
                     </motion.div>
                   </div>
                 </div>
@@ -752,9 +1072,11 @@ export default function ISYCasePage() {
                       <h4 className="text-lg font-semibold text-gray-200 mb-3">
                         Состояние: все в порядке
                       </h4>
-                      <div 
-                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer hover:opacity-90 transition-opacity"
+                      <motion.div 
+                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
                         onClick={() => setZoomedImage('/cases/isy-iseeyou/images/success.png')}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/success.png"
@@ -763,7 +1085,7 @@ export default function ISYCasePage() {
                           className="object-contain"
                           unoptimized
                         />
-                      </div>
+                      </motion.div>
                     </motion.div>
 
                     {/* Tooltips */}
@@ -777,9 +1099,11 @@ export default function ISYCasePage() {
                       <h4 className="text-lg font-semibold text-gray-200 mb-3">
                         Интерактивные подсказки
                       </h4>
-                      <div 
-                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer hover:opacity-90 transition-opacity"
+                      <motion.div 
+                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
                         onClick={() => setZoomedImage('/cases/isy-iseeyou/images/tooltips.png')}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/tooltips.png"
@@ -788,7 +1112,7 @@ export default function ISYCasePage() {
                           className="object-contain"
                           unoptimized
                         />
-                      </div>
+                      </motion.div>
                     </motion.div>
 
                     {/* Global Filters */}
@@ -802,9 +1126,11 @@ export default function ISYCasePage() {
                       <h4 className="text-lg font-semibold text-gray-200 mb-3">
                         Глобальная фильтрация
                       </h4>
-                      <div 
-                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer hover:opacity-90 transition-opacity"
+                      <motion.div 
+                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
                         onClick={() => setZoomedImage('/cases/isy-iseeyou/images/global_filter.png')}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/global_filter.png"
@@ -813,7 +1139,7 @@ export default function ISYCasePage() {
                           className="object-contain"
                           unoptimized
                         />
-                      </div>
+                      </motion.div>
                     </motion.div>
 
                     {/* Table Settings */}
@@ -827,9 +1153,11 @@ export default function ISYCasePage() {
                       <h4 className="text-lg font-semibold text-gray-200 mb-3">
                         Настройки таблицы
                       </h4>
-                      <div 
-                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer hover:opacity-90 transition-opacity"
+                      <motion.div 
+                        className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
                         onClick={() => setZoomedImage('/cases/isy-iseeyou/images/table_filter.png')}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/table_filter.png"
@@ -838,12 +1166,12 @@ export default function ISYCasePage() {
                           className="object-contain"
                           unoptimized
                         />
-                      </div>
+                      </motion.div>
                     </motion.div>
                   </div>
                 </div>
               </AnimatedSection>
-            </div>
+              </div>
           </AnimatedSection>
 
           {/* Contact/CTA Section */}
@@ -921,19 +1249,24 @@ export default function ISYCasePage() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="relative max-w-7xl max-h-[90vh] w-full h-full"
-            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-7xl max-h-[90vh] w-full h-full pointer-events-none"
           >
             <button
-              onClick={() => setZoomedImage(null)}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+              onClick={(e) => {
+                e.stopPropagation()
+                setZoomedImage(null)
+              }}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10 pointer-events-auto"
               aria-label="Закрыть"
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div className="relative w-full h-full rounded-lg overflow-hidden">
+            <div 
+              className="relative w-full h-full rounded-lg overflow-hidden pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
               <Image
                 src={zoomedImage}
                 alt="Увеличенное изображение"

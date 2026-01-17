@@ -15,7 +15,7 @@ export default function Hero() {
         {!imageError && (
           <Image
             src="/hero-image.jpg"
-            alt="Dashboard on laptop"
+            alt="Дашборд на ноутбуке"
             fill
             className="object-cover opacity-30"
             priority
@@ -28,7 +28,7 @@ export default function Hero() {
         {imageError && (
           <Image
             src="/cases/isy-iseeyou/images/hero.svg"
-            alt="Dashboard on laptop"
+            alt="Дашборд на ноутбуке"
             fill
             className="object-cover opacity-20"
             priority

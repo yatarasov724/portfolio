@@ -8,12 +8,11 @@ import Header from '@/components/Header'
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
 import AnimatedSection from '@/components/animations/AnimatedSection'
 import Stagger from '@/components/animations/Stagger'
-import Timeline from '@/components/Timeline'
 
 // Константы для hero section
 const HERO_CONFIG = {
   image: {
-    src: '/cases/agro-platform/images/agro-platform-hero.png',
+    src: '/cases/agro-platform/images/agro-hero-section.png',
     alt: 'Agricultural Enterprise Management Platform',
     height: '125%' as const,
   },
@@ -105,19 +104,7 @@ export default function AgroPlatformCasePage() {
 
 - Как балансировать функциональность и простоту использования.  
 
-- Как дизайн-система ускоряет работу над специализированными платформами.
-
-## Артефакты
-
-Можно добавить:  
-
-- mind-map структуры платформы;  
-
-- варианты концептов дашборда;  
-
-- сравнение "каркас → финальный UI";  
-
-- примеры визуализации данных о полях и культурах.`
+- Как дизайн-система ускоряет работу над специализированными платформами.`
 
   return (
     <SmoothScrollProvider>
@@ -263,24 +250,6 @@ export default function AgroPlatformCasePage() {
             >
               {markdownContent}
             </ReactMarkdown>
-            
-            {/* Timeline for work format */}
-            <AnimatedSection className="my-12" amount={0.1}>
-              <div className="bg-gray-900/30 rounded-xl p-8 border border-gray-800/50">
-                <h3 className="text-lg font-semibold text-gray-300 mb-6 text-center">
-                  Формат работы
-                </h3>
-                <Timeline
-                  items={[
-                    { title: 'Аналитика и сбор требований' },
-                    { title: 'Изучение технических реализаций', subtitle: 'Архитектура' },
-                    { title: 'Wireframes' },
-                    { title: 'Правки' },
-                    { title: 'UI' },
-                  ]}
-                />
-              </div>
-            </AnimatedSection>
           </AnimatedSection>
 
           {/* Solution Section with Images */}
@@ -292,39 +261,6 @@ export default function AgroPlatformCasePage() {
             </Stagger>
             
             <div className="space-y-32">
-              {/* Dashboard Overview */}
-              <AnimatedSection amount={0.1}>
-                <div>
-                  <Stagger className="mb-6" staggerDelay={0.08}>
-                    <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                      Dashboard Overview
-                    </h3>
-                    <p className="text-lg text-gray-400 max-w-3xl mb-6">
-                      Главный экран платформы: обзор состояния хозяйства, ключевые метрики и быстрый доступ к функциям.
-                    </p>
-                  </Stagger>
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ amount: 0.3, once: false }}
-                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="relative w-full rounded-lg overflow-hidden"
-                  >
-                    <div className="relative w-full">
-                      <Image
-                        src="/cases/agro-platform/images/dashboard-overview.png"
-                        alt="Dashboard Overview"
-                        width={1920}
-                        height={1080}
-                        className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-              </AnimatedSection>
-
               {/* Fields Management */}
               <AnimatedSection amount={0.1}>
                 <div>
@@ -333,28 +269,76 @@ export default function AgroPlatformCasePage() {
                       Fields Management
                     </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      Управление полями: карточки полей с информацией о культурах, состоянии и истории работ.
+                      Комплексный анализ состояния полей на основе спутниковых данных. Визуализация вегетационных индексов (NDVI, EVI, NDMI) для оценки здоровья культур и продуктивности. Интерактивная карта с переключением слоев и метеорологическими данными для принятия обоснованных решений.
                     </p>
                   </Stagger>
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ amount: 0.3, once: false }}
-                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="relative w-full rounded-lg overflow-hidden"
-                  >
-                    <div className="relative w-full">
-                      <Image
-                        src="/cases/agro-platform/images/fields-management.png"
-                        alt="Fields Management"
-                        width={1920}
-                        height={1080}
-                        className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
-                      />
+                  <div className="space-y-16">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ amount: 0.3, once: false }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="relative w-full rounded-lg overflow-hidden"
+                    >
+                      <div className="relative w-full">
+                        <Image
+                          src="/cases/agro-platform/images/fields-management.png"
+                          alt="Fields Management"
+                          width={1920}
+                          height={1080}
+                          className="w-full h-auto object-contain rounded-lg"
+                          unoptimized
+                          priority
+                        />
+                      </div>
+                    </motion.div>
+                    <div>
+                      <p className="text-lg text-gray-400 max-w-3xl mb-6">
+                        Детальная информационная панель поля: данные о вегетации, влажности почвы, прогнозе урожайности, культуре и сорте. Прогноз погоды на неделю, окна для внесения средств защиты растений и карты предписаний.
+                      </p>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ amount: 0.3, once: false }}
+                        transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="relative w-full rounded-lg overflow-hidden"
+                      >
+                        <div className="relative w-full">
+                          <Image
+                            src="/cases/agro-platform/images/fields-management2.png"
+                            alt="Детальный анализ индексов поля"
+                            width={1920}
+                            height={1080}
+                            className="w-full h-auto object-contain rounded-lg"
+                            unoptimized
+                          />
+                        </div>
+                      </motion.div>
                     </div>
-                  </motion.div>
+                    <div>
+                      <p className="text-lg text-gray-400 max-w-3xl mb-6">
+                        Графики для анализа показателей в динамике времени: индекс вегетации, влажность почвы, эффективные температуры и осадки. Визуализация трендов и изменений для оценки состояния поля и принятия решений.
+                      </p>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ amount: 0.3, once: false }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="relative w-full rounded-lg overflow-hidden"
+                      >
+                        <div className="relative w-full">
+                          <Image
+                            src="/cases/agro-platform/images/fields-management3.png"
+                            alt="Метеорологические данные и слои карты"
+                            width={1920}
+                            height={1080}
+                            className="w-full h-auto object-contain rounded-lg"
+                            unoptimized
+                          />
+                        </div>
+                      </motion.div>
+                    </div>
+                  </div>
                 </div>
               </AnimatedSection>
 
@@ -366,7 +350,7 @@ export default function AgroPlatformCasePage() {
                       Crop Monitoring
                     </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      Мониторинг культур: визуализация состояния посевов, прогнозы развития и рекомендации.
+                      Планирование севооборота с визуализацией всей картины хозяйства. Агроном видит полную схему чередования культур по каждому полю: культуру, дату сева, дату высева и урожайность за гектар для оптимизации долгосрочной стратегии хозяйства.
                     </p>
                   </Stagger>
                   <motion.div
@@ -424,15 +408,15 @@ export default function AgroPlatformCasePage() {
                 </div>
               </AnimatedSection>
 
-              {/* Planning & Calendar */}
+              {/* Телеметрия */}
               <AnimatedSection amount={0.1}>
                 <div>
                   <Stagger className="mb-6" staggerDelay={0.08}>
                     <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                      Planning & Calendar
+                      Телеметрия
                     </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      Планирование работ: календарь сельскохозяйственных операций и управление задачами.
+                      Отслеживание добавленной техники в реальном времени и исторически. Просмотр статуса техники, местоположения и данных о работе для контроля и оптимизации использования сельскохозяйственного оборудования.
                     </p>
                   </Stagger>
                   <motion.div
@@ -445,7 +429,7 @@ export default function AgroPlatformCasePage() {
                     <div className="relative w-full">
                       <Image
                         src="/cases/agro-platform/images/planning-calendar.png"
-                        alt="Planning & Calendar"
+                        alt="Телеметрия"
                         width={1920}
                         height={1080}
                         className="w-full h-auto object-contain rounded-lg"
@@ -469,7 +453,7 @@ export default function AgroPlatformCasePage() {
               transition={{ duration: 0.6 }}
               className="text-2xl md:text-3xl font-bold text-gray-50 mb-4"
             >
-              Have questions about this project?
+              Есть вопросы по проекту?
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -478,7 +462,7 @@ export default function AgroPlatformCasePage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-lg text-gray-400 mb-8"
             >
-              Let's discuss the details or check out other projects
+              Давайте обсудим детали или посмотрите другие проекты
             </motion.p>
             
             <motion.div
@@ -499,7 +483,7 @@ export default function AgroPlatformCasePage() {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
                 </svg>
-                <span>Contact on Telegram</span>
+                <span>Написать в Telegram</span>
               </motion.a>
               
               <motion.a
@@ -511,7 +495,7 @@ export default function AgroPlatformCasePage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-                <span>View other projects</span>
+                <span>Посмотреть другие проекты</span>
               </motion.a>
             </motion.div>
           </div>
