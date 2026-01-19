@@ -95,11 +95,11 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="flex flex-col relative z-0">
         {/* Text Content - сверху */}
-        <div className="flex flex-col p-8 bg-gradient-to-b from-gray-950/90 via-gray-950/60 to-transparent">
+        <div className="flex flex-col p-4 sm:p-6 md:p-8 bg-gradient-to-b from-gray-950/90 via-gray-950/60 to-transparent">
           {/* Заголовок и теги в одной строке */}
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
             {/* Заголовок */}
-            <h3 className="text-xl md:text-2xl font-medium text-gray-100 leading-tight flex-1">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-medium text-gray-100 leading-tight flex-1">
               {project.title.split('\n').map((line, i, arr) => (
                 <span key={i}>
                   {line}
@@ -130,7 +130,7 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
           </div>
           
           {/* Description */}
-          <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-4">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed mb-4">
             {project.description}
           </p>
           
@@ -143,7 +143,7 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
         </div>
         
         {/* Image - снизу */}
-        <div className="relative w-full h-[280px] md:h-[380px] lg:h-[480px] overflow-hidden px-8">
+        <div className="relative w-full h-[240px] sm:h-[280px] md:h-[380px] lg:h-[480px] overflow-hidden px-4 sm:px-6 md:px-8">
           <div className="relative w-full h-full overflow-hidden">
             <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden">
               {project.image && !imageError ? (

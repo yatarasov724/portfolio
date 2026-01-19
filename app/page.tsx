@@ -12,8 +12,8 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden pt-24">
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-6">
+      <section className="relative w-full overflow-hidden pt-20 sm:pt-24">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-4 sm:px-6">
           <div className="w-full max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -24,10 +24,10 @@ export default function Home() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                 Yaroslav Tarasov
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-2 font-medium">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-2 font-medium">
                 Продуктовый дизайнер / UI & UX
               </p>
-              <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-2">
                 Специализируюсь на B2B продуктах, сложных системах, дашбордах и внутренних инструментах. Создаю интерфейсы, которые сложные рабочие процессы делают легче, а работу команд эффективнее.
               </p>
               
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="max-w-5xl mx-auto px-6 py-24">
+      <section id="about" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,14 +77,14 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <SectionTitle>О себе</SectionTitle>
-          <div className="mt-12 max-w-3xl space-y-6">
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+          <div className="mt-8 sm:mt-12 max-w-3xl space-y-4 sm:space-y-6">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
               Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в Kaspersky, где проектирую интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.
             </p>
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
               Моя основная задача — создавать структурированный и масштабируемый UX для систем, где важна ясность.
             </p>
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
               Привык тесно сотрудничать с продакт-менеджерами, разработчиками и стейкхолдерами для согласования решений и обеспечения технической реализуемости. Создаю и поддерживаю дизайн-системы, работаю с командами разработки над реализацией интерфейсов.
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="max-w-5xl mx-auto px-6 py-24">
+      <section id="projects" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <SectionTitle>Проекты</SectionTitle>
-          <div className="grid grid-cols-1 gap-8 mt-12">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 mt-8 sm:mt-12">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* Skills & Focus Section */}
-      <section id="skills" className="max-w-5xl mx-auto px-6 py-24">
+      <section id="skills" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -125,8 +125,8 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <SectionTitle>Навыки и фокус</SectionTitle>
-          <div className="mt-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-8 sm:mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {/* Product Design */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -204,7 +204,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="max-w-5xl mx-auto px-6 py-24">
+      <section id="contact" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -213,7 +213,7 @@ export default function Home() {
           className="relative"
         >
           {/* Gradient Card */}
-          <div className="relative bg-gradient-to-br from-gray-900/50 via-gray-900/30 to-gray-900/50 rounded-2xl p-8 md:p-12 border-2 border-blue-500/20 hover:border-blue-500/40 transition-all overflow-hidden">
+          <div className="relative bg-gradient-to-br from-gray-900/50 via-gray-900/30 to-gray-900/50 rounded-2xl p-6 sm:p-8 md:p-12 border-2 border-blue-500/20 hover:border-blue-500/40 transition-all overflow-hidden">
             {/* Decorative gradient glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none" />
             
@@ -223,7 +223,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-3xl md:text-4xl font-bold text-gray-50 mb-4"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-50 mb-4"
               >
                 Готов помочь с вашим проектом
               </motion.h2>
@@ -232,7 +232,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed"
                 >
                   Давайте обсудим, как я могу помочь создать интерфейс, который решит ваши задачи.
                 </motion.p>
@@ -242,13 +242,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-wrap justify-center items-center gap-4"
+                className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-4"
               >
                 <motion.a
                   href="https://t.me/yatarasov"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors w-full sm:w-auto"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -262,7 +262,7 @@ export default function Home() {
                   href="https://www.linkedin.com/in/yatarasov/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 w-full sm:w-auto"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
