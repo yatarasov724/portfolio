@@ -16,19 +16,6 @@ export default function Header() {
         </a>
         <div className="flex gap-8">
           <a 
-            href="#projects" 
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById('projects')
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="text-gray-400 hover:text-gray-100 transition-colors"
-          >
-            Проекты
-          </a>
-          <a 
             href="#about" 
             onClick={(e) => {
               e.preventDefault()
@@ -40,6 +27,19 @@ export default function Header() {
             className="text-gray-400 hover:text-gray-100 transition-colors"
           >
             О себе
+          </a>
+          <a 
+            href="#projects" 
+            onClick={(e) => {
+              e.preventDefault()
+              const element = document.getElementById('projects')
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }}
+            className="text-gray-400 hover:text-gray-100 transition-colors"
+          >
+            Проекты
           </a>
           <a 
             href="#skills" 

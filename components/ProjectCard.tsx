@@ -1,10 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Project {
   id: string
@@ -18,6 +18,8 @@ interface Project {
   domain?: string
   role?: string
   whatIDid?: string[]
+  comingSoon?: boolean
+  password?: string
 }
 
 interface ProjectCardProps {
@@ -27,13 +29,31 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const router = useRouter()
   const [imageError, setImageError] = useState(false)
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [passwordInput, setPasswordInput] = useState('')
+  const [passwordError, setPasswordError] = useState(false)
   const isExternal = project.url.startsWith('http')
+  
+  // Проверяем, есть ли сохраненный доступ
+  const getStorageKey = () => `case_access_${project.id}`
+  const hasAccess = typeof window !== 'undefined' && sessionStorage.getItem(getStorageKey()) === 'true'
   
   // Определяем, является ли проект AgTech для применения специальных стилей
   const isAgTech = project.url === '/cases/agro-platform' || project.domain === 'AgTech'
   
   const handleClick = (e: React.MouseEvent) => {
+    if (project.comingSoon) {
+      e.preventDefault()
+      return
+    }
     e.preventDefault()
+    
+    // Если есть пароль и нет доступа, показываем модальное окно
+    if (project.password && !hasAccess) {
+      setShowPasswordModal(true)
+      return
+    }
+    
     if (isExternal) {
       window.open(project.url, '_blank', 'noopener,noreferrer')
     } else {
@@ -41,15 +61,33 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     }
   }
   
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (passwordInput === project.password) {
+      sessionStorage.setItem(getStorageKey(), 'true')
+      setShowPasswordModal(false)
+      setPasswordInput('')
+      setPasswordError(false)
+      if (isExternal) {
+        window.open(project.url, '_blank', 'noopener,noreferrer')
+      } else {
+        router.push(project.url)
+      }
+    } else {
+      setPasswordError(true)
+      setPasswordInput('')
+    }
+  }
+  
   return (
     <motion.div
-      whileHover={{ y: -2 }}
+      whileHover={project.comingSoon ? {} : { y: -2 }}
       transition={{ 
         type: "spring",
         stiffness: 300,
         damping: 30
       }}
-      className="group relative rounded-2xl shadow-2xl overflow-hidden border border-gray-700/50 cursor-pointer bg-gray-900/50 backdrop-blur-sm hover:border-gray-700/60 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out"
+      className={`group relative rounded-2xl shadow-2xl overflow-hidden border border-gray-700/50 ${project.comingSoon ? 'cursor-default opacity-75' : 'cursor-pointer'} bg-gray-900/50 backdrop-blur-sm hover:border-gray-700/60 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out`}
       onClick={handleClick}
     >
       <div className="flex flex-col relative z-0">
@@ -106,22 +144,37 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <div className="relative w-full h-full overflow-hidden">
             <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden">
               {project.image && !imageError ? (
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  unoptimized
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                  className="object-contain object-top transition-opacity duration-300 ease-out"
-                  style={{
-                    imageRendering: 'crisp-edges',
-                    WebkitImageRendering: 'crisp-edges',
-                  } as React.CSSProperties}
-                  onError={(e) => {
-                    console.error('Image failed to load:', project.image, e)
-                    setImageError(true)
-                  }}
-                />
+                <>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    className={`object-contain object-top transition-opacity duration-300 ease-out ${project.comingSoon ? 'opacity-30 grayscale' : ''}`}
+                    style={{
+                      imageRendering: 'crisp-edges',
+                      WebkitImageRendering: 'crisp-edges',
+                    } as React.CSSProperties}
+                    onError={(e) => {
+                      console.error('Image failed to load:', project.image, e)
+                      setImageError(true)
+                    }}
+                  />
+                  {project.comingSoon && (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/60 to-gray-900/30 pointer-events-none" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center px-8 pointer-events-none">
+                        <p className="text-2xl md:text-3xl font-semibold text-gray-300 mb-3">
+                          Coming Soon
+                        </p>
+                        <p className="text-sm md:text-base text-gray-500 text-center max-w-md leading-relaxed">
+                          Детальный кейс с процессом работы, выводами и результатами готовится к публикации
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-gray-600 bg-gray-800">
                   <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,6 +186,83 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       </div>
+
+      {/* Password Modal */}
+      <AnimatePresence>
+        {showPasswordModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={() => {
+              setShowPasswordModal(false)
+              setPasswordInput('')
+              setPasswordError(false)
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-gray-900 rounded-2xl p-8 max-w-md w-full border border-gray-800"
+            >
+              <h3 className="text-2xl font-semibold text-gray-50 mb-2">
+                Доступ к кейсу
+              </h3>
+              <p className="text-gray-400 mb-6">
+                Этот кейс защищен паролем. Введите пароль для доступа.
+              </p>
+              
+              <form onSubmit={handlePasswordSubmit} className="space-y-4">
+                <div>
+                  <input
+                    type="password"
+                    value={passwordInput}
+                    onChange={(e) => {
+                      setPasswordInput(e.target.value)
+                      setPasswordError(false)
+                    }}
+                    placeholder="Введите пароль"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-50 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    autoFocus
+                  />
+                  {passwordError && (
+                    <p className="text-red-400 text-sm mt-2">
+                      Неверный пароль. Попробуйте снова.
+                    </p>
+                  )}
+                </div>
+                
+                <div className="flex gap-3">
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex-1 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Войти
+                  </motion.button>
+                  <motion.button
+                    type="button"
+                    onClick={() => {
+                      setShowPasswordModal(false)
+                      setPasswordInput('')
+                      setPasswordError(false)
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-6 py-3 bg-gray-800 text-gray-300 font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
+                  >
+                    Отмена
+                  </motion.button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }

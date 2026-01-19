@@ -20,7 +20,7 @@ const HERO_CONFIG = {
   },
   content: {
     headline: 'Дашборд для топ-менеджмента',
-    subheadline: 'Автоматизированный дашборд для быстрого сбора статистики по инфраструктуре. Заменил ручную выгрузку в Excel и построение графиков на автоматическую визуализацию в реальном времени.',
+    subheadline: 'Дашборд для топ-менеджмента и команды информационной безопасности. Единое окно метрик, рисков и статусов процессов для быстрого доступа к статистике инфраструктуры в реальном времени.',
   },
 } as const
 
@@ -33,23 +33,23 @@ export default function ISYCasePage() {
 
   const markdownContentProblem = `## Проблема
 
-- Статистика по инфраструктуре собиралась вручную: данные выгружались в Excel, графики и отчёты строились вручную, что занимало часы работы.  
+- Руководство и комплаенс-подразделение тратили часы на ручной сбор данных: выгрузку в Excel, построение графиков и подготовку отчётов.  
 
-- Метрики были разрознены, не было единого источника правды.  
+- Метрики хранились в разных системах, не было единого источника правды для оценки состояния инфраструктуры.  
 
-- Руководство и комплаенс-подразделение тратили много времени на поиск данных и построение отчётов.  
+- Отсутствие автоматизации приводило к задержкам в выявлении аномалий и принятии решений.  
 
-- Не было автоматизированной визуализации: трендов, рисков, глубокой аналитики в реальном времени.`
+- Сложность визуализации данных затрудняла быстрый анализ трендов и рисков.`
 
   const markdownContentGoals = `## Цели
 
-- Создать автоматизированный дашборд для сбора статистики по всей инфраструктуре в реальном времени.  
+- Создать единую точку доступа к метрикам инфраструктуры с автоматическим обновлением данных в реальном времени.  
 
-- Заменить ручной процесс выгрузки в Excel и построения графиков на автоматизированный.  
+- Обеспечить визуализацию рисков и статусов процессов с возможностью детального анализа.  
 
-- Снизить время генерации отчётов с часов до минут.  
+- Сократить время на подготовку отчётов и поиск информации с часов до минут.  
 
-- Сделать визуально понятные risk-метрики с детальной навигацией: от общей картины → к деталям.`
+- Спроектировать интерфейс, понятный для non-tech пользователей, с интуитивной навигацией от общего к частному.`
 
   const markdownContentResults = `## Результаты
 
@@ -252,7 +252,7 @@ export default function ISYCasePage() {
                       whileInView={{ opacity: 1 }}
                       viewport={{ amount: 0.2, once: false }}
                       transition={{ duration: 0.6, delay: 0.3 }}
-                      className="list-none text-gray-400 mb-8 space-y-1"
+                      className="list-none text-gray-400 mb-8 space-y-0.5"
                     >
                       {children}
                     </motion.ul>
@@ -268,7 +268,7 @@ export default function ISYCasePage() {
                       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                       className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
                     >
-                      <span className="text-gray-500">•</span>
+                      <span className="text-gray-500" aria-hidden>◆</span>
                       <span>{children}</span>
                     </motion.li>
                   )
@@ -322,7 +322,7 @@ export default function ISYCasePage() {
                       whileInView={{ opacity: 1 }}
                       viewport={{ amount: 0.2, once: false }}
                       transition={{ duration: 0.6, delay: 0.3 }}
-                      className="list-none text-gray-400 mb-8 space-y-1"
+                      className="list-none text-gray-400 mb-8 space-y-0.5"
                     >
                       {children}
                     </motion.ul>
@@ -338,7 +338,7 @@ export default function ISYCasePage() {
                       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                       className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
                     >
-                      <span className="text-gray-500">•</span>
+                      <span className="text-gray-500" aria-hidden>◆</span>
                       <span>{children}</span>
                     </motion.li>
                   )
@@ -425,7 +425,7 @@ export default function ISYCasePage() {
                       whileInView={{ opacity: 1 }}
                       viewport={{ amount: 0.2, once: false }}
                       transition={{ duration: 0.6, delay: 0.3 }}
-                      className="list-none text-gray-400 mb-8 space-y-1"
+                      className="list-none text-gray-400 mb-8 space-y-0.5"
                     >
                       {children}
                     </motion.ul>
@@ -441,7 +441,7 @@ export default function ISYCasePage() {
                       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                       className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
                     >
-                      <span className="text-gray-500">•</span>
+                      <span className="text-gray-500" aria-hidden>◆</span>
                       <span>{children}</span>
                     </motion.li>
                   )
@@ -481,8 +481,8 @@ export default function ISYCasePage() {
               <div className="space-y-12 md:space-y-16">
                 {/* Step 1: Исследование и анализ */}
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5 }}
                   className="relative pl-12 md:pl-16"
@@ -490,8 +490,11 @@ export default function ISYCasePage() {
                   {/* Dot */}
                   <motion.div 
                     className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg z-10"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
                     whileHover={{ scale: 1.3 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     <div className="absolute inset-0 w-4 h-4 rounded-full bg-blue-500/30 blur-md" />
                   </motion.div>
@@ -508,7 +511,7 @@ export default function ISYCasePage() {
                       01. Исследование и анализ
                     </motion.h3>
                     <motion.ul 
-                      className="list-none text-gray-400 space-y-2"
+                      className="list-none text-gray-400 space-y-1.5"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true, amount: 0.3 }}
@@ -521,7 +524,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Изучил текущий процесс сбора статистики: ручная выгрузка в Excel, построение графиков вручную, время генерации отчётов — несколько часов.</span>
                       </motion.li>
                       <motion.li 
@@ -531,7 +534,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Проанализировал источники данных инфраструктуры и систему метрик, которые нужно автоматизировать.</span>
                       </motion.li>
                       <motion.li 
@@ -541,7 +544,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Сегментировал целевую аудиторию: C-level, комплаенс, security-team.</span>
                       </motion.li>
                       <motion.li 
@@ -551,7 +554,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.7 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Определил ключевые сценарии использования: быстрый доступ к статистике инфраструктуры, weekly review, risk overview, operational monitoring.</span>
                       </motion.li>
                     </motion.ul>
@@ -560,8 +563,8 @@ export default function ISYCasePage() {
 
                 {/* Step 2: Информационная архитектура */}
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="relative pl-12 md:pl-16"
@@ -569,8 +572,11 @@ export default function ISYCasePage() {
                   {/* Dot */}
                   <motion.div 
                     className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-gray-900 shadow-lg z-10"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                     whileHover={{ scale: 1.3 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     <div className="absolute inset-0 w-4 h-4 rounded-full bg-purple-500/30 blur-md" />
                   </motion.div>
@@ -587,7 +593,7 @@ export default function ISYCasePage() {
                       02. Информационная архитектура
                     </motion.h3>
                     <motion.ul 
-                      className="list-none text-gray-400 space-y-2"
+                      className="list-none text-gray-400 space-y-1.5"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true, amount: 0.3 }}
@@ -600,7 +606,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Построил структуру от общего к частному: начиная с главных общих сущностей, заканчивая детализированными авточеками по каждому сервису.</span>
                       </motion.li>
                       <motion.li 
@@ -610,7 +616,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Спроектировал логику автоматического сбора данных и визуализации, заменившую ручной процесс в Excel.</span>
                       </motion.li>
                       <motion.li 
@@ -620,8 +626,8 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                       >
-                        <span className="text-gray-500">•</span>
-                        <span>Спроектировал фильтры и уровни вложенности для детальной навигации от общего к частному.</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
+                        <span>Спроектировал систему фильтров и иерархическую структуру для детального просмотра и анализа данных.</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -630,7 +636,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.7 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Определил визуальный язык для уровней риска и статусов инфраструктуры.</span>
                       </motion.li>
                     </motion.ul>
@@ -639,8 +645,8 @@ export default function ISYCasePage() {
 
                 {/* Step 3: UI-дизайн */}
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="relative pl-12 md:pl-16"
@@ -648,8 +654,11 @@ export default function ISYCasePage() {
                   {/* Dot */}
                   <motion.div 
                     className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-pink-500 to-red-500 border-2 border-gray-900 shadow-lg z-10"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
                     whileHover={{ scale: 1.3 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     <div className="absolute inset-0 w-4 h-4 rounded-full bg-pink-500/30 blur-md" />
                   </motion.div>
@@ -666,7 +675,7 @@ export default function ISYCasePage() {
                       03. UI-дизайн
                     </motion.h3>
                     <motion.ul 
-                      className="list-none text-gray-400 space-y-2"
+                      className="list-none text-gray-400 space-y-1.5"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true, amount: 0.3 }}
@@ -679,7 +688,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Изначально сервис разрабатывался на Angular, но в связи с требованиями руководства стояла задача перейти на единую B2B дизайн-систему на React.</span>
                       </motion.li>
                       <motion.li 
@@ -689,18 +698,8 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                       >
-                        <span className="text-gray-500">•</span>
-                        <span>Переиспользовал виджеты и компоненты, которые были реализованы в другом продукте компании, адаптировав их под специфику дашборда инфраструктуры.</span>
-                      </motion.li>
-                      <motion.li 
-                        className="text-lg leading-relaxed flex items-baseline gap-3"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                      >
-                        <span className="text-gray-500">•</span>
-                        <span>Вместе с командой дизайн-системы адаптировал существующие компоненты под наш сервис: автоматизированные карточки статистики, диаграммы, таблицы, статусы инфраструктуры.</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
+                        <span>Вместе с командой дизайн-системы адаптировал существующие компоненты под специфику дашборда: карточки статистики, диаграммы, таблицы и статусы инфраструктуры.</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -709,7 +708,7 @@ export default function ISYCasePage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.5, delay: 0.7 }}
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>Стиль: строгий, корпоративный, читаемый, ориентированный на данные. Единообразие с другими B2B продуктами компании обеспечило быструю адаптацию пользователей.</span>
                       </motion.li>
                     </motion.ul>
@@ -760,7 +759,7 @@ export default function ISYCasePage() {
                         whileInView={{ opacity: 1 }}
                         viewport={{ amount: 0.2, once: false }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="list-none text-gray-400 mb-8 space-y-1"
+                        className="list-none text-gray-400 mb-8 space-y-0.5"
                       >
                         {children}
                       </motion.ul>
@@ -776,7 +775,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                         className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3"
                       >
-                        <span className="text-gray-500">•</span>
+                        <span className="text-gray-500" aria-hidden>◆</span>
                         <span>{children}</span>
                       </motion.li>
                     )
@@ -894,7 +893,7 @@ export default function ISYCasePage() {
                       Дашборд для топ-менеджмента
                     </h3>
                     <p className="text-lg text-gray-400 max-w-3xl mb-6">
-                      Главный экран для C-level и комплаенса: автоматизированный сбор статистики по всей инфраструктуре в реальном времени. Единое окно метрик, рисков и статусов процессов, заменяющее ручной процесс выгрузки в Excel.
+                      Главный экран с ключевыми метриками инфраструктуры, визуализацией рисков и статусов процессов. Позволяет быстро оценить общее состояние системы и перейти к детальному анализу.
                     </p>
                   </Stagger>
                   <div className="space-y-6">
@@ -1176,59 +1175,67 @@ export default function ISYCasePage() {
 
           {/* Contact/CTA Section */}
           <AnimatedSection className="mt-32 mb-16" amount={0.1}>
-            <div className="text-center">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-2xl md:text-3xl font-bold text-gray-50 mb-4"
-              >
-                Есть вопросы по проекту?
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-lg text-gray-400 mb-8"
-              >
-                Давайте обсудим детали или посмотрите другие проекты
-              </motion.p>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-col sm:flex-row justify-center items-center gap-4"
-              >
-                <motion.a
-                  href="https://t.me/yatarasov"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
-                  </svg>
-                  <span>Написать в Telegram</span>
-                </motion.a>
+            <div className="relative">
+              {/* Gradient Card */}
+              <div className="relative bg-gradient-to-br from-gray-900/50 via-gray-900/30 to-gray-900/50 rounded-2xl p-8 md:p-12 border-2 border-blue-500/20 hover:border-blue-500/40 transition-all overflow-hidden">
+                {/* Decorative gradient glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none" />
                 
-                <motion.a
-                  href="/"
-                  className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                  <span>Посмотреть другие проекты</span>
-                </motion.a>
-              </motion.div>
+                <div className="relative z-10 text-center">
+                  <motion.h2
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-3xl md:text-4xl font-bold text-gray-50 mb-4"
+                  >
+                    Есть вопросы по проекту?
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  >
+                    Давайте обсудим детали проекта или посмотрите другие кейсы из моего портфолио
+                  </motion.p>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex flex-col sm:flex-row justify-center items-center gap-4"
+                  >
+                    <motion.a
+                      href="https://t.me/yatarasov"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
+                      </svg>
+                      <span>Написать в Telegram</span>
+                    </motion.a>
+                    
+                    <motion.a
+                      href="/"
+                      className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Посмотреть другие проекты</span>
+                    </motion.a>
+                  </motion.div>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
           </div>

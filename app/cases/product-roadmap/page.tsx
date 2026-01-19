@@ -226,13 +226,13 @@ export default function ProductRoadmapCasePage() {
               },
               ul: ({node, ...props}) => (
                 <ul
-                  className="list-none text-gray-400 mb-8 space-y-1"
+                  className="list-none text-gray-400 mb-8 space-y-0.5"
                   {...props}
                 />
               ),
               li: ({node, ...props}) => (
                 <li className="text-lg leading-relaxed text-gray-400 flex items-baseline gap-3">
-                  <span className="text-gray-500">•</span>
+                  <span className="text-gray-500" aria-hidden>◆</span>
                   <span>{props.children}</span>
                 </li>
               ),
@@ -255,25 +255,25 @@ export default function ProductRoadmapCasePage() {
                 <h3 className="text-2xl font-semibold text-gray-50 mb-4">
                   Старый интерфейс
                 </h3>
-                <ul className="text-lg text-gray-400 max-w-3xl space-y-3 mb-6">
+                <ul className="list-none text-lg text-gray-400 max-w-3xl space-y-2 mb-6">
                   <li className="flex items-start gap-3">
-                    <span className="text-gray-500 mt-1">•</span>
+                    <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
                     <span>Отсутствовала возможность переключения между годовыми периодами, что ограничивало планирование на долгосрочную перспективу</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-gray-500 mt-1">•</span>
+                    <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
                     <span>Интерфейс был построен только вокруг сущности релизов, без учёта годового цикла планирования</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-gray-500 mt-1">•</span>
+                    <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
                     <span>Не существовало годового цикла роадмепа и статусной модели для отслеживания этапов планирования</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-gray-500 mt-1">•</span>
+                    <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
                     <span>Отсутствовала цветовая легенда, что создавало неоднозначность в интерпретации статусов и приоритетов</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-gray-500 mt-1">•</span>
+                    <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
                     <span>Устаревшая техническая архитектура: сервис не обновлялся более 7 лет, что затрудняло поддержку и развитие</span>
                   </li>
                 </ul>
@@ -305,7 +305,7 @@ export default function ProductRoadmapCasePage() {
         <AnimatedSection className="mb-24" amount={0.1}>
           <Stagger staggerDelay={0.1}>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-50 mb-4 mt-12 first:mt-0">
-              FEATURES OVERVIEW
+              Обзор функций
             </h2>
           </Stagger>
           
@@ -408,6 +408,72 @@ export default function ProductRoadmapCasePage() {
                 </motion.div>
               </div>
             </AnimatedSection>
+          </div>
+        </AnimatedSection>
+
+        {/* Contact/CTA Section */}
+        <AnimatedSection className="mt-32 mb-16" amount={0.1}>
+          <div className="relative">
+            {/* Gradient Card */}
+            <div className="relative bg-gradient-to-br from-gray-900/50 via-gray-900/30 to-gray-900/50 rounded-2xl p-8 md:p-12 border-2 border-blue-500/20 hover:border-blue-500/40 transition-all overflow-hidden">
+              {/* Decorative gradient glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none" />
+              
+              <div className="relative z-10 text-center">
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="text-3xl md:text-4xl font-bold text-gray-50 mb-4"
+                >
+                  Есть вопросы по проекту?
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                >
+                  Давайте обсудим детали проекта или посмотрите другие кейсы из моего портфолио
+                </motion.p>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="flex flex-col sm:flex-row justify-center items-center gap-4"
+                >
+                  <motion.a
+                    href="https://t.me/yatarasov"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
+                    </svg>
+                    <span>Написать в Telegram</span>
+                  </motion.a>
+                  
+                  <motion.a
+                    href="/"
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span>Посмотреть другие проекты</span>
+                  </motion.a>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </AnimatedSection>
       </div>

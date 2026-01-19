@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Yaroslav Tarasov — Product Designer / UI & UX",
-  description: "Product Designer / UI & UX. Создаю интуитивные интерфейсы и продумываю пользовательский опыт.",
+  title: "Yaroslav Tarasov — Продуктовый дизайнер / UI & UX",
+  description: "Продуктовый дизайнер / UI & UX. Создаю интуитивные интерфейсы и продумываю пользовательский опыт.",
 };
 
 export default function RootLayout({

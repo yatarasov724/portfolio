@@ -10,55 +10,59 @@ export interface Project {
   domain?: string
   role?: string
   whatIDid?: string[]
+  comingSoon?: boolean
+  password?: string
 }
 
 export const projects: Project[] = [
   {
     id: '1',
     title: 'Product Roadmap',
-    description: 'Roadmap tool for coordinating releases and planning services for the year. A unified instrument to simplify coordination between teams, avoid conflicts in release cards, and increase process transparency.',
+    description: 'Инструмент для согласования релизов и планирования сервисов на год. Единый инструмент для упрощения координации между командами, избежания конфликтов в карточках релизов и повышения прозрачности процессов.',
     image: '/cases/product-roadmap/images/product-roadmap-hero.png',
     url: '/cases/product-roadmap',
     tags: ['B2B', 'Product Management'],
     period: '2025',
-    domain: 'Product Management',
+    domain: 'Управление продуктом',
+    comingSoon: true,
     whatIDid: [
-      'Designed roadmap interface with yearly planning cycles',
-      'Created status model for releases and roadmap stages',
-      'Built approval workflow for top management',
-      'Implemented conflict detection and visualization'
+      'Спроектировал интерфейс roadmap с годовыми циклами планирования',
+      'Создал статусную модель для релизов и этапов roadmap',
+      'Построил процесс согласования для топ-менеджмента',
+      'Реализовал обнаружение и визуализацию конфликтов'
     ]
   },
   {
     id: '2',
-    title: 'ISY I See You — Executive Dashboard',
-    description: 'Executive dashboard for C-level and compliance team: unified view of infrastructure statistics, KPIs, and operational metrics. Automated reporting system that replaced manual Excel exports and chart building.',
+    title: 'Дашборд для топ-менеджмента',
+    description: 'Дашборд для топ-менеджмента и команды информационной безопасности. Единое окно метрик, рисков и статусов процессов для быстрого доступа к статистике инфраструктуры в реальном времени.',
     image: '/cases/isy-iseeyou/images/laptop-dashboard.png',
     url: '/cases/isy-iseeyou',
-    tags: ['B2B', 'Analytics', 'Enterprise'],
+    tags: ['B2B', 'Analytics', 'Info sec'],
     period: '2025',
-    domain: 'Security & Analytics',
+    domain: 'Безопасность и аналитика',
+    password: 'ISY-2025-DASH',
     whatIDid: [
-      'Designed automated dashboard for infrastructure statistics collection',
-      'Created unified view replacing manual Excel exports and chart building',
-      'Built real-time data visualization with detailed navigation from overview to specifics',
-      'Reduced report generation time from hours (manual process) to minutes (automated)'
+      'Спроектировал автоматизированный дашборд для сбора статистики по инфраструктуре',
+      'Создал единое окно, заменившее ручную выгрузку в Excel и построение графиков',
+      'Построил визуализацию данных в реальном времени с детальной навигацией от общего к частному',
+      'Снизил время генерации отчётов с часов (ручной процесс) до минут (автоматизированный)'
     ]
   },
   {
     id: '3',
-    title: 'Agricultural enterprise management platform',
-    description: 'Digital platform for farm management that optimizes land, equipment, and agricultural processes. It improves efficiency, decision-making, and data accuracy',
+    title: 'Агроплатформа на базе AI',
+    description: 'Платформа для управления агропредприятием, которая позволяет управлять полями, мониторить состояние культур, планировать работы и анализировать урожайность. Использует AI, спутниковые данные, метеорологическую информацию и телеметрию.',
     image: '/cases/agro-platform/images/agro-platform-hero.png',
     url: '/cases/agro-platform',
     tags: ['B2B', 'AgTech'],
     period: '2023 – 2024',
     domain: 'AgTech',
     whatIDid: [
-      'Designed field management interface with map visualization',
-      'Created analytics dashboards for crop monitoring',
-      'Built planning calendar for agricultural tasks',
-      'Designed AI assistant for decision support'
+      'Спроектировал интерфейс управления полями с визуализацией карт',
+      'Создал аналитические дашборды для мониторинга культур',
+      'Построил календарь планирования для сельскохозяйственных задач',
+      'Спроектировал AI-ассистента для поддержки принятия решений'
     ]
   }
 ]
