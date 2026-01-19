@@ -53,13 +53,14 @@ export default function Home() {
                   Смотреть проекты
                 </motion.button>
                 <motion.a
-                  href="/cv.pdf"
-                  download
+                  href="/Tarasov Yaroslav (4).pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-8 py-3.5 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors text-base w-full sm:w-auto text-center border border-gray-700"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Скачать резюме
+                  Резюме
                 </motion.a>
               </div>
             </motion.div>

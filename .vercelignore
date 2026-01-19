@@ -1,0 +1,5 @@
+# Файлы, которые не нужно отправлять в Vercel
+.DS_Store
+*.log
+.env.local
+.env*.local

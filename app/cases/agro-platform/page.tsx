@@ -1,13 +1,16 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Header from '@/components/Header'
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
 import AnimatedSection from '@/components/animations/AnimatedSection'
 import Stagger from '@/components/animations/Stagger'
+
+// Динамический импорт ReactMarkdown для code splitting
+const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
+import remarkGfm from 'remark-gfm'
 
 // Константы для hero section
 const HERO_CONFIG = {
@@ -101,10 +104,9 @@ export default function AgroPlatformCasePage() {
                       <Image
                     src={HERO_CONFIG.image.src}
                     alt={HERO_CONFIG.image.alt}
-                        unoptimized
                         fill
                         priority
-                        quality={100}
+                        quality={95}
                     className="object-contain object-top"
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
                         style={{
@@ -501,8 +503,8 @@ export default function AgroPlatformCasePage() {
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain rounded-lg"
-                          unoptimized
                           priority
+                          quality={90}
                         />
                       </div>
                     </motion.div>
@@ -524,7 +526,8 @@ export default function AgroPlatformCasePage() {
                             width={1920}
                             height={1080}
                             className="w-full h-auto object-contain rounded-lg"
-                            unoptimized
+                            quality={85}
+                            loading="lazy"
                           />
                         </div>
                       </motion.div>
@@ -547,7 +550,8 @@ export default function AgroPlatformCasePage() {
                             width={1920}
                             height={1080}
                             className="w-full h-auto object-contain rounded-lg"
-                            unoptimized
+                            quality={85}
+                            loading="lazy"
                           />
                         </div>
                       </motion.div>

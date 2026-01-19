@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 
 interface Project {
   id: string
@@ -26,7 +26,7 @@ interface ProjectCardProps {
   project: Project
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
   const router = useRouter()
   const [imageError, setImageError] = useState(false)
   const [showPasswordModal, setShowPasswordModal] = useState(false)
@@ -35,13 +35,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const isExternal = project.url.startsWith('http')
   
   // Проверяем, есть ли сохраненный доступ
-  const getStorageKey = () => `case_access_${project.id}`
+  const getStorageKey = useCallback(() => `case_access_${project.id}`, [project.id])
   const hasAccess = typeof window !== 'undefined' && sessionStorage.getItem(getStorageKey()) === 'true'
   
   // Определяем, является ли проект AgTech для применения специальных стилей
   const isAgTech = project.url === '/cases/agro-platform' || project.domain === 'AgTech'
   
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = useCallback((e: React.MouseEvent) => {
     if (project.comingSoon) {
       e.preventDefault()
       return
@@ -54,20 +54,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       return
     }
     
+    const isExternal = project.url.startsWith('http')
     if (isExternal) {
       window.open(project.url, '_blank', 'noopener,noreferrer')
     } else {
       router.push(project.url)
     }
-  }
+  }, [project.comingSoon, project.password, project.url, hasAccess, router])
   
-  const handlePasswordSubmit = (e: React.FormEvent) => {
+  const handlePasswordSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     if (passwordInput === project.password) {
-      sessionStorage.setItem(getStorageKey(), 'true')
+      const storageKey = getStorageKey()
+      sessionStorage.setItem(storageKey, 'true')
       setShowPasswordModal(false)
       setPasswordInput('')
       setPasswordError(false)
+      const isExternal = project.url.startsWith('http')
       if (isExternal) {
         window.open(project.url, '_blank', 'noopener,noreferrer')
       } else {
@@ -77,7 +80,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       setPasswordError(true)
       setPasswordInput('')
     }
-  }
+  }, [passwordInput, project.password, project.url, getStorageKey, router])
   
   return (
     <motion.div
@@ -149,8 +152,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     src={project.image}
                     alt={project.title}
                     fill
-                    unoptimized
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                    loading="lazy"
+                    quality={85}
                     className={`object-contain object-top transition-opacity duration-300 ease-out ${project.comingSoon ? 'opacity-30 grayscale' : ''}`}
                     style={{
                       imageRendering: 'crisp-edges',
@@ -265,5 +269,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </AnimatePresence>
     </motion.div>
   )
-}
+})
+
+export default ProjectCard
 

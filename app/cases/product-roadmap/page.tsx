@@ -1,8 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import ReactMarkdown from 'react-markdown'
+import dynamic from 'next/dynamic'
 import remarkGfm from 'remark-gfm'
+
+// Динамический импорт ReactMarkdown для code splitting
+const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/Header'
@@ -144,10 +147,9 @@ export default function ProductRoadmapCasePage() {
                 <Image
                   src={HERO_CONFIG.image.src}
                   alt={HERO_CONFIG.image.alt}
-                  unoptimized
                   fill
                   priority
-                  quality={100}
+                  quality={95}
                   className="object-contain object-top"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
                   style={{
@@ -292,8 +294,8 @@ export default function ProductRoadmapCasePage() {
                     width={1920}
                     height={1080}
                     className="w-full h-auto object-contain rounded-lg"
-                    unoptimized
-                    priority
+                  priority
+                  quality={90}
                   />
                 </div>
               </motion.div>
@@ -335,8 +337,8 @@ export default function ProductRoadmapCasePage() {
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"
-                      unoptimized
-                      priority
+                  priority
+                  quality={90}
                     />
                   </div>
                 </motion.div>
@@ -368,8 +370,8 @@ export default function ProductRoadmapCasePage() {
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"
-                      unoptimized
-                      priority
+                  priority
+                  quality={90}
                     />
                   </div>
                 </motion.div>
@@ -401,8 +403,8 @@ export default function ProductRoadmapCasePage() {
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"
-                      unoptimized
-                      priority
+                  priority
+                  quality={90}
                     />
                   </div>
                 </motion.div>

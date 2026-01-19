@@ -13,8 +13,8 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
   useEffect(() => {
     if (ENABLE_LENIS) {
       // Динамический импорт Lenis только если включен
-      // @ts-ignore - lenis может быть не установлен
-      import('lenis').then((Lenis: any) => {
+      // @ts-expect-error - lenis может быть не установлен
+      import('lenis').then((Lenis: { default: typeof import('lenis') }) => {
         const lenis = new Lenis.default({
           duration: 1.2,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

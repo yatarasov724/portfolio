@@ -5,6 +5,8 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-geist-sans",
+  display: 'swap',
+  preload: true,
 });
 
 export const metadata: Metadata = {

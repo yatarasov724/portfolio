@@ -1,8 +1,18 @@
 'use client'
 
+import { memo } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { handleSmoothScroll } from '@/utils/scroll'
 
-export default function Header() {
+const navItems = [
+  { id: 'about', label: 'О себе' },
+  { id: 'projects', label: 'Проекты' },
+  { id: 'skills', label: 'Навыки' },
+  { id: 'contact', label: 'Контакты' },
+]
+
+function Header() {
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
@@ -11,65 +21,25 @@ export default function Header() {
       className="absolute top-0 left-0 right-0 max-w-5xl mx-auto px-6 py-8 z-20"
     >
       <nav className="flex justify-between items-center">
-        <a href="/" className="text-xl font-semibold text-gray-50 hover:text-gray-100 transition-colors">
+        <Link href="/" className="text-xl font-semibold text-gray-50 hover:text-gray-100 transition-colors">
           Yaroslav Tarasov
-        </a>
+        </Link>
         <div className="flex gap-8">
-          <a 
-            href="#about" 
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById('about')
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="text-gray-400 hover:text-gray-100 transition-colors"
-          >
-            О себе
-          </a>
-          <a 
-            href="#projects" 
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById('projects')
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="text-gray-400 hover:text-gray-100 transition-colors"
-          >
-            Проекты
-          </a>
-          <a 
-            href="#skills" 
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById('skills')
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="text-gray-400 hover:text-gray-100 transition-colors"
-          >
-            Навыки
-          </a>
-          <a 
-            href="#contact" 
-            onClick={(e) => {
-              e.preventDefault()
-              const element = document.getElementById('contact')
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="text-gray-400 hover:text-gray-100 transition-colors"
-          >
-            Контакты
-          </a>
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => handleSmoothScroll(e, item.id)}
+              className="text-gray-400 hover:text-gray-100 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
       </nav>
     </motion.header>
   )
 }
+
+export default memo(Header)
 

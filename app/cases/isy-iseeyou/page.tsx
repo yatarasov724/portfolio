@@ -1,8 +1,11 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import ReactMarkdown from 'react-markdown'
+import dynamic from 'next/dynamic'
 import remarkGfm from 'remark-gfm'
+
+// Динамический импорт ReactMarkdown для code splitting
+const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -133,7 +136,6 @@ export default function ISYCasePage() {
                   duration: 0.6, 
                   delay: 0.3,
                   ease: [0.25, 0.1, 0.25, 1],
-                  hover: { duration: 0.3 }
                 }}
                 className="relative w-full max-w-5xl"
               >
@@ -163,10 +165,9 @@ export default function ISYCasePage() {
                     <Image
                       src={HERO_CONFIG.image.src}
                       alt={HERO_CONFIG.image.alt}
-                      unoptimized
                       fill
                       priority
-                      quality={100}
+                      quality={95}
                       className="object-contain object-center"
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
                       style={{
@@ -361,8 +362,7 @@ export default function ISYCasePage() {
               whileHover={{ scale: 1.02 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ 
-                duration: 0.6,
-                hover: { duration: 0.3 }
+                duration: 0.6
               }}
               className="relative"
             >
@@ -905,7 +905,6 @@ export default function ISYCasePage() {
                       transition={{ 
                         duration: 0.6, 
                         ease: [0.25, 0.1, 0.25, 1],
-                        hover: { duration: 0.3 }
                       }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
@@ -916,8 +915,8 @@ export default function ISYCasePage() {
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain rounded-lg"
-                          unoptimized
-                          priority
+                      priority
+                      quality={90}
                         />
                       </div>
                     </motion.div>
@@ -930,7 +929,6 @@ export default function ISYCasePage() {
                         duration: 0.6, 
                         delay: 0.1, 
                         ease: [0.25, 0.1, 0.25, 1],
-                        hover: { duration: 0.3 }
                       }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
@@ -941,7 +939,8 @@ export default function ISYCasePage() {
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain rounded-lg"
-                          unoptimized
+                          quality={85}
+                      loading="lazy"
                         />
                       </div>
                     </motion.div>
@@ -968,7 +967,6 @@ export default function ISYCasePage() {
                     transition={{ 
                       duration: 0.6, 
                       ease: [0.25, 0.1, 0.25, 1],
-                      hover: { duration: 0.3 }
                     }}
                     className="relative w-full rounded-lg overflow-hidden"
                   >
@@ -979,8 +977,8 @@ export default function ISYCasePage() {
                         width={1920}
                         height={1080}
                         className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
+                      priority
+                      quality={90}
                 />
               </div>
                   </motion.div>
@@ -1007,7 +1005,6 @@ export default function ISYCasePage() {
                       transition={{ 
                         duration: 0.6, 
                         ease: [0.25, 0.1, 0.25, 1],
-                        hover: { duration: 0.3 }
                       }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
@@ -1018,8 +1015,8 @@ export default function ISYCasePage() {
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain rounded-lg"
-                          unoptimized
-                          priority
+                      priority
+                      quality={90}
                         />
                       </div>
                     </motion.div>
@@ -1032,7 +1029,6 @@ export default function ISYCasePage() {
                         duration: 0.6, 
                         delay: 0.1, 
                         ease: [0.25, 0.1, 0.25, 1],
-                        hover: { duration: 0.3 }
                       }}
                       className="relative w-full rounded-lg overflow-hidden"
                     >
@@ -1043,7 +1039,8 @@ export default function ISYCasePage() {
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain rounded-lg"
-                          unoptimized
+                          quality={85}
+                      loading="lazy"
                         />
                       </div>
                     </motion.div>
@@ -1082,7 +1079,8 @@ export default function ISYCasePage() {
                           alt="Состояние: все в порядке"
                           fill
                           className="object-contain"
-                          unoptimized
+                          quality={85}
+                      loading="lazy"
                         />
                       </motion.div>
                     </motion.div>
@@ -1109,7 +1107,8 @@ export default function ISYCasePage() {
                           alt="Интерактивные подсказки"
                           fill
                           className="object-contain"
-                          unoptimized
+                          quality={85}
+                      loading="lazy"
                         />
                       </motion.div>
                     </motion.div>
@@ -1136,7 +1135,8 @@ export default function ISYCasePage() {
                           alt="Глобальная фильтрация"
                           fill
                           className="object-contain"
-                          unoptimized
+                          quality={85}
+                      loading="lazy"
                         />
                       </motion.div>
                     </motion.div>
@@ -1163,7 +1163,8 @@ export default function ISYCasePage() {
                           alt="Настройки таблицы"
                           fill
                           className="object-contain"
-                          unoptimized
+                          quality={85}
+                      loading="lazy"
                         />
                       </motion.div>
                     </motion.div>
