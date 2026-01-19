@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden pt-20 sm:pt-24">
+      <section className="relative w-full overflow-hidden pt-24 sm:pt-28 md:pt-32">
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-4 sm:px-6">
           <div className="w-full max-w-5xl mx-auto">
             <motion.div

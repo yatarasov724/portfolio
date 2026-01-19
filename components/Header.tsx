@@ -14,6 +14,30 @@ const navItems = [
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  // Логика появления меню при скролле вверх
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Показываем меню если:
+      // 1. Скроллим вверх (текущая позиция меньше предыдущей)
+      // 2. Находимся в самом верху страницы
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Скрываем при скролле вниз
+        setIsVisible(false)
+      }
+      
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   // Предотвращаем скролл body при открытом меню
   useEffect(() => {
@@ -35,9 +59,18 @@ function Header() {
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="absolute top-0 left-0 right-0 max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 z-50"
+      animate={{ 
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? 0 : -20
+      }}
+      transition={{ duration: 0.3 }}
+      className={`fixed top-0 left-0 right-0 max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 z-50 transition-all ${
+        isVisible ? 'pointer-events-auto' : 'pointer-events-none'
+      }`}
+      style={{
+        backdropFilter: isVisible ? 'blur(10px)' : 'none',
+        backgroundColor: isVisible ? 'rgba(3, 7, 18, 0.8)' : 'transparent',
+      }}
     >
       <nav className="flex justify-between items-center">
         <Link 
