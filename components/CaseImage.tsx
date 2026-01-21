@@ -33,13 +33,15 @@ export default function CaseImage({ src, alt, className = '', fallbackSrc }: Cas
   }
 
   return (
-    <Image
-      src={currentSrc}
-      alt={alt}
-      fill
-      className={className}
-      onError={handleError}
-    />
+    <div className="relative w-full h-full border border-gray-700/50">
+      <Image
+        src={currentSrc}
+        alt={alt}
+        fill
+        className={className}
+        onError={handleError}
+      />
+    </div>
   )
 }
 

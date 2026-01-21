@@ -8,12 +8,15 @@ import remarkGfm from 'remark-gfm'
 const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
 import AnimatedSection from '@/components/animations/AnimatedSection'
 import Stagger from '@/components/animations/Stagger'
 import Timeline from '@/components/Timeline'
+import ImageModal from '@/components/ImageModal'
+import { scrollToSectionOnHome } from '@/utils/scroll'
+import { fixTypography } from '@/utils/typography'
 
 // Константы для hero section
 const HERO_CONFIG = {
@@ -28,7 +31,14 @@ const HERO_CONFIG = {
 } as const
 
 export default function ISYCasePage() {
-  const [zoomedImage, setZoomedImage] = useState<string | null>(null)
+  const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null)
+  
+  // Сброс скролла при загрузке страницы
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+    }
+  }, [])
   
   const markdownContentBeforeProblem = `## Обзор
 
@@ -67,7 +77,7 @@ export default function ISYCasePage() {
   return (
     <SmoothScrollProvider>
     <main className="min-h-screen">
-      <Header />
+      <Header showLogo={true} />
       {/* Hero Section */}
         <section className="relative w-full overflow-hidden min-h-screen flex items-center justify-center">
           {/* Enhanced background with animated gradient glow */}
@@ -114,7 +124,7 @@ export default function ISYCasePage() {
                   transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                   className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
                 >
-                  {HERO_CONFIG.content.headline}
+                  {fixTypography(HERO_CONFIG.content.headline)}
               </motion.h1>
               <motion.p
                   initial={{ opacity: 0, y: 10 }}
@@ -122,7 +132,7 @@ export default function ISYCasePage() {
                   transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                   className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
               >
-                  {HERO_CONFIG.content.subheadline}
+                  {fixTypography(HERO_CONFIG.content.subheadline)}
               </motion.p>
             </motion.div>
               
@@ -137,7 +147,7 @@ export default function ISYCasePage() {
                   delay: 0.3,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
-                className="relative w-full max-w-5xl"
+                className="relative w-full max-w-5xl mx-auto"
               >
                 {/* Glow effect behind image */}
                 <motion.div
@@ -160,15 +170,16 @@ export default function ISYCasePage() {
                 />
                 
                 {/* Image container */}
-                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden shadow-md">
-                  <div className="relative w-full h-full">
+                <div className="relative w-full rounded-2xl shadow-md border border-gray-700/50 flex items-center justify-center">
+                  <div className="relative w-full">
                     <Image
                       src={HERO_CONFIG.image.src}
                       alt={HERO_CONFIG.image.alt}
-                      fill
+                      width={1920}
+                      height={1080}
                       priority
                       quality={95}
-                      className="object-contain object-center"
+                      className="w-full h-auto object-contain"
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
                       style={{
                         imageRendering: 'crisp-edges',
@@ -183,22 +194,6 @@ export default function ISYCasePage() {
           </div>
         </div>
               </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-gray-400 text-3xl"
-          >
-            ↓
-          </motion.div>
-        </motion.div>
             </div>
           </div>
       </section>
@@ -359,7 +354,6 @@ export default function ISYCasePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.02 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ 
                 duration: 0.6
@@ -371,7 +365,10 @@ export default function ISYCasePage() {
                   Старый процесс
                 </span>
               </div>
-              <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950">
+              <div 
+                className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer border border-gray-700/50"
+                onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/OLD ISY.png', alt: 'Старый процесс: ручная выгрузка в Excel' })}
+              >
                 <Image
                   src="/cases/isy-iseeyou/images/OLD ISY.png"
                   alt="Старый процесс: ручная выгрузка в Excel"
@@ -469,24 +466,16 @@ export default function ISYCasePage() {
             <div className="bg-gray-900/30 rounded-xl p-8 md:p-10 border border-gray-800/50">
               {/* Vertical Timeline with Details */}
               <div className="relative">
-              {/* Vertical line - goes through all 3 blocks */}
-              <motion.div
-                className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-2 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-pink-500/50 rounded-full"
-                initial={{ height: 0 }}
-                whileInView={{ height: '100%' }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              />
-              
-              <div className="space-y-12 md:space-y-16">
                 {/* Step 1: Исследование и анализ */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5 }}
-                  className="relative pl-12 md:pl-16"
+                  className="relative pl-12 md:pl-16 pb-12 md:pb-16"
                 >
+                  {/* Vertical line from this point to next */}
+                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-[calc(0.5rem+4px)] bottom-0 w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-purple-500/50" />
                   {/* Dot */}
                   <motion.div 
                     className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg z-10"
@@ -525,7 +514,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.4 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Изучил текущий процесс сбора статистики: ручная выгрузка в Excel, построение графиков вручную, время генерации отчётов — несколько часов.</span>
+                        <span>{fixTypography('Изучил текущий процесс сбора статистики: ручная выгрузка в Excel, построение графиков вручную, время генерации отчётов — несколько часов.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -545,7 +534,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.6 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Сегментировал целевую аудиторию: C-level, комплаенс, security-team.</span>
+                        <span>{fixTypography('Сегментировал целевую аудиторию: C-level, комплаенс, security-team.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -555,7 +544,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.7 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Определил ключевые сценарии использования: быстрый доступ к статистике инфраструктуры, weekly review, risk overview, operational monitoring.</span>
+                        <span>{fixTypography('Определил ключевые сценарии использования: быстрый доступ к статистике инфраструктуры, weekly review, risk overview, operational monitoring.')}</span>
                       </motion.li>
                     </motion.ul>
                   </div>
@@ -567,8 +556,12 @@ export default function ISYCasePage() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="relative pl-12 md:pl-16"
+                  className="relative pl-12 md:pl-16 pb-12 md:pb-16"
                 >
+                  {/* Vertical line from previous point to this point */}
+                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-0 h-[calc(0.5rem+4px)] w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-purple-500/50" />
+                  {/* Vertical line from this point to next */}
+                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-[calc(0.5rem+4px)] bottom-0 w-0.5 bg-gradient-to-b from-purple-500/50 via-pink-500/50 to-pink-500/50" />
                   {/* Dot */}
                   <motion.div 
                     className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-gray-900 shadow-lg z-10"
@@ -607,7 +600,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.4 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Построил структуру от общего к частному: начиная с главных общих сущностей, заканчивая детализированными авточеками по каждому сервису.</span>
+                        <span>{fixTypography('Построил структуру от общего к частному: начиная с главных общих сущностей, заканчивая детализированными авточеками по каждому сервису.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -617,7 +610,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.5 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Спроектировал логику автоматического сбора данных и визуализации, заменившую ручной процесс в Excel.</span>
+                        <span>{fixTypography('Спроектировал логику автоматического сбора данных и визуализации, заменившую ручной процесс в Excel.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -627,7 +620,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.6 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Спроектировал систему фильтров и иерархическую структуру для детального просмотра и анализа данных.</span>
+                        <span>{fixTypography('Спроектировал систему фильтров и иерархическую структуру для детального просмотра и анализа данных.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -637,13 +630,13 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.7 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Определил визуальный язык для уровней риска и статусов инфраструктуры.</span>
+                        <span>{fixTypography('Определил визуальный язык для уровней риска и статусов инфраструктуры.')}</span>
                       </motion.li>
                     </motion.ul>
                   </div>
                 </motion.div>
 
-                {/* Step 3: UI-дизайн */}
+                {/* Step 3: Интерфейс */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -651,6 +644,8 @@ export default function ISYCasePage() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="relative pl-12 md:pl-16"
                 >
+                  {/* Vertical line from previous point to this point */}
+                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-0 h-[calc(0.5rem+4px)] w-0.5 bg-gradient-to-b from-purple-500/50 via-pink-500/50 to-pink-500/50" />
                   {/* Dot */}
                   <motion.div 
                     className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-pink-500 to-red-500 border-2 border-gray-900 shadow-lg z-10"
@@ -672,7 +667,7 @@ export default function ISYCasePage() {
                       viewport={{ once: true, amount: 0.3 }}
                       transition={{ duration: 0.5, delay: 0.1 }}
                     >
-                      03. UI-дизайн
+                      03. Интерфейс
                     </motion.h3>
                     <motion.ul 
                       className="list-none text-gray-400 space-y-1.5"
@@ -689,7 +684,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.4 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Изначально сервис разрабатывался на Angular, но в связи с требованиями руководства стояла задача перейти на единую B2B дизайн-систему на React.</span>
+                        <span>{fixTypography('Изначально сервис разрабатывался на Angular, но в связи с требованиями руководства стояла задача перейти на единую B2B дизайн-систему на React.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -699,7 +694,7 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.5 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Вместе с командой дизайн-системы адаптировал существующие компоненты под специфику дашборда: карточки статистики, диаграммы, таблицы и статусы инфраструктуры.</span>
+                        <span>{fixTypography('Вместе с командой дизайн-системы адаптировал существующие компоненты под специфику дашборда: карточки статистики, диаграммы, таблицы и статусы инфраструктуры.')}</span>
                       </motion.li>
                       <motion.li 
                         className="text-lg leading-relaxed flex items-baseline gap-3"
@@ -709,12 +704,11 @@ export default function ISYCasePage() {
                         transition={{ duration: 0.5, delay: 0.7 }}
                       >
                         <span className="text-gray-500" aria-hidden>◆</span>
-                        <span>Стиль: строгий, корпоративный, читаемый, ориентированный на данные. Единообразие с другими B2B продуктами компании обеспечило быструю адаптацию пользователей.</span>
+                        <span>{fixTypography('Стиль: строгий, корпоративный, читаемый, ориентированный на данные. Единообразие с другими B2B продуктами компании обеспечило быструю адаптацию пользователей.')}</span>
                       </motion.li>
                     </motion.ul>
                   </div>
                 </motion.div>
-              </div>
               </div>
             </div>
 
@@ -900,13 +894,13 @@ export default function ISYCasePage() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
                       transition={{ 
                         duration: 0.6, 
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
-                      className="relative w-full rounded-lg overflow-hidden"
+                      className="relative w-full rounded-lg overflow-hidden cursor-pointer border border-gray-700/50"
+                      onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/laptop-dashboard.png', alt: 'Дашборд для топ-менеджмента' })}
                     >
                       <div className="relative w-full">
                         <Image
@@ -923,14 +917,14 @@ export default function ISYCasePage() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
                       transition={{ 
                         duration: 0.6, 
                         delay: 0.1, 
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
-                      className="relative w-full rounded-lg overflow-hidden"
+                      className="relative w-full rounded-lg overflow-hidden cursor-pointer border border-gray-700/50"
+                      onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/laptop-dashboard-2.png', alt: 'Дашборд для топ-менеджмента' })}
                     >
                       <div className="relative w-full">
                         <Image
@@ -962,13 +956,13 @@ export default function ISYCasePage() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    whileHover={{ scale: 1.02 }}
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ 
                       duration: 0.6, 
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
-                    className="relative w-full rounded-lg overflow-hidden"
+                    className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                    onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/service_card.png', alt: 'Карточка сервиса' })}
                   >
                     <div className="relative w-full">
                       <Image
@@ -1006,7 +1000,7 @@ export default function ISYCasePage() {
                         duration: 0.6, 
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
-                      className="relative w-full rounded-lg overflow-hidden"
+                      className="relative w-full rounded-lg overflow-hidden border border-gray-700/50"
                     >
                       <div className="relative w-full">
                         <Image
@@ -1030,7 +1024,7 @@ export default function ISYCasePage() {
                         delay: 0.1, 
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
-                      className="relative w-full rounded-lg overflow-hidden"
+                      className="relative w-full rounded-lg overflow-hidden border border-gray-700/50"
                     >
                       <div className="relative w-full">
                         <Image
@@ -1070,9 +1064,7 @@ export default function ISYCasePage() {
                       </h4>
                       <motion.div 
                         className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
-                        onClick={() => setZoomedImage('/cases/isy-iseeyou/images/success.png')}
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
+                        onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/success.png', alt: 'Состояние: все в порядке' })}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/success.png"
@@ -1098,9 +1090,7 @@ export default function ISYCasePage() {
                       </h4>
                       <motion.div 
                         className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
-                        onClick={() => setZoomedImage('/cases/isy-iseeyou/images/tooltips.png')}
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
+                        onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/tooltips.png', alt: 'Интерактивные подсказки' })}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/tooltips.png"
@@ -1126,9 +1116,7 @@ export default function ISYCasePage() {
                       </h4>
                       <motion.div 
                         className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
-                        onClick={() => setZoomedImage('/cases/isy-iseeyou/images/global_filter.png')}
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
+                        onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/global_filter.png', alt: 'Глобальная фильтрация' })}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/global_filter.png"
@@ -1154,9 +1142,7 @@ export default function ISYCasePage() {
                       </h4>
                       <motion.div 
                         className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-950 cursor-pointer group"
-                        onClick={() => setZoomedImage('/cases/isy-iseeyou/images/table_filter.png')}
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
+                        onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/table_filter.png', alt: 'Настройки таблицы' })}
                       >
                         <Image
                           src="/cases/isy-iseeyou/images/table_filter.png"
@@ -1217,23 +1203,23 @@ export default function ISYCasePage() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
+                      <span className="whitespace-nowrap">Написать в Telegram</span>
                       <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
                       </svg>
-                      <span className="whitespace-nowrap">Написать в Telegram</span>
                     </motion.a>
                     
-                    <motion.a
-                      href="/"
+                    <motion.button
+                      onClick={() => scrollToSectionOnHome('projects')}
                       className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 w-full sm:w-auto min-w-[200px] sm:min-w-0"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
+                      <span className="whitespace-nowrap">Посмотреть другие проекты</span>
                       <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                      <span className="whitespace-nowrap">Посмотреть другие проекты</span>
-                    </motion.a>
+                    </motion.button>
                   </motion.div>
                 </div>
               </div>
@@ -1242,51 +1228,15 @@ export default function ISYCasePage() {
           </div>
     </main>
 
-    {/* Image Zoom Modal */}
-    <AnimatePresence>
-      {zoomedImage && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setZoomedImage(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="relative max-w-7xl max-h-[90vh] w-full h-full pointer-events-none"
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setZoomedImage(null)
-              }}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10 pointer-events-auto"
-              aria-label="Закрыть"
-            >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <div 
-              className="relative w-full h-full rounded-lg overflow-hidden pointer-events-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={zoomedImage}
-                alt="Увеличенное изображение"
-                fill
-                className="object-contain"
-                unoptimized
-              />
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    {/* Image Modal */}
+    {zoomedImage && (
+      <ImageModal
+        src={zoomedImage.src}
+        alt={zoomedImage.alt}
+        isOpen={true}
+        onClose={() => setZoomedImage(null)}
+      />
+    )}
     </SmoothScrollProvider>
   )
 }

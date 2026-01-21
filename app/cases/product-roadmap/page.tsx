@@ -8,11 +8,13 @@ import remarkGfm from 'remark-gfm'
 const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import Header from '@/components/Header'
 import CaseImage from '@/components/CaseImage'
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
 import AnimatedSection from '@/components/animations/AnimatedSection'
 import Stagger from '@/components/animations/Stagger'
+import { scrollToSectionOnHome } from '@/utils/scroll'
 
 // Константы для hero section
 const HERO_CONFIG = {
@@ -28,6 +30,13 @@ const HERO_CONFIG = {
 } as const
 
 export default function ProductRoadmapCasePage() {
+  // Сброс скролла при загрузке страницы
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+    }
+  }, [])
+  
   const markdownContent = `## Обзор
 
 Проект — создание roadmap для согласования релизов и планирования сервисов на год: единый инструмент для упрощения согласования между командами, избежания конфликтов в карточках релизов и повышения прозрачности процессов.
@@ -107,7 +116,7 @@ export default function ProductRoadmapCasePage() {
   return (
     <SmoothScrollProvider>
       <main className="min-h-screen">
-        <Header />
+        <Header showLogo={true} />
         {/* Hero Section */}
         <section className="relative w-full overflow-hidden">
           {/* Subtle radial gradient background glow */}
@@ -141,16 +150,17 @@ export default function ProductRoadmapCasePage() {
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative w-full h-[320px] sm:h-[380px] md:h-[450px] lg:h-[550px] xl:h-[650px] overflow-hidden flex items-start justify-center"
+              className="relative w-full max-w-5xl mx-auto flex items-start justify-center border border-gray-700/50 rounded-lg"
             >
-              <div className="relative w-full h-full">
+              <div className="relative w-full">
                 <Image
                   src={HERO_CONFIG.image.src}
                   alt={HERO_CONFIG.image.alt}
-                  fill
+                  width={1920}
+                  height={1080}
                   priority
                   quality={95}
-                  className="object-contain object-top"
+                  className="w-full h-auto object-contain"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
                   style={{
                     imageRendering: 'crisp-edges',
@@ -163,22 +173,6 @@ export default function ProductRoadmapCasePage() {
                   }}
                 />
               </div>
-            </motion.div>
-            
-            {/* Scroll Indicator - ниже изображения */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="relative mt-4 sm:mt-5 md:mt-6 flex justify-center"
-            >
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="text-gray-400 text-2xl"
-              >
-                ↓
-              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -456,23 +450,23 @@ export default function ProductRoadmapCasePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
+                    <span className="whitespace-nowrap">Написать в Telegram</span>
                     <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
                     </svg>
-                    <span className="whitespace-nowrap">Написать в Telegram</span>
                   </motion.a>
                   
-                  <motion.a
-                    href="/"
+                  <motion.button
+                    onClick={() => scrollToSectionOnHome('projects')}
                     className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 w-full sm:w-auto min-w-[200px] sm:min-w-0"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
+                    <span className="whitespace-nowrap">Посмотреть другие проекты</span>
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    <span className="whitespace-nowrap">Посмотреть другие проекты</span>
-                  </motion.a>
+                  </motion.button>
                 </motion.div>
               </div>
             </div>

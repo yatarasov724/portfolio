@@ -16,3 +16,39 @@ body {
   color: #ededed;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Перенос висячих предлогов и союзов для русского текста */
+p, li {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+  orphans: 2;
+  widows: 2;
+  text-rendering: optimizeLegibility;
+  /* Улучшенный перенос для русского текста */
+  line-break: auto;
+  word-spacing: normal;
+}
+
+/* Для всех текстовых элементов */
+span, h1, h2, h3, h4, h5, h6 {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+/* Специальные правила для параграфов с длинным текстом */
+p.leading-relaxed,
+li.leading-relaxed {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+/* Для контента в кейсах */
+.prose p,
+.prose li {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  word-break: normal;
+}

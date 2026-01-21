@@ -3,41 +3,24 @@
 import { memo, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { handleSmoothScroll } from '@/utils/scroll'
+
+interface HeaderProps {
+  showLogo?: boolean
+}
 
 const navItems = [
   { id: 'about', label: 'О себе' },
-  { id: 'projects', label: 'Проекты' },
   { id: 'skills', label: 'Навыки' },
+  { id: 'projects', label: 'Проекты' },
   { id: 'contact', label: 'Контакты' },
 ]
 
-function Header() {
+function Header({ showLogo = false }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-
-  // Логика появления меню при скролле вверх
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      // Показываем меню если:
-      // 1. Скроллим вверх (текущая позиция меньше предыдущей)
-      // 2. Находимся в самом верху страницы
-      if (currentScrollY < lastScrollY || currentScrollY < 100) {
-        setIsVisible(true)
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Скрываем при скролле вниз
-        setIsVisible(false)
-      }
-      
-      setLastScrollY(currentScrollY)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  const pathname = usePathname()
+  const isCasePage = pathname?.startsWith('/cases')
 
   // Предотвращаем скролл body при открытом меню
   useEffect(() => {
@@ -52,7 +35,14 @@ function Header() {
   }, [isMenuOpen])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, itemId: string) => {
-    handleSmoothScroll(e, itemId)
+    if (isCasePage) {
+      // На странице кейса - переходим на главную с якорем
+      e.preventDefault()
+      window.location.href = `/#${itemId}`
+    } else {
+      // На главной странице - используем плавный скролл
+      handleSmoothScroll(e, itemId)
+    }
     setIsMenuOpen(false)
   }
 
@@ -60,34 +50,55 @@ function Header() {
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ 
-        opacity: isVisible ? 1 : 0,
-        y: isVisible ? 0 : -20
+        opacity: 1,
+        y: 0
       }}
       transition={{ duration: 0.3 }}
-      className={`fixed top-0 left-0 right-0 max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 z-50 transition-all ${
-        isVisible ? 'pointer-events-auto' : 'pointer-events-none'
-      }`}
+      className="fixed top-0 left-0 right-0 w-full px-4 sm:px-6 py-6 sm:py-8 z-50 transition-all pointer-events-auto"
       style={{
-        backdropFilter: isVisible ? 'blur(10px)' : 'none',
-        backgroundColor: isVisible ? 'rgba(3, 7, 18, 0.8)' : 'transparent',
+        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(3, 7, 18, 0.8)',
       }}
     >
-      <nav className="flex justify-between items-center">
-        <Link 
-          href="/" 
-          className="text-lg sm:text-xl font-semibold text-gray-50 hover:text-gray-100 transition-colors z-50"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Yaroslav Tarasov
-        </Link>
+      <nav className="flex justify-between items-center max-w-5xl mx-auto">
+        <div className="min-w-[180px] h-[28px] flex items-center">
+          <AnimatePresence mode="wait">
+            {showLogo ? (
+              <motion.div
+                key="header-logo"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="text-lg sm:text-xl font-semibold text-gray-50 z-50"
+              >
+                <Link 
+                  href="/" 
+                  className="hover:text-gray-100 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Yaroslav Tarasov
+                </Link>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="header-spacer"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="w-full h-full"
+              />
+            )}
+          </AnimatePresence>
+        </div>
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8">
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => handleSmoothScroll(e, item.id)}
+              href={isCasePage ? `/#${item.id}` : `#${item.id}`}
+              onClick={(e) => handleNavClick(e, item.id)}
               className="text-gray-400 hover:text-gray-100 transition-colors"
             >
               {item.label}

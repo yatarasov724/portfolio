@@ -1,75 +1,99 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import SectionTitle from '@/components/SectionTitle'
 import ProjectCard from '@/components/ProjectCard'
 import { projects } from './data/projects'
+import { handleHashScroll } from '@/utils/scroll'
 
 export default function Home() {
+  const [showHeaderLogo, setShowHeaderLogo] = useState(false)
+
+  useEffect(() => {
+    handleHashScroll()
+  }, [])
+
+  useEffect(() => {
+    let ticking = false
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY
+          // Показываем логотип в header когда проскроллили больше 200px
+          setShowHeaderLogo(scrollY > 200)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Проверяем начальное состояние
+    
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <main className="min-h-screen">
-      <Header />
+      <Header showLogo={showHeaderLogo} />
       
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden pt-24 sm:pt-28 md:pt-32">
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-4 sm:px-6">
-          <div className="w-full max-w-5xl mx-auto">
+      <section id="hero-section" className="relative w-full overflow-hidden pt-24 sm:pt-28 md:pt-32">
+        <div className="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-80px)] px-4 sm:px-6 pb-16 sm:pb-20">
+          <div className="w-full max-w-5xl mx-auto flex-1 flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-center max-w-4xl mx-auto"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-                Yaroslav Tarasov
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-2 font-medium">
-                Продуктовый дизайнер / UI & UX
-              </p>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-2">
-                Специализируюсь на B2B продуктах, сложных системах, дашбордах и внутренних инструментах. Создаю интерфейсы, которые сложные рабочие процессы делают легче, а работу команд эффективнее.
-              </p>
-              
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <motion.button
-                  onClick={() => {
-                    const element = document.getElementById('projects')
-                    if (element) {
-                      const headerOffset = 80
-                      const elementPosition = element.getBoundingClientRect().top
-                      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                      })
-                    }
-                  }}
-                  className="px-8 py-3.5 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-base w-full sm:w-auto"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Смотреть проекты
-                </motion.button>
-                <motion.a
-                  href="/Tarasov Yaroslav (4).pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors text-base w-full sm:w-auto text-center border border-gray-700"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Резюме
-                </motion.a>
+              {/* Logo/Title */}
+              <div className="h-[60px] sm:h-[72px] md:h-[84px] lg:h-[96px] flex items-center justify-center mb-6 sm:mb-8">
+                <AnimatePresence>
+                  {!showHeaderLogo && (
+                    <motion.h1
+                      key="hero-logo"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                    >
+                      Yaroslav Tarasov
+                    </motion.h1>
+                  )}
+                </AnimatePresence>
               </div>
+              
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-2">
+                <span className="font-medium">Продуктовый дизайнер</span>, специализируюсь на B2B продуктах, сложных системах, дашбордах и внутренних инструментах. Создаю интерфейсы, которые сложные рабочие процессы делают легче, а работу команд эффективнее.
+              </p>
             </motion.div>
           </div>
+          
+          {/* Scroll Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.5 }}
+            className="flex justify-center"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-gray-400 text-2xl sm:text-3xl"
+            >
+              ↓
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
+      <section id="about" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +103,7 @@ export default function Home() {
           <SectionTitle>О себе</SectionTitle>
           <div className="mt-8 sm:mt-12 max-w-3xl space-y-4 sm:space-y-6">
             <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
-              Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в Kaspersky, где проектирую интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.
+              Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в Лаборатории Касперского, где проектирую интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
               Моя основная задача — создавать структурированный и масштабируемый UX для систем, где важна ясность.
@@ -91,33 +115,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <SectionTitle>Проекты</SectionTitle>
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 mt-8 sm:mt-12">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <ProjectCard project={project} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
       {/* Skills & Focus Section */}
-      <section id="skills" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
+      <section id="skills" className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +142,7 @@ export default function Home() {
                   {['UX/UI Design', 'User Research', 'Information Architecture', 'Prototyping', 'Validation', 'Dashboards'].map((tag, index) => (
                     <span
                       key={index}
-                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30"
+                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30 cursor-default"
                     >
                       {tag}
                     </span>
@@ -167,7 +166,7 @@ export default function Home() {
                   {['Components', 'Tokens', 'Documentation', 'Scalability', 'Consistency'].map((tag, index) => (
                     <span
                       key={index}
-                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30"
+                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30 cursor-default"
                     >
                       {tag}
                     </span>
@@ -191,7 +190,7 @@ export default function Home() {
                   {['Collaboration', 'Strategy', 'Coordination', 'Internal Tools', 'Metrics'].map((tag, index) => (
                     <span
                       key={index}
-                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30"
+                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30 cursor-default"
                     >
                       {tag}
                     </span>
@@ -199,6 +198,31 @@ export default function Home() {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle>Проекты</SectionTitle>
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 mt-8 sm:mt-12">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </section>

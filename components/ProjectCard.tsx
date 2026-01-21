@@ -124,13 +124,13 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                   project.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="text-[10px] font-normal text-gray-500 uppercase tracking-wide px-2 py-0.5 rounded bg-gray-800/30"
+                      className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30 cursor-default"
                     >
                       {tag}
                     </span>
                   ))
                 ) : project.domain ? (
-                  <span className="text-[10px] font-normal text-gray-500 uppercase tracking-wide px-2 py-0.5 rounded bg-gray-800/30">
+                  <span className="text-xs text-gray-400 px-3 py-1.5 rounded-lg bg-gray-800/30 border border-gray-700/30 cursor-default">
                     {project.domain}
                   </span>
                 ) : null}
@@ -154,7 +154,7 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
         {/* Image - снизу */}
         <div className="relative w-full h-[240px] sm:h-[280px] md:h-[380px] lg:h-[480px] overflow-hidden px-4 sm:px-6 md:px-8">
           <div className="relative w-full h-full overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden border border-gray-700/50">
               {project.image && !imageError ? (
                 <>
                   <Image
@@ -174,6 +174,27 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                       setImageError(true)
                     }}
                   />
+                  
+                  {/* Lock Badge - поверх изображения */}
+                  {project.password && !hasAccess && (
+                    <div className="absolute top-4 right-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900/90 backdrop-blur-md border border-gray-700/60 shadow-lg">
+                      <svg 
+                        className="w-4 h-4 text-gray-300" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2} 
+                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" 
+                        />
+                      </svg>
+                      <span className="text-xs font-medium text-gray-300">Защищено</span>
+                    </div>
+                  )}
+                  
                   {project.comingSoon && (
                     <>
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/60 to-gray-900/30 pointer-events-none" />
