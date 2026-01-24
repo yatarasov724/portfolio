@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect, memo, useCallback } from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Project {
   id: string
@@ -28,6 +29,7 @@ interface ProjectCardProps {
 
 const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
   const router = useRouter()
+  const { t } = useLanguage()
   const [imageError, setImageError] = useState(false)
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [passwordInput, setPasswordInput] = useState('')
@@ -191,7 +193,7 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                           d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" 
                         />
                       </svg>
-                      <span className="text-xs font-medium text-gray-300">Защищено</span>
+                      <span className="text-xs font-medium text-gray-300">{t('projectCard.protected')}</span>
                     </div>
                   )}
                   
@@ -200,10 +202,10 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/60 to-gray-900/30 pointer-events-none" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center px-8 pointer-events-none">
                         <p className="text-2xl md:text-3xl font-semibold text-gray-300 mb-3">
-                          Coming Soon
+                          {t('projectCard.comingSoon')}
                         </p>
                         <p className="text-sm md:text-base text-gray-500 text-center max-w-md leading-relaxed">
-                          Детальный кейс с процессом работы, выводами и результатами готовится к публикации
+                          {t('projectCard.comingSoonDescription')}
                         </p>
                       </div>
                     </>
@@ -243,10 +245,10 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
               className="bg-gray-900 rounded-2xl p-8 max-w-md w-full border border-gray-800"
             >
               <h3 className="text-2xl font-semibold text-gray-50 mb-2">
-                Доступ к кейсу
+                {t('projectCard.passwordModal.title')}
               </h3>
               <p className="text-gray-400 mb-6">
-                Этот кейс защищен паролем. Введите пароль для доступа.
+                {t('projectCard.passwordModal.description')}
               </p>
               
               <form onSubmit={handlePasswordSubmit} className="space-y-4">
@@ -258,13 +260,13 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                       setPasswordInput(e.target.value)
                       setPasswordError(false)
                     }}
-                    placeholder="Введите пароль"
+                    placeholder={t('projectCard.passwordModal.placeholder')}
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-50 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                     autoFocus
                   />
                   {passwordError && (
                     <p className="text-red-400 text-sm mt-2">
-                      Неверный пароль. Попробуйте снова.
+                      {t('projectCard.passwordModal.error')}
                     </p>
                   )}
                 </div>
@@ -283,10 +285,10 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        <span>Проверка...</span>
+                        <span>{t('projectCard.passwordModal.checking')}</span>
                       </>
                     ) : (
-                      'Войти'
+                      t('projectCard.passwordModal.submit')
                     )}
                   </motion.button>
                   <motion.button
@@ -300,7 +302,7 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
                     whileTap={{ scale: 0.98 }}
                     className="px-6 py-3 bg-gray-800 text-gray-300 font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700"
                   >
-                    Отмена
+                    {t('projectCard.passwordModal.cancel')}
                   </motion.button>
                 </div>
               </form>

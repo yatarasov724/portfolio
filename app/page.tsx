@@ -5,11 +5,14 @@ import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import SectionTitle from '@/components/SectionTitle'
 import ProjectCard from '@/components/ProjectCard'
-import { projects } from './data/projects'
+import { getProjects } from './data/projects'
 import { handleHashScroll } from '@/utils/scroll'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Home() {
   const [showHeaderLogo, setShowHeaderLogo] = useState(false)
+  const { t, language } = useLanguage()
+  const projects = getProjects(language)
 
   useEffect(() => {
     handleHashScroll()
@@ -68,8 +71,11 @@ export default function Home() {
                 </AnimatePresence>
               </div>
               
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-2">
-                <span className="font-medium">Продуктовый дизайнер</span>, специализируюсь на B2B продуктах, сложных системах, дашбордах и внутренних инструментах. Создаю интерфейсы, которые сложные рабочие процессы делают легче, а работу команд эффективнее.
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-2" style={{ textWrap: 'balance' }}>
+                {language === 'en' 
+                  ? <>Product Designer, specializing in B2B products and complex systems. I create interfaces that make complex workflows easier and team work more efficient.</>
+                  : <>Продуктовый дизайнер, специализируюсь на B2B продуктах и сложных системах. Создаю интерфейсы, которые делают рабочие процессы легче, а работу команд эффективнее.</>
+                }
               </p>
             </motion.div>
           </div>
@@ -100,16 +106,19 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle>О себе</SectionTitle>
+          <SectionTitle>{t('about.title')}</SectionTitle>
           <div className="mt-8 sm:mt-12 max-w-3xl space-y-4 sm:space-y-6">
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
-              Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в Лаборатории Касперского, где проектирую интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed" style={{ textWrap: 'balance' }}>
+              {language === 'en' 
+                ? <>Product Designer with over 5 years of experience. I specialize in B2B products, complex systems, and enterprise tools. Previously worked at T1, currently working at <span className="font-semibold text-gray-200">Kaspersky Lab</span>, where I design interfaces for dashboards, internal platforms, and applications with large data volumes.</>
+                : <>Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в <span className="font-semibold text-gray-200">Лаборатории Касперского</span>, где проектирую интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.</>
+              }
             </p>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
-              Моя основная задача — создавать структурированный и масштабируемый UX для систем, где важна ясность.
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed" style={{ textWrap: 'balance' }}>
+              {t('about.paragraph2')}
             </p>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
-              Привык тесно сотрудничать с продакт-менеджерами, разработчиками и стейкхолдерами для согласования решений и обеспечения технической реализуемости. Создаю и поддерживаю дизайн-системы, работаю с командами разработки над реализацией интерфейсов.
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed" style={{ textWrap: 'balance' }}>
+              {t('about.paragraph3')}
             </p>
           </div>
         </motion.div>
@@ -123,7 +132,7 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle>Навыки и фокус</SectionTitle>
+          <SectionTitle>{t('skills.title')}</SectionTitle>
           <div className="mt-8 sm:mt-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {/* Product Design */}
@@ -134,9 +143,9 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="flex flex-col"
               >
-                <h3 className="text-xl font-semibold text-gray-50 mb-3">Product Design</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  Проектирование интерфейсов для корпоративных систем, дашбордов и приложений с большим объемом данных
+                <h3 className="text-xl font-semibold text-gray-50 mb-3">{t('skills.productDesign.title')}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4" style={{ textWrap: 'balance' }}>
+                  {t('skills.productDesign.description')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['UX/UI Design', 'User Research', 'Information Architecture', 'Prototyping', 'Validation', 'Dashboards'].map((tag, index) => (
@@ -158,9 +167,9 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="flex flex-col"
               >
-                <h3 className="text-xl font-semibold text-gray-50 mb-3">Design Systems</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  Создание и поддержка библиотек компонентов для масштабируемой разработки продуктов
+                <h3 className="text-xl font-semibold text-gray-50 mb-3">{t('skills.designSystems.title')}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4" style={{ textWrap: 'balance' }}>
+                  {t('skills.designSystems.description')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Components', 'Tokens', 'Documentation', 'Scalability', 'Consistency'].map((tag, index) => (
@@ -182,9 +191,9 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="flex flex-col"
               >
-                <h3 className="text-xl font-semibold text-gray-50 mb-3">Processes</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  Работа со стейкхолдерами, координация между командами и проектирование внутренних инструментов
+                <h3 className="text-xl font-semibold text-gray-50 mb-3">{t('skills.processes.title')}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4" style={{ textWrap: 'balance' }}>
+                  {t('skills.processes.description')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Collaboration', 'Strategy', 'Coordination', 'Internal Tools', 'Metrics'].map((tag, index) => (
@@ -210,7 +219,7 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle>Проекты</SectionTitle>
+          <SectionTitle>{t('projects.title')}</SectionTitle>
           <div className="grid grid-cols-1 gap-6 sm:gap-8 mt-8 sm:mt-12">
             {projects.map((project, index) => (
               <motion.div
@@ -249,7 +258,7 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-50 mb-4"
               >
-                Готов помочь с вашим проектом
+                {t('contact.title')}
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
@@ -257,8 +266,9 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed"
+                  style={{ textWrap: 'balance' }}
                 >
-                  Давайте обсудим, как я могу помочь создать интерфейс, который решит ваши задачи.
+                  {t('contact.description')}
                 </motion.p>
               
               <motion.div
@@ -279,7 +289,7 @@ export default function Home() {
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
                   </svg>
-                  <span>Написать в Telegram</span>
+                  <span>{t('contact.telegram')}</span>
                 </motion.a>
                 
                 <motion.a
@@ -293,7 +303,7 @@ export default function Home() {
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
-                  <span>LinkedIn</span>
+                  <span>{t('contact.linkedin')}</span>
                 </motion.a>
               </motion.div>
             </div>

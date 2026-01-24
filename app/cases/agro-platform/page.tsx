@@ -11,26 +11,34 @@ import Stagger from '@/components/animations/Stagger'
 import ImageModal from '@/components/ImageModal'
 import { scrollToSectionOnHome } from '@/utils/scroll'
 import { fixTypography } from '@/utils/typography'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { TranslationKey } from '@/i18n/translations'
+import { getTimelineSteps } from './data'
+import { getFunctionsData } from './functions-data'
+import CaseTimeline from '@/components/CaseTimeline'
 
 // Динамический импорт ReactMarkdown для code splitting
 const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
 import remarkGfm from 'remark-gfm'
 
-// Константы для hero section
-const HERO_CONFIG = {
-  image: {
-    src: '/cases/agro-platform/images/agro-hero-section.png',
-    alt: 'Платформа для управления сельским хозяйством',
-    height: '125%' as const,
-  },
-  content: {
-    headline: 'Агроплатформа на базе AI для управления агропредприятием',
-    subheadline: 'Платформа для управления агропредприятием, которая позволяет управлять полями, мониторить состояние культур, планировать работы и анализировать урожайность. Использует AI, спутниковые данные, метеорологическую информацию и телеметрию.',
-  },
-} as const
-
 export default function AgroPlatformCasePage() {
   const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null)
+  const { t, language } = useLanguage()
+  const timelineSteps = getTimelineSteps(language)
+  const functionsData = getFunctionsData(language)
+
+  // Константы для hero section с локализацией
+  const HERO_CONFIG = {
+    image: {
+      src: '/cases/agro-platform/images/agro-platform-hero.png',
+      alt: language === 'en' ? 'Agricultural management platform' : 'Платформа для управления сельским хозяйством',
+      height: '125%' as const,
+    },
+    content: {
+      headline: t('case.agro.hero.headline'),
+      subheadline: t('case.agro.hero.subheadline'),
+    },
+  } as const
   
   // Сброс скролла при загрузке страницы
   useEffect(() => {
@@ -39,7 +47,31 @@ export default function AgroPlatformCasePage() {
     }
   }, [])
   
-  const markdownContentBeforeProcess = `## Обзор
+  const markdownContentBeforeProcess = language === 'en'
+    ? `## Overview
+
+Platform for agricultural management that allows managing fields, monitoring crop conditions, planning work, and analyzing yields. Uses AI, satellite data, meteorological information, and telemetry to make informed decisions in agricultural operations.
+
+## Problem
+
+- Farmers did not have a unified tool for farm management and crop monitoring.
+
+- Data on field conditions and yields were fragmented.
+
+- There was no convenient visualization of agricultural data and analytics.
+
+- There were no tools for planning and yield forecasting.
+
+## Goals
+
+- Create a unified platform for farm management.
+
+- Provide real-time crop and field condition monitoring.
+
+- Provide analytics and forecasting for decision-making.
+
+- Simplify planning and agricultural operations management processes.`
+    : `## Обзор
 
 Платформа для управления сельским хозяйством, которая позволяет управлять полями, мониторить состояние культур, планировать работы и анализировать урожайность. Использует AI, спутниковые данные, метеорологическую информацию и телеметрию для принятия обоснованных решений в сельскохозяйственных операциях.
 
@@ -63,7 +95,17 @@ export default function AgroPlatformCasePage() {
 
 - Упростить процессы планирования и управления сельскохозяйственными операциями.`
 
-  const markdownContentResults = `## Результаты
+  const markdownContentResults = language === 'en'
+    ? `## Results
+
+- Farmers received a unified platform for farm management.
+
+- Visibility of field and crop conditions improved.
+
+- Analytics and forecasting capabilities appeared for decision-making.
+
+- The interface became intuitive and convenient for work in field conditions.`
+    : `## Результаты
 
 - Фермеры получили единую платформу для управления хозяйством.  
 
@@ -110,10 +152,10 @@ export default function AgroPlatformCasePage() {
                 initial={{ opacity: 0, y: 20, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative w-full max-w-5xl mx-auto flex items-start justify-center cursor-pointer border border-gray-700/50 rounded-lg"
+                className="relative w-full max-w-5xl mx-auto flex items-start justify-center cursor-pointer rounded-lg overflow-hidden"
                 onClick={() => setZoomedImage({ src: HERO_CONFIG.image.src, alt: HERO_CONFIG.image.alt })}
               >
-                <div className="relative w-full">
+                <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
                       <Image
                     src={HERO_CONFIG.image.src}
                     alt={HERO_CONFIG.image.alt}
@@ -208,164 +250,11 @@ export default function AgroPlatformCasePage() {
           <AnimatedSection className="mb-24" amount={0.1}>
             <Stagger staggerDelay={0.1}>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-50 mb-8 mt-12 first:mt-0">
-                Процесс
+                {t('case.sections.process')}
           </h2>
             </Stagger>
-            <div className="bg-gray-900/30 rounded-xl p-8 md:p-10 border border-gray-800/50">
-              <div className="relative">
-                {/* 01. Исследование */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5 }}
-                  className="relative pl-12 md:pl-16 pb-12 md:pb-16"
-                >
-                  {/* Vertical line from this point to next */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-[calc(0.5rem+4px)] bottom-0 w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-purple-500/50" />
-                  <motion.div
-                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg z-10"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    whileHover={{ scale: 1.3 }}
-                  >
-                    <div className="absolute inset-0 w-4 h-4 rounded-full bg-blue-500/30 blur-md" />
-                  </motion.div>
-                  <div className="pt-2">
-                      <motion.h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.1 }}>01. Исследование</motion.h3>
-                      <motion.ul className="list-none text-gray-400 space-y-1.5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.4 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Сегментировал аудиторию (фермеры, агрономы, управляющие) и зафиксировал их роли, цели и точки боли: разрозненные данные, планирование «в головах», отсутствие единой картины по полям и культурам.')}</span></motion.li>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.5 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Совместно с агрономом провёл интервью и наблюдал за реальными процессами: как принимают решения по севу и обработке, какие данные нужны в поле и в офисе, как работают с погодой и спутниковыми индексами.')}</span></motion.li>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.6 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Сформулировал ключевые сценарии и базовый функционал первой итерации, опираясь на критичные для сезона задачи: мониторинг полей, планирование работ, анализ урожайности.')}</span></motion.li>
-                    </motion.ul>
-                  </div>
-                </motion.div>
-
-                {/* 02. Информационная архитектура */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="relative pl-12 md:pl-16 pb-12 md:pb-16"
-                >
-                  {/* Vertical line from previous point to this point */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-0 h-[calc(0.5rem+4px)] w-0.5 bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-purple-500/50" />
-                  {/* Vertical line from this point to next */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-[calc(0.5rem+4px)] bottom-0 w-0.5 bg-gradient-to-b from-purple-500/50 via-pink-500/50 to-pink-500/50" />
-                  <motion.div
-                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-gray-900 shadow-lg z-10"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    whileHover={{ scale: 1.3 }}
-                  >
-                    <div className="absolute inset-0 w-4 h-4 rounded-full bg-purple-500/30 blur-md" />
-                  </motion.div>
-                  <div className="pt-2">
-                      <motion.h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.1 }}>02. Информационная архитектура</motion.h3>
-                      <motion.ul className="list-none text-gray-400 space-y-1.5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.4 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Выстроил структуру от целей пользователей: обзор хозяйства → поля и культуры → детали по полю (карты, индексы, погода, история) → планирование и аналитика.')}</span></motion.li>
-                    </motion.ul>
-                  </div>
-                </motion.div>
-
-                {/* 03. Анализ и приоритизация */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="relative pl-12 md:pl-16 pb-12 md:pb-16"
-                >
-                  {/* Vertical line from previous point to this point */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-0 h-[calc(0.5rem+4px)] w-0.5 bg-gradient-to-b from-purple-500/50 via-pink-500/50 to-pink-500/50" />
-                  {/* Vertical line from this point to next */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-[calc(0.5rem+4px)] bottom-0 w-0.5 bg-gradient-to-b from-pink-500/50 via-rose-500/50 to-rose-500/50" />
-                  <motion.div
-                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 border-2 border-gray-900 shadow-lg z-10"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    whileHover={{ scale: 1.3 }}
-                  >
-                    <div className="absolute inset-0 w-4 h-4 rounded-full bg-pink-500/30 blur-md" />
-                  </motion.div>
-                  <div className="pt-2">
-                      <motion.h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.1 }}>03. Анализ и приоритизация</motion.h3>
-                      <motion.ul className="list-none text-gray-400 space-y-1.5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.4 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Провёл сравнительный анализ аналогов и решений в AgTech: что уже решают пользователи, какие паттерны привычны, где есть разрывы.')}</span></motion.li>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.5 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Приоритизировал бэклог под первый релиз: зафиксировал объём первой итерации и критерии «готово» для каждого блока.')}</span></motion.li>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.6 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Разложил ключевые сценарии на описания и требования к экранам, чтобы валидация и дизайн опирались на одни и те же допущения.')}</span></motion.li>
-                    </motion.ul>
-                  </div>
-                </motion.div>
-
-                {/* 04. Валидация с пользователями */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="relative pl-12 md:pl-16 pb-12 md:pb-16"
-                >
-                  {/* Vertical line from previous point to this point */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-0 h-[calc(0.5rem+4px)] w-0.5 bg-gradient-to-b from-pink-500/50 via-rose-500/50 to-rose-500/50" />
-                  {/* Vertical line from this point to next */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-[calc(0.5rem+4px)] bottom-0 w-0.5 bg-gradient-to-b from-rose-500/50 via-red-500/50 to-red-500/50" />
-                  <motion.div
-                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-rose-500 to-red-500 border-2 border-gray-900 shadow-lg z-10"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    whileHover={{ scale: 1.3 }}
-                  >
-                    <div className="absolute inset-0 w-4 h-4 rounded-full bg-rose-500/30 blur-md" />
-                  </motion.div>
-                  <div className="pt-2">
-                      <motion.h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.1 }}>04. Валидация с пользователями</motion.h3>
-                      <motion.ul className="list-none text-gray-400 space-y-1.5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.4 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Собрал обратную связь по эскизам и прототипам: интервью и демо с агрономом и стейкхолдерами, проверка сценариев и терминологии.')}</span></motion.li>
-                        <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.5 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Презентовал функционал, зафиксировал правки по приоритетам и UX, встроил обратную связь в следующую итерацию структуры и прототипов.')}</span></motion.li>
-                    </motion.ul>
-                  </div>
-                </motion.div>
-
-                {/* 05. UI и дизайн‑система */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="relative pl-12 md:pl-16"
-                >
-                  {/* Vertical line from previous point to this point */}
-                  <div className="absolute left-[calc(1.5rem-1px)] md:left-[calc(2rem-1px)] top-0 h-[calc(0.5rem+4px)] w-0.5 bg-gradient-to-b from-rose-500/50 via-red-500/50 to-red-500/50" />
-                  <motion.div
-                    className="absolute left-[calc(1.5rem-8px)] md:left-[calc(2rem-8px)] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-red-500 to-orange-500 border-2 border-gray-900 shadow-lg z-10"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    whileHover={{ scale: 1.3 }}
-                  >
-                    <div className="absolute inset-0 w-4 h-4 rounded-full bg-red-500/30 blur-md" />
-                  </motion.div>
-                  <div className="pt-2">
-                    <motion.h3 className="text-xl md:text-2xl font-semibold text-gray-50 mb-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.1 }}>05. UI и дизайн‑система</motion.h3>
-                    <motion.ul className="list-none text-gray-400 space-y-1.5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                      <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.4 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Спроектировал и унифицировал компоненты: карточки полей, карты с индексами и слоями, графики, календари, дашборды — с учётом работы в поле (читаемость, контраст, понятная иерархия).')}</span></motion.li>
-                      <motion.li className="text-lg leading-relaxed flex items-baseline gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.5 }}><span className="text-gray-500" aria-hidden>◆</span><span>{fixTypography('Масштабировал UI‑набор в дизайн‑систему платформы, чтобы новые экраны и фичи собирались из единых, переиспользуемых блоков.')}</span></motion.li>
-                    </motion.ul>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+            
+            <CaseTimeline steps={timelineSteps} language={language} />
           </AnimatedSection>
 
           {/* Team & Role Section */}
@@ -380,7 +269,7 @@ export default function AgroPlatformCasePage() {
                   transition={{ duration: 0.5 }}
                   className="text-xl md:text-2xl font-semibold text-gray-50 mb-6"
                 >
-                  Моя роль
+                  {t('case.sections.myRole')}
                 </motion.h3>
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
@@ -389,7 +278,9 @@ export default function AgroPlatformCasePage() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="text-lg text-gray-400 leading-relaxed"
                 >
-                  Единственный продуктовый дизайнер в команде. Отвечал за пользовательское исследование, информационную архитектуру, дизайн интерфейсов, дизайн-систему и валидацию решений с пользователями.
+                  {language === 'en' 
+                    ? 'The only product designer on the team. Responsible for user research, information architecture, interface design, design system, and validation of solutions with users.'
+                    : 'Единственный продуктовый дизайнер в команде. Отвечал за пользовательское исследование, информационную архитектуру, дизайн интерфейсов, дизайн-систему и валидацию решений с пользователями.'}
                 </motion.p>
               </div>
 
@@ -402,7 +293,7 @@ export default function AgroPlatformCasePage() {
                   transition={{ duration: 0.5 }}
                   className="text-xl md:text-2xl font-semibold text-gray-50 mb-6"
                 >
-                  Состав команды
+                  {t('case.sections.teamComposition')}
                 </motion.h3>
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -412,16 +303,16 @@ export default function AgroPlatformCasePage() {
                   className="flex flex-wrap gap-2"
                 >
                   {[
-                    { role: 'Агроном-консультант', count: 1 },
-                    { role: 'GIS-аналитик', count: 2 },
-                    { role: 'ML-разработчик', count: 1 },
-                    { role: 'Project Manager', count: 1 },
-                    { role: 'Product Manager', count: 1 },
-                    { role: 'Тестировщик', count: 1 },
-                    { role: 'Frontend-разработчик', count: 2 },
-                    { role: 'Backend-разработчик', count: 2 },
-                    { role: 'DevOps', count: 1 },
-                    { role: 'Системный архитектор', count: 1 },
+                    { role: 'case.agro.team.agronomistConsultant', count: 1 },
+                    { role: 'case.agro.team.gisAnalyst', count: 2 },
+                    { role: 'case.agro.team.mlDeveloper', count: 1 },
+                    { role: 'case.agro.team.projectManager', count: 1 },
+                    { role: 'case.agro.team.productManager', count: 1 },
+                    { role: 'case.agro.team.tester', count: 1 },
+                    { role: 'case.agro.team.frontendDeveloper', count: 2 },
+                    { role: 'case.agro.team.backendDeveloper', count: 2 },
+                    { role: 'case.agro.team.devops', count: 1 },
+                    { role: 'case.agro.team.systemArchitect', count: 1 },
                   ].map((item, index) => (
                     <motion.span
                       key={index}
@@ -431,7 +322,7 @@ export default function AgroPlatformCasePage() {
                       transition={{ duration: 0.3, delay: 0.3 + index * 0.03 }}
                       className="inline-flex items-center px-4 py-2 bg-gray-800/30 rounded-lg border border-gray-700/30 text-sm text-gray-300 hover:border-gray-600/50 transition-colors"
                     >
-                      {item.role}{item.count > 1 && ` (${item.count})`}
+                      {t(item.role as TranslationKey)}{item.count > 1 && ` (${item.count})`}
                     </motion.span>
                   ))}
                 </motion.div>
@@ -443,44 +334,46 @@ export default function AgroPlatformCasePage() {
           <AnimatedSection className="mb-24" amount={0.1}>
             <Stagger staggerDelay={0.1}>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-50 mb-4 mt-12 first:mt-0">
-                Роли пользователей
+                {t('case.sections.roles')}
               </h2>
               <p className="text-lg text-gray-400 max-w-3xl mb-8">
-                Платформа предназначена для различных ролей в агропредприятии, каждая из которых решает свои задачи и получает ожидаемые результаты.
+                {language === 'en' 
+                  ? 'The platform is designed for various roles in agricultural enterprises, each solving their tasks and getting expected results.'
+                  : 'Платформа предназначена для различных ролей в агропредприятии, каждая из которых решает свои задачи и получает ожидаемые результаты.'}
               </p>
             </Stagger>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  role: 'Фермер / Владелец хозяйства',
-                  tasks: 'Принимать стратегические решения по развитию хозяйства, контролировать финансовые показатели и урожайность',
-                  results: 'Иметь полную картину состояния хозяйства и принимать обоснованные решения на основе данных'
+                  role: 'case.agro.roles.farmer.role',
+                  tasks: 'case.agro.roles.farmer.tasks',
+                  results: 'case.agro.roles.farmer.results'
                 },
                 {
-                  role: 'Агроном',
-                  tasks: 'Планировать севооборот, контролировать состояние культур, анализировать спутниковые данные и метеорологию',
-                  results: 'Эффективно планировать работы и своевременно реагировать на проблемы с культурами'
+                  role: 'case.agro.roles.agronomist.role',
+                  tasks: 'case.agro.roles.agronomist.tasks',
+                  results: 'case.agro.roles.agronomist.results'
                 },
                 {
-                  role: 'Управляющий / Директор хозяйства',
-                  tasks: 'Координировать работу подразделений, контролировать выполнение планов и анализировать операционные показатели',
-                  results: 'Оптимизировать процессы и повышать эффективность сельскохозяйственных операций'
+                  role: 'case.agro.roles.manager.role',
+                  tasks: 'case.agro.roles.manager.tasks',
+                  results: 'case.agro.roles.manager.results'
                 },
                 {
-                  role: 'Полевой работник / Механизатор',
-                  tasks: 'Получать задания на полевые работы, фиксировать выполненные операции и отмечать проблемы в поле',
-                  results: 'Четко понимать задачи и эффективно выполнять работы согласно плану'
+                  role: 'case.agro.roles.fieldWorker.role',
+                  tasks: 'case.agro.roles.fieldWorker.tasks',
+                  results: 'case.agro.roles.fieldWorker.results'
                 },
                 {
-                  role: 'Экономист / Финансовый менеджер',
-                  tasks: 'Анализировать затраты на операции, прогнозировать урожайность и рассчитывать рентабельность',
-                  results: 'Иметь актуальные финансовые данные для планирования бюджета и оценки эффективности'
+                  role: 'case.agro.roles.economist.role',
+                  tasks: 'case.agro.roles.economist.tasks',
+                  results: 'case.agro.roles.economist.results'
                 },
                 {
-                  role: 'Специалист по аналитике',
-                  tasks: 'Анализировать исторические данные, выявлять тренды и формировать отчеты для руководства',
-                  results: 'Предоставлять аналитические инсайты для принятия стратегических решений'
+                  role: 'case.agro.roles.analyst.role',
+                  tasks: 'case.agro.roles.analyst.tasks',
+                  results: 'case.agro.roles.analyst.results'
                 }
               ].map((item, index) => (
                 <AnimatedSection key={index} amount={0.1}>
@@ -492,23 +385,23 @@ export default function AgroPlatformCasePage() {
                     className="bg-gray-900/30 rounded-xl p-6 border border-gray-800/50 hover:border-gray-700/50 transition-all h-full"
                   >
                     <h3 className="text-lg font-semibold text-gray-200 mb-3">
-                      {item.role}
+                      {t(item.role as TranslationKey)}
                     </h3>
                     <div className="space-y-3">
                       <div>
                         <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
-                          Основные задачи
+                          {t('case.sections.mainTasks')}
                         </p>
                         <p className="text-sm text-gray-400 leading-relaxed">
-                          {item.tasks}
+                          {t(item.tasks as TranslationKey)}
                         </p>
                       </div>
                       <div>
                         <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
-                          Ожидаемые результаты
+                          {t('case.sections.expectedResults')}
                         </p>
                         <p className="text-sm text-gray-400 leading-relaxed">
-                          {item.results}
+                          {t(item.results as TranslationKey)}
                         </p>
                       </div>
                     </div>
@@ -556,7 +449,7 @@ export default function AgroPlatformCasePage() {
           <AnimatedSection className="mb-24" amount={0.1}>
             <Stagger staggerDelay={0.1}>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-50 mb-4 mt-12 first:mt-0">
-                Обзор функций
+                {functionsData.title}
               </h2>
             </Stagger>
             
@@ -566,10 +459,10 @@ export default function AgroPlatformCasePage() {
             <div>
                   <Stagger className="mb-6" staggerDelay={0.08}>
                 <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                  Управление полями
+                  {functionsData.sections[0].title}
                 </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      {fixTypography('Комплексный анализ состояния полей на основе спутниковых данных. Визуализация вегетационных индексов (NDVI, EVI, NDMI) для оценки здоровья культур и продуктивности. Интерактивная карта с переключением слоев и метеорологическими данными для принятия обоснованных решений.')}
+                      {language === 'ru' ? fixTypography(functionsData.sections[0].description) : functionsData.sections[0].description}
                     </p>
                   </Stagger>
                   <div className="space-y-16">
@@ -578,16 +471,16 @@ export default function AgroPlatformCasePage() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ amount: 0.3, once: false }}
                       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                      className="relative w-full rounded-lg overflow-hidden cursor-pointer border border-gray-700/50"
-                      onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management.png', alt: 'Управление полями' })}
+                      className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                      onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management.png', alt: functionsData.sections[0].title })}
                     >
-                      <div className="relative w-full">
+                      <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
                         <Image
                   src="/cases/agro-platform/images/fields-management.png"
-                  alt="Управление полями"
+                  alt={functionsData.sections[0].title}
                           width={1920}
                           height={1080}
-                          className="w-full h-auto object-contain rounded-lg"
+                          className="w-full h-auto object-contain"
                           priority
                           quality={90}
                         />
@@ -595,23 +488,23 @@ export default function AgroPlatformCasePage() {
                     </motion.div>
                     <div>
                       <p className="text-lg text-gray-400 max-w-3xl mb-6">
-                        {fixTypography('Детальная информационная панель поля с данными о вегетации, влажности почвы, прогнозе урожайности, культуре и сорте, прогнозом погоды на неделю, окнами для внесения средств защиты растений и картами предписаний.')}
+                        {language === 'ru' ? fixTypography(functionsData.sections[0].details![0]) : functionsData.sections[0].details![0]}
                       </p>
                       <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ amount: 0.3, once: false }}
                         transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="relative w-full rounded-lg overflow-hidden cursor-pointer border border-gray-700/50"
+                        className="relative w-full rounded-lg overflow-hidden cursor-pointer"
                         onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management2.png', alt: 'Детальный анализ индексов поля' })}
                       >
-                        <div className="relative w-full">
+                        <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
                           <Image
                             src="/cases/agro-platform/images/fields-management2.png"
                             alt="Детальный анализ индексов поля"
                             width={1920}
                             height={1080}
-                            className="w-full h-auto object-contain rounded-lg"
+                            className="w-full h-auto object-contain"
                             quality={85}
                             loading="lazy"
                           />
@@ -620,23 +513,23 @@ export default function AgroPlatformCasePage() {
                     </div>
                     <div>
                       <p className="text-lg text-gray-400 max-w-3xl mb-6">
-                        {fixTypography('Графики для анализа показателей в динамике времени: индекс вегетации, влажность почвы, эффективные температуры и осадки. Визуализация трендов и изменений для оценки состояния поля и принятия решений.')}
+                        {language === 'ru' ? fixTypography(functionsData.sections[0].details![1]) : functionsData.sections[0].details![1]}
                       </p>
                       <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ amount: 0.3, once: false }}
                         transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="relative w-full rounded-lg overflow-hidden cursor-pointer border border-gray-700/50"
+                        className="relative w-full rounded-lg overflow-hidden cursor-pointer"
                         onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management3.png', alt: 'Метеорологические данные и слои карты' })}
                       >
-                        <div className="relative w-full">
+                        <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
                           <Image
                             src="/cases/agro-platform/images/fields-management3.png"
                             alt="Метеорологические данные и слои карты"
                             width={1920}
                             height={1080}
-                            className="w-full h-auto object-contain rounded-lg"
+                            className="w-full h-auto object-contain"
                             quality={85}
                             loading="lazy"
                           />
@@ -652,10 +545,10 @@ export default function AgroPlatformCasePage() {
             <div>
                   <Stagger className="mb-6" staggerDelay={0.08}>
                 <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                  Мониторинг культур
+                  {functionsData.sections[1].title}
                 </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      {fixTypography('Планирование севооборота с визуализацией всей картины хозяйства. Агроном видит полную схему чередования культур по каждому полю: культуру, дату сева, дату высева и урожайность за гектар для оптимизации долгосрочной стратегии хозяйства.')}
+                      {language === 'ru' ? fixTypography(functionsData.sections[1].description) : functionsData.sections[1].description}
                     </p>
                   </Stagger>
                   <motion.div
@@ -664,12 +557,12 @@ export default function AgroPlatformCasePage() {
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                     className="relative w-full rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/crop-monitoring.png', alt: 'Мониторинг культур' })}
+                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/crop-monitoring.png', alt: functionsData.sections[1].title })}
                   >
                     <div className="relative w-full">
                       <Image
                   src="/cases/agro-platform/images/crop-monitoring.png"
-                  alt="Мониторинг культур"
+                  alt={functionsData.sections[1].title}
                         width={1920}
                         height={1080}
                         className="w-full h-auto object-contain rounded-lg"
@@ -686,10 +579,10 @@ export default function AgroPlatformCasePage() {
             <div>
                   <Stagger className="mb-6" staggerDelay={0.08}>
                 <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                  Технологические карты
+                  {functionsData.sections[2].title}
                 </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                  {fixTypography('Визуализация и планирование работ по культуре в виде диаграммы Ганта. Агроном видит временные рамки операций, последовательность обработок, может планировать использование техники и контролировать выполнение работ по каждому полю. Позволяет оптимизировать расписание и избегать конфликтов в использовании ресурсов.')}
+                  {language === 'ru' ? fixTypography(functionsData.sections[2].description) : functionsData.sections[2].description}
                 </p>
                   </Stagger>
                   <motion.div
@@ -698,7 +591,7 @@ export default function AgroPlatformCasePage() {
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                     className="relative w-full rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/gantt.png', alt: 'Диаграмма Ганта' })}
+                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/gantt.png', alt: functionsData.sections[2].title })}
                   >
                     <div className="relative w-full">
                       <Image
@@ -715,15 +608,15 @@ export default function AgroPlatformCasePage() {
             </div>
               </AnimatedSection>
 
-              {/* Телеметрия */}
+              {/* Planning Calendar */}
               <AnimatedSection amount={0.1}>
             <div>
                   <Stagger className="mb-6" staggerDelay={0.08}>
                 <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                      Телеметрия
+                      {functionsData.sections[3].title}
                 </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      {fixTypography('Отслеживание добавленной техники в реальном времени и исторически. Просмотр статуса техники, местоположения и данных о работе для контроля и оптимизации использования сельскохозяйственного оборудования.')}
+                      {language === 'ru' ? fixTypography(functionsData.sections[3].description) : functionsData.sections[3].description}
                     </p>
                   </Stagger>
                   <motion.div
@@ -732,12 +625,12 @@ export default function AgroPlatformCasePage() {
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                     className="relative w-full rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/planning-calendar.png', alt: 'Телеметрия' })}
+                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/planning-calendar.png', alt: functionsData.sections[3].title })}
                   >
                     <div className="relative w-full">
                       <Image
                   src="/cases/agro-platform/images/planning-calendar.png"
-                        alt="Телеметрия"
+                        alt={functionsData.sections[3].title}
                         width={1920}
                         height={1080}
                         className="w-full h-auto object-contain rounded-lg"
@@ -754,10 +647,10 @@ export default function AgroPlatformCasePage() {
                 <div>
                   <Stagger className="mb-6" staggerDelay={0.08}>
                     <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                      AI-ассистент
+                      {functionsData.sections[4].title}
                     </h3>
                     <p className="text-lg text-gray-400 max-w-3xl">
-                      {fixTypography('Раздел с AI-ассистентом, который может ответить на любые вопросы по агрономии. Помогает пользователям получать консультации, рекомендации и разъяснения по работе с платформой, состоянию полей, планированию работ и другим аспектам сельскохозяйственной деятельности.')}
+                      {language === 'ru' ? fixTypography(functionsData.sections[4].description) : functionsData.sections[4].description}
                     </p>
                   </Stagger>
                   <motion.div
@@ -766,12 +659,12 @@ export default function AgroPlatformCasePage() {
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                     className="relative w-full rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/ai.png', alt: 'AI-ассистент' })}
+                    onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/ai.png', alt: functionsData.sections[4].title })}
                   >
                     <div className="relative w-full">
                       <Image
                         src="/cases/agro-platform/images/ai.png"
-                        alt="AI-ассистент"
+                        alt={functionsData.sections[4].title}
                         width={1920}
                         height={1080}
                         className="w-full h-auto object-contain rounded-lg"
@@ -801,7 +694,7 @@ export default function AgroPlatformCasePage() {
                   transition={{ duration: 0.6 }}
                   className="text-3xl md:text-4xl font-bold text-gray-50 mb-4"
                 >
-                  Есть вопросы по проекту?
+                  {t('case.cta.title')}
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
@@ -810,7 +703,7 @@ export default function AgroPlatformCasePage() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
                 >
-                  Давайте обсудим детали проекта или посмотрите другие кейсы из моего портфолио
+                  {t('case.cta.description')}
                 </motion.p>
                 
                 <motion.div
@@ -828,7 +721,7 @@ export default function AgroPlatformCasePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className="whitespace-nowrap">Написать в Telegram</span>
+                    <span className="whitespace-nowrap">{t('case.cta.telegram')}</span>
                     <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
                     </svg>
@@ -840,7 +733,7 @@ export default function AgroPlatformCasePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className="whitespace-nowrap">Посмотреть другие проекты</span>
+                    <span className="whitespace-nowrap">{t('case.cta.viewOtherProjects')}</span>
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

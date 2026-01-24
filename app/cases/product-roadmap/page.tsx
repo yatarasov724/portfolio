@@ -15,6 +15,7 @@ import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
 import AnimatedSection from '@/components/animations/AnimatedSection'
 import Stagger from '@/components/animations/Stagger'
 import { scrollToSectionOnHome } from '@/utils/scroll'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // Константы для hero section
 const HERO_CONFIG = {
@@ -30,6 +31,8 @@ const HERO_CONFIG = {
 } as const
 
 export default function ProductRoadmapCasePage() {
+  const { t, language } = useLanguage()
+  
   // Сброс скролла при загрузке страницы
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -37,7 +40,83 @@ export default function ProductRoadmapCasePage() {
     }
   }, [])
   
-  const markdownContent = `## Обзор
+  const markdownContent = language === 'en' 
+    ? `## Overview
+
+Project — creating a roadmap for release coordination and annual service planning: a unified tool to simplify coordination between teams, avoid conflicts in release cards, and increase process transparency.
+
+**Work format:** requirements gathering → status model formation → architecture design → scenario creation → visual structure → working artifacts
+
+**Collaboration:** Worked together with Release Manager (Head of PM) on status model formation, requirements gathering, and architecture design.
+
+## Problem
+
+- The current service was opaque for product managers: the interface was complex, there were no clear regulations and work rules.
+
+- This led to errors, delays, and a fragmented release coordination process.
+
+- All participants had different ideas about how the service should work.
+
+- Stakeholders relied on their own hypotheses and familiar shortcuts — any step required argumentation.
+
+- Product managers didn't understand what exactly needed to be done in the interface, and which steps were mandatory.
+
+## Goals
+
+- Create a unified tool for planning releases and services for the year.
+
+- Simplify coordination between teams.
+
+- Avoid conflicts in release cards.
+
+- Increase process transparency for all participants.
+
+## Process
+
+### 01. Requirements Gathering and Research
+
+- Identified requirements together with Release Manager, refined them as work progressed.
+
+- Gathered requirements from process participants: product managers and executive management.
+
+- Studied current problems and limitations of the existing service.
+
+### 02. Information Architecture
+
+- Designed information architecture and thought through main interaction scenarios.
+
+- Divided work logic into two key scenarios: for product managers and for executive management.
+
+- Developed status model for roadmap and separate status model for releases.
+
+- Considered technical limitations: service on Angular, design system on React — adapted solutions to existing architecture.
+
+### 03. UX Design and Scenarios
+
+- Divided interface into two scenarios: filling and maintaining roadmap by PMs, and release approval by executive management.
+
+- Created action flow for each role.
+
+- Considered that requirements changed along the way — built flexible architecture.
+
+### 04. Visual Structure and Artifacts
+
+- Visualized product card with release statuses and detailed view capability.
+
+- Responsible for visual structure, interface logic, and working artifacts preparation.
+
+- Formed requirements that will be communicated to product managers.
+
+## Results
+
+- Ready roadmap structure and rules for its use will be transferred to product teams.
+
+- Created unified standard for data maintenance.
+
+- Reduced number of errors in release planning.
+
+- Interface became clear for product managers with clear regulations and work rules.`
+    : `## Обзор
 
 Проект — создание roadmap для согласования релизов и планирования сервисов на год: единый инструмент для упрощения согласования между командами, избежания конфликтов в карточках релизов и повышения прозрачности процессов.
 
@@ -249,28 +328,38 @@ export default function ProductRoadmapCasePage() {
             <div>
               <Stagger className="mb-6" staggerDelay={0.08}>
                 <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                  Старый интерфейс
+                  {t('case.sections.oldInterface')}
                 </h3>
                 <ul className="list-none text-lg text-gray-400 max-w-3xl space-y-2 mb-6">
                   <li className="flex items-start gap-3">
                     <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
-                    <span>Отсутствовала возможность переключения между годовыми периодами, что ограничивало планирование на долгосрочную перспективу</span>
+                    <span>{language === 'en' 
+                      ? 'There was no ability to switch between annual periods, which limited long-term planning'
+                      : 'Отсутствовала возможность переключения между годовыми периодами, что ограничивало планирование на долгосрочную перспективу'}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
-                    <span>Интерфейс был построен только вокруг сущности релизов, без учёта годового цикла планирования</span>
+                    <span>{language === 'en' 
+                      ? 'The interface was built only around the release entity, without considering the annual planning cycle'
+                      : 'Интерфейс был построен только вокруг сущности релизов, без учёта годового цикла планирования'}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
-                    <span>Не существовало годового цикла роадмепа и статусной модели для отслеживания этапов планирования</span>
+                    <span>{language === 'en' 
+                      ? 'There was no annual roadmap cycle and status model for tracking planning stages'
+                      : 'Не существовало годового цикла роадмепа и статусной модели для отслеживания этапов планирования'}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
-                    <span>Отсутствовала цветовая легенда, что создавало неоднозначность в интерпретации статусов и приоритетов</span>
+                    <span>{language === 'en' 
+                      ? 'There was no color legend, which created ambiguity in interpreting statuses and priorities'
+                      : 'Отсутствовала цветовая легенда, что создавало неоднозначность в интерпретации статусов и приоритетов'}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-gray-500 mt-1 flex-shrink-0" aria-hidden>◆</span>
-                    <span>Устаревшая техническая архитектура: сервис не обновлялся более 7 лет, что затрудняло поддержку и развитие</span>
+                    <span>{language === 'en' 
+                      ? 'Outdated technical architecture: the service had not been updated for more than 7 years, which made support and development difficult'
+                      : 'Устаревшая техническая архитектура: сервис не обновлялся более 7 лет, что затрудняло поддержку и развитие'}</span>
                   </li>
                 </ul>
               </Stagger>
@@ -284,7 +373,7 @@ export default function ProductRoadmapCasePage() {
                 <div className="relative w-full">
                   <Image
                     src="/cases/product-roadmap/images/before.png"
-                    alt="Старый интерфейс"
+                    alt={t('case.sections.oldInterface')}
                     width={1920}
                     height={1080}
                     className="w-full h-auto object-contain rounded-lg"
@@ -301,7 +390,7 @@ export default function ProductRoadmapCasePage() {
         <AnimatedSection className="mb-24" amount={0.1}>
           <Stagger staggerDelay={0.1}>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-50 mb-4 mt-12 first:mt-0">
-              Обзор функций
+              {t('case.sections.functions')}
             </h2>
           </Stagger>
           
@@ -311,10 +400,12 @@ export default function ProductRoadmapCasePage() {
               <div>
                 <Stagger className="mb-6" staggerDelay={0.08}>
                   <h3 className="text-2xl font-semibold text-gray-50 mb-4">
-                    Обзор Roadmap
+                    {t('case.sections.roadmapOverview')}
                   </h3>
                   <p className="text-lg text-gray-400 max-w-3xl mb-6">
-                    Реализована возможность переключения между годовыми периодами, внедрён годовой цикл роадмепа с чёткой статусной моделью, добавлена цветовая легенда для интуитивного понимания статусов и приоритетов. Главный экран roadmap: временная шкала всех сервисов и релизов.
+                    {language === 'en' 
+                      ? 'Implemented the ability to switch between annual periods, introduced an annual roadmap cycle with a clear status model, added a color legend for intuitive understanding of statuses and priorities. Main roadmap screen: timeline of all services and releases.'
+                      : 'Реализована возможность переключения между годовыми периодами, внедрён годовой цикл роадмепа с чёткой статусной моделью, добавлена цветовая легенда для интуитивного понимания статусов и приоритетов. Главный экран roadmap: временная шкала всех сервисов и релизов.'}
                   </p>
                 </Stagger>
                 <motion.div
@@ -326,8 +417,8 @@ export default function ProductRoadmapCasePage() {
                 >
                   <div className="relative w-full">
                     <Image
-                      src="/cases/product-roadmap/images/roadmap%20main.png"
-                      alt="Обзор Roadmap"
+                      src="/cases/product-roadmap/images/roadmap-main.png"
+                      alt={t('case.sections.roadmapOverview')}
                       width={1920}
                       height={1080}
                       className="w-full h-auto object-contain rounded-lg"
@@ -423,7 +514,7 @@ export default function ProductRoadmapCasePage() {
                   transition={{ duration: 0.6 }}
                   className="text-3xl md:text-4xl font-bold text-gray-50 mb-4"
                 >
-                  Есть вопросы по проекту?
+                  {t('case.cta.title')}
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
@@ -432,7 +523,7 @@ export default function ProductRoadmapCasePage() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
                 >
-                  Давайте обсудим детали проекта или посмотрите другие кейсы из моего портфолио
+                  {t('case.cta.description')}
                 </motion.p>
                 
                 <motion.div
@@ -450,7 +541,7 @@ export default function ProductRoadmapCasePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className="whitespace-nowrap">Написать в Telegram</span>
+                    <span className="whitespace-nowrap">{t('case.cta.telegram')}</span>
                     <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.559z"/>
                     </svg>
@@ -462,7 +553,7 @@ export default function ProductRoadmapCasePage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className="whitespace-nowrap">Посмотреть другие проекты</span>
+                    <span className="whitespace-nowrap">{t('case.cta.viewOtherProjects')}</span>
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
