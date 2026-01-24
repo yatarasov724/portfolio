@@ -155,8 +155,8 @@ const ProjectCard = memo(function ProjectCard({ project }: ProjectCardProps) {
         
         {/* Image - снизу */}
         <div className="relative w-full h-[240px] sm:h-[280px] md:h-[380px] lg:h-[480px] overflow-hidden px-4 sm:px-6 md:px-8">
-          <div className="relative w-full h-full overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden border border-gray-700/50">
+          <div className="relative w-full h-full overflow-hidden border border-gray-700/50 rounded-lg">
+            <div className="absolute top-0 left-0 right-0 w-full h-[125%] overflow-hidden">
               {project.image && !imageError ? (
                 <>
                   <Image
