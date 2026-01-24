@@ -4,9 +4,8 @@ const nextConfig: NextConfig = {
   // Статический экспорт для GitHub Pages
   output: 'export',
   
-  // basePath для GitHub Pages (если используется поддомен username.github.io/portfolio)
-  // Удалите эту строку после настройки кастомного домена
-  basePath: '/portfolio',
+  // basePath НЕ нужен для кастомного домена
+  // basePath: '/portfolio', // Закомментировано для работы с yaroslavtarasov.com
   
   // Оптимизация изображений
   images: {
