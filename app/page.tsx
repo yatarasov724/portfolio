@@ -134,7 +134,7 @@ export default function Home() {
         >
           <SectionTitle>{t('skills.title')}</SectionTitle>
           <div className="mt-8 sm:mt-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {/* Product Design */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -282,7 +282,7 @@ export default function Home() {
                   href="https://t.me/yatarasov"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors w-full sm:w-auto"
+                  className="flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-950"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -296,7 +296,7 @@ export default function Home() {
                   href="https://www.linkedin.com/in/yatarasov/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-colors border border-gray-700 w-full sm:w-auto"
+                  className="flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 active:bg-gray-600 transition-colors border border-gray-700 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-950"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

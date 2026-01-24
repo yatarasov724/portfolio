@@ -102,7 +102,7 @@ function Header({ showLogo = false }: HeaderProps) {
                 key={item.id}
                 href={isCasePage ? `/#${item.id}` : `#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
-                className="text-gray-400 hover:text-gray-100 transition-colors"
+                className="text-gray-400 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-950 rounded px-2 py-1"
               >
                 {item.label}
               </a>
@@ -110,37 +110,49 @@ function Header({ showLogo = false }: HeaderProps) {
             {/* Language Switcher */}
             <button
               onClick={() => setLanguage(language === 'en' ? 'ru' : 'en')}
-              className="text-gray-400 hover:text-gray-100 transition-colors text-sm font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-gray-600/50"
+              className="text-gray-400 hover:text-gray-100 transition-colors text-sm font-medium px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-gray-600/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-950"
               aria-label="Switch language"
             >
               {language === 'en' ? 'RU' : 'EN'}
             </button>
           </div>
 
-          {/* Mobile Burger Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden relative z-[60] w-8 h-8 flex flex-col justify-center items-center gap-1.5 focus:outline-none"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-            type="button"
-          >
-            <motion.span
-              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-6 h-0.5 bg-gray-50 rounded-full"
-            />
-            <motion.span
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="w-6 h-0.5 bg-gray-50 rounded-full"
-            />
-            <motion.span
-              animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-6 h-0.5 bg-gray-50 rounded-full"
-            />
-          </button>
+          {/* Mobile Language Switcher + Burger Button */}
+          <div className="md:hidden flex items-center gap-2 sm:gap-3">
+            {/* Language Switcher for Mobile */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'ru' : 'en')}
+              className="relative z-[60] text-gray-300 hover:text-gray-50 active:text-gray-50 transition-colors text-xs sm:text-sm font-medium px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-gray-700/50 hover:border-gray-600/50 active:border-gray-600/50 bg-gray-900/50 min-w-[44px] min-h-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-950"
+              aria-label="Switch language"
+            >
+              {language === 'en' ? 'RU' : 'EN'}
+            </button>
+            
+            {/* Mobile Burger Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="relative z-[60] w-11 h-11 sm:w-10 sm:h-10 flex flex-col justify-center items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-950 rounded-lg"
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+              type="button"
+            >
+              <motion.span
+                animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-0.5 bg-gray-50 rounded-full"
+              />
+              <motion.span
+                animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-0.5 bg-gray-50 rounded-full"
+              />
+              <motion.span
+                animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-0.5 bg-gray-50 rounded-full"
+              />
+            </button>
+          </div>
         </nav>
       </motion.header>
 
@@ -164,7 +176,7 @@ function Header({ showLogo = false }: HeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-64 bg-gray-950 border-l border-gray-800 z-[55] md:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-64 sm:w-80 bg-gray-950 border-l border-gray-800 z-[55] md:hidden overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col pt-24 px-6">
@@ -176,24 +188,11 @@ function Header({ showLogo = false }: HeaderProps) {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="text-lg font-medium text-gray-300 hover:text-gray-50 py-4 border-b border-gray-800 transition-colors"
+                    className="text-lg font-medium text-gray-300 hover:text-gray-50 active:text-gray-50 py-4 border-b border-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-inset min-h-[44px] flex items-center"
                   >
                     {item.label}
                   </motion.a>
                 ))}
-                {/* Language Switcher for Mobile */}
-                <motion.button
-                  onClick={() => {
-                    setLanguage(language === 'en' ? 'ru' : 'en')
-                    setIsMenuOpen(false)
-                  }}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
-                  className="text-lg font-medium text-gray-300 hover:text-gray-50 py-4 border-b border-gray-800 transition-colors text-left"
-                >
-                  {language === 'en' ? 'Русский' : 'English'}
-                </motion.button>
               </div>
             </motion.div>
           </>

@@ -23,6 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-gray-950" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      </head>
       <body className={`${inter.variable} antialiased bg-gray-950 text-gray-100`}>
         <LanguageProvider>
           <LanguageSetter />

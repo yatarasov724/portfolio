@@ -1,12 +1,14 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import remarkGfm from 'remark-gfm'
 
 // Динамический импорт ReactMarkdown для code splitting
-const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
-import Link from 'next/link'
+const ReactMarkdown = dynamic(() => import('react-markdown'), { 
+  ssr: true,
+  loading: () => <div className="animate-pulse h-4 bg-gray-800 rounded w-3/4 mb-2" />
+})
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
@@ -173,7 +175,6 @@ Automated dashboard for quick collection of statistics across the entire infrast
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.02 }}
                 viewport={{ amount: 0.3, once: false }}
                 transition={{ 
                   duration: 0.6, 
@@ -203,7 +204,8 @@ Automated dashboard for quick collection of statistics across the entire infrast
                 />
                 
                 {/* Image container */}
-                <div className="relative w-full rounded-2xl shadow-md overflow-hidden">
+                <div className="relative w-full rounded-2xl shadow-md overflow-hidden cursor-pointer"
+                  onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/laptop-dashboard.png', alt: language === 'en' ? 'Executive Dashboard' : 'Дашборд для топ-менеджмента' })}>
                   <div className="relative w-full border border-gray-700/50 rounded-2xl overflow-hidden">
                     <Image
                       src="/cases/isy-iseeyou/images/laptop-dashboard.png"
@@ -701,7 +703,7 @@ Automated dashboard for quick collection of statistics across the entire infrast
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain"
-                          priority
+                          loading="lazy"
                       quality={90}
                         />
                       </div>
@@ -765,7 +767,7 @@ Automated dashboard for quick collection of statistics across the entire infrast
                         width={1920}
                         height={1080}
                         className="w-full h-auto object-contain rounded-lg"
-                        priority
+                        loading="lazy"
                       quality={90}
                 />
               </div>
@@ -790,13 +792,13 @@ Automated dashboard for quick collection of statistics across the entire infrast
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
                       transition={{ 
                         duration: 0.6, 
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
-                      className="relative w-full rounded-lg overflow-hidden"
+                      className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                      onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/autocheck_card.png', alt: t('case.sections.requirementCard') })}
                     >
                       <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
                         <Image
@@ -805,7 +807,7 @@ Automated dashboard for quick collection of statistics across the entire infrast
                           width={1920}
                           height={1080}
                           className="w-full h-auto object-contain"
-                          priority
+                          loading="lazy"
                       quality={90}
                         />
                       </div>
@@ -813,14 +815,14 @@ Automated dashboard for quick collection of statistics across the entire infrast
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{ scale: 1.02 }}
                       viewport={{ amount: 0.3, once: false }}
                       transition={{ 
                         duration: 0.6, 
                         delay: 0.1, 
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
-                      className="relative w-full rounded-lg overflow-hidden"
+                      className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                      onClick={() => setZoomedImage({ src: '/cases/isy-iseeyou/images/autocheck_card_details.png', alt: language === 'en' ? 'Requirement Card Details' : 'Детали карточки требования' })}
                     >
                       <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
                         <Image

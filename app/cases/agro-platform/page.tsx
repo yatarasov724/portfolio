@@ -18,7 +18,10 @@ import { getFunctionsData } from './functions-data'
 import CaseTimeline from '@/components/CaseTimeline'
 
 // Динамический импорт ReactMarkdown для code splitting
-const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
+const ReactMarkdown = dynamic(() => import('react-markdown'), { 
+  ssr: true,
+  loading: () => <div className="animate-pulse h-4 bg-gray-800 rounded w-3/4 mb-2" />
+})
 import remarkGfm from 'remark-gfm'
 
 export default function AgroPlatformCasePage() {
@@ -152,10 +155,10 @@ Platform for agricultural management that allows managing fields, monitoring cro
                 initial={{ opacity: 0, y: 20, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative w-full max-w-5xl mx-auto flex items-start justify-center cursor-pointer rounded-lg overflow-hidden"
+                className="relative w-full max-w-5xl mx-auto flex items-start justify-center cursor-pointer rounded-md sm:rounded-lg overflow-hidden"
                 onClick={() => setZoomedImage({ src: HERO_CONFIG.image.src, alt: HERO_CONFIG.image.alt })}
               >
-                <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
+                <div className="relative w-full border border-gray-700/50 rounded-md sm:rounded-lg overflow-hidden">
                       <Image
                     src={HERO_CONFIG.image.src}
                     alt={HERO_CONFIG.image.alt}
@@ -163,7 +166,7 @@ Platform for agricultural management that allows managing fields, monitoring cro
                         height={1080}
                         priority
                         quality={95}
-                    className="w-full h-auto object-contain"
+                    className="w-full h-auto object-contain rounded-md sm:rounded-lg"
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1280px"
                         style={{
                           imageRendering: 'crisp-edges',
@@ -471,17 +474,18 @@ Platform for agricultural management that allows managing fields, monitoring cro
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ amount: 0.3, once: false }}
                       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                      className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                      className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                       onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management.png', alt: functionsData.sections[0].title })}
                     >
-                      <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
+                      <div className="relative w-full">
                         <Image
                   src="/cases/agro-platform/images/fields-management.png"
                   alt={functionsData.sections[0].title}
                           width={1920}
                           height={1080}
-                          className="w-full h-auto object-contain"
-                          priority
+                          className="w-full h-auto object-contain border border-gray-700/50 rounded-md sm:rounded-lg"
+                          style={{ display: 'block', backgroundColor: 'rgba(17, 24, 39, 0.5)' }}
+                          loading="lazy"
                           quality={90}
                         />
                       </div>
@@ -495,16 +499,17 @@ Platform for agricultural management that allows managing fields, monitoring cro
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ amount: 0.3, once: false }}
                         transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                        className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                         onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management2.png', alt: 'Детальный анализ индексов поля' })}
                       >
-                        <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
+                        <div className="relative w-full">
                           <Image
                             src="/cases/agro-platform/images/fields-management2.png"
                             alt="Детальный анализ индексов поля"
                             width={1920}
                             height={1080}
-                            className="w-full h-auto object-contain"
+                            className="w-full h-auto object-contain rounded-md sm:rounded-lg"
+                            style={{ display: 'block' }}
                             quality={85}
                             loading="lazy"
                           />
@@ -520,16 +525,17 @@ Platform for agricultural management that allows managing fields, monitoring cro
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ amount: 0.3, once: false }}
                         transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                        className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                         onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/fields-management3.png', alt: 'Метеорологические данные и слои карты' })}
                       >
-                        <div className="relative w-full border border-gray-700/50 rounded-lg overflow-hidden">
+                        <div className="relative w-full">
                           <Image
                             src="/cases/agro-platform/images/fields-management3.png"
                             alt="Метеорологические данные и слои карты"
                             width={1920}
                             height={1080}
-                            className="w-full h-auto object-contain"
+                            className="w-full h-auto object-contain rounded-md sm:rounded-lg"
+                            style={{ display: 'block' }}
                             quality={85}
                             loading="lazy"
                           />
@@ -556,18 +562,18 @@ Platform for agricultural management that allows managing fields, monitoring cro
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                    className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                     onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/crop-monitoring.png', alt: functionsData.sections[1].title })}
                   >
-                    <div className="relative w-full">
+                    <div className="relative w-full border border-gray-700/50 rounded-md sm:rounded-lg overflow-hidden">
                       <Image
                   src="/cases/agro-platform/images/crop-monitoring.png"
                   alt={functionsData.sections[1].title}
                         width={1920}
                         height={1080}
-                        className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
+                        className="w-full h-auto object-contain rounded-md sm:rounded-lg"
+                        loading="lazy"
+                        quality={85}
                 />
               </div>
                   </motion.div>
@@ -590,18 +596,18 @@ Platform for agricultural management that allows managing fields, monitoring cro
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                    className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                     onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/gantt.png', alt: functionsData.sections[2].title })}
                   >
-                    <div className="relative w-full">
+                    <div className="relative w-full border border-gray-700/50 rounded-md sm:rounded-lg overflow-hidden">
                       <Image
                         src="/cases/agro-platform/images/gantt.png"
                         alt="Диаграмма Ганта"
                         width={1920}
                         height={1080}
-                        className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
+                        className="w-full h-auto object-contain rounded-md sm:rounded-lg"
+                        loading="lazy"
+                        quality={85}
                 />
               </div>
                   </motion.div>
@@ -624,18 +630,18 @@ Platform for agricultural management that allows managing fields, monitoring cro
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                    className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                     onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/planning-calendar.png', alt: functionsData.sections[3].title })}
                   >
-                    <div className="relative w-full">
+                    <div className="relative w-full border border-gray-700/50 rounded-md sm:rounded-lg overflow-hidden">
                       <Image
                   src="/cases/agro-platform/images/planning-calendar.png"
                         alt={functionsData.sections[3].title}
                         width={1920}
                         height={1080}
-                        className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
+                        className="w-full h-auto object-contain rounded-md sm:rounded-lg"
+                        loading="lazy"
+                        quality={85}
                 />
               </div>
                   </motion.div>
@@ -658,18 +664,18 @@ Platform for agricultural management that allows managing fields, monitoring cro
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ amount: 0.3, once: false }}
                     transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                    className="relative w-full rounded-md sm:rounded-lg overflow-hidden cursor-pointer"
                     onClick={() => setZoomedImage({ src: '/cases/agro-platform/images/ai.png', alt: functionsData.sections[4].title })}
                   >
-                    <div className="relative w-full">
+                    <div className="relative w-full border border-gray-700/50 rounded-md sm:rounded-lg overflow-hidden">
                       <Image
                         src="/cases/agro-platform/images/ai.png"
                         alt={functionsData.sections[4].title}
                         width={1920}
                         height={1080}
-                        className="w-full h-auto object-contain rounded-lg"
-                        unoptimized
-                        priority
+                        className="w-full h-auto object-contain rounded-md sm:rounded-lg"
+                        loading="lazy"
+                        quality={85}
                       />
                     </div>
                   </motion.div>

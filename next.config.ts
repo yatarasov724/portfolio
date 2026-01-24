@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
   // Экспериментальные оптимизации
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: ['framer-motion', 'react-markdown'],
   },
 };
 

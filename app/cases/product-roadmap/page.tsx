@@ -5,12 +5,14 @@ import dynamic from 'next/dynamic'
 import remarkGfm from 'remark-gfm'
 
 // Динамический импорт ReactMarkdown для code splitting
-const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: true })
-import Link from 'next/link'
+const ReactMarkdown = dynamic(() => import('react-markdown'), { 
+  ssr: true,
+  loading: () => <div className="animate-pulse h-4 bg-gray-800 rounded w-3/4 mb-2" />
+})
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
-import CaseImage from '@/components/CaseImage'
+import ImageModal from '@/components/ImageModal'
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider'
 import AnimatedSection from '@/components/animations/AnimatedSection'
 import Stagger from '@/components/animations/Stagger'
@@ -32,6 +34,7 @@ const HERO_CONFIG = {
 
 export default function ProductRoadmapCasePage() {
   const { t, language } = useLanguage()
+  const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null)
   
   // Сброс скролла при загрузке страницы
   useEffect(() => {
@@ -229,7 +232,8 @@ Project — creating a roadmap for release coordination and annual service plann
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative w-full max-w-5xl mx-auto flex items-start justify-center border border-gray-700/50 rounded-lg"
+              className="relative w-full max-w-5xl mx-auto flex items-start justify-center border border-gray-700/50 rounded-lg cursor-pointer"
+              onClick={() => setZoomedImage({ src: HERO_CONFIG.image.src, alt: HERO_CONFIG.image.alt })}
             >
               <div className="relative w-full">
                 <Image
@@ -368,7 +372,8 @@ Project — creating a roadmap for release coordination and annual service plann
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ amount: 0.3, once: false }}
                 transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative w-full rounded-lg overflow-hidden"
+                className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                onClick={() => setZoomedImage({ src: '/cases/product-roadmap/images/before.png', alt: t('case.sections.oldInterface') })}
               >
                 <div className="relative w-full">
                   <Image
@@ -377,7 +382,7 @@ Project — creating a roadmap for release coordination and annual service plann
                     width={1920}
                     height={1080}
                     className="w-full h-auto object-contain rounded-lg"
-                  priority
+                  loading="lazy"
                   quality={90}
                   />
                 </div>
@@ -413,7 +418,8 @@ Project — creating a roadmap for release coordination and annual service plann
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ amount: 0.3, once: false }}
                   transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="relative w-full rounded-lg overflow-hidden"
+                  className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() => setZoomedImage({ src: '/cases/product-roadmap/images/roadmap-main.png', alt: t('case.sections.roadmapOverview') })}
                 >
                   <div className="relative w-full">
                     <Image
@@ -446,7 +452,8 @@ Project — creating a roadmap for release coordination and annual service plann
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ amount: 0.3, once: false }}
                   transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="relative w-full rounded-lg overflow-hidden"
+                  className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() => setZoomedImage({ src: '/cases/product-roadmap/images/card.png', alt: language === 'en' ? 'Product Card' : 'Карточка продукта' })}
                 >
                   <div className="relative w-full">
                     <Image
@@ -479,7 +486,8 @@ Project — creating a roadmap for release coordination and annual service plann
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ amount: 0.3, once: false }}
                   transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="relative w-full rounded-lg overflow-hidden"
+                  className="relative w-full rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() => setZoomedImage({ src: '/cases/product-roadmap/images/history.png', alt: language === 'en' ? 'Change History' : 'История изменений' })}
                 >
                   <div className="relative w-full">
                     <Image
@@ -565,6 +573,14 @@ Project — creating a roadmap for release coordination and annual service plann
         </AnimatedSection>
       </div>
     </main>
+
+    {/* Fullscreen Image Modal */}
+    <ImageModal 
+      isOpen={zoomedImage !== null}
+      src={zoomedImage?.src || ''}
+      alt={zoomedImage?.alt || ''}
+      onClose={() => setZoomedImage(null)}
+    />
     </SmoothScrollProvider>
   )
 }
