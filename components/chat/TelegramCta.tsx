@@ -12,7 +12,7 @@ export default function TelegramCta() {
         href="https://t.me/yatarasov"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2.5 bg-gray-900/40 border border-gray-800/50 rounded-2xl px-4 py-3.5 text-gray-300 hover:border-blue-500/50 hover:bg-blue-500/5 transition-colors"
+        className="flex items-center gap-2.5 bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800/50 rounded-2xl px-4 py-3.5 text-gray-700 dark:text-gray-300 hover:border-blue-500/50 hover:bg-blue-500/5 transition-colors"
       >
         {language === 'ru' ? 'Написать мне в Telegram' : 'Message me on Telegram'}
         <span className="ml-auto w-[30px] h-[30px] rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0">

@@ -9,7 +9,7 @@ export default function SuggestedQuestions({ items }: { items: SuggestedLink[] }
         <Link
           key={item.href + item.label}
           href={item.href}
-          className="text-[13px] text-gray-400 border border-gray-800/50 rounded-full px-4 py-2 hover:border-blue-500/50 hover:text-blue-400 transition-colors"
+          className="text-[13px] text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800/50 rounded-full px-4 py-2 hover:border-blue-500/50 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
         >
           {item.label}
         </Link>
