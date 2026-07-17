@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { NAV_SECTIONS } from '@/lib/chat/nav'
+import type { NavItem } from '@/lib/chat/nav'
 import { AboutIcon, BarChartIcon, SproutIcon, MailIcon, MenuIcon, CloseIcon } from './icons'
 
 const ICON_COMPONENTS = {
@@ -15,7 +16,7 @@ const ICON_COMPONENTS = {
   contact: MailIcon,
 }
 
-const NAV_COPY: Record<string, { ru: { title: string; meta: string }; en: { title: string; meta: string } }> = {
+const NAV_COPY: Record<NavItem['id'], { ru: { title: string; meta: string }; en: { title: string; meta: string } }> = {
   about: {
     ru: { title: 'Обо мне', meta: 'Кто я и что умею' },
     en: { title: 'About', meta: 'Who I am' },
