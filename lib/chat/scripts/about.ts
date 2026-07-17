@@ -6,7 +6,6 @@ export function getAboutChat(language: 'en' | 'ru'): ChatScript {
 
   return {
     title: language === 'ru' ? 'Обо мне' : 'About',
-    meta: language === 'ru' ? 'Product Designer · 5+ лет' : 'Product Designer · 5+ years',
     tags: ['Product Design', 'B2B', language === 'ru' ? '5+ лет' : '5+ years'],
     messages: [
       {

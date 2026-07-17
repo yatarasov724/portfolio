@@ -48,7 +48,6 @@ export interface SuggestedLink {
 
 export interface ChatScript {
   title: string
-  meta: string
   tags: string[]
   messages: ChatMessage[]
   suggested: SuggestedLink[]
