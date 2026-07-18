@@ -59,6 +59,21 @@ export default function ChatMessageList({ messages }: { messages: ChatMessage[] 
                       </div>
                     )
                   }
+                  if (block.type === 'list') {
+                    return (
+                      <div key={i}>
+                        {block.heading && <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1.5">{block.heading}</p>}
+                        <ul className="space-y-1.5">
+                          {block.items.map((item, itemIndex) => (
+                            <li key={itemIndex} className="flex items-baseline gap-2.5">
+                              <span className="text-gray-400 dark:text-gray-600 text-xs" aria-hidden>◆</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  }
                   if (block.type === 'chips') {
                     return (
                       <div key={i} className="flex flex-wrap gap-2">

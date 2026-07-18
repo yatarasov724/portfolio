@@ -32,4 +32,12 @@ describe('getInfrastructureMonitoringChat', () => {
       expect(metricsBlock.items).toHaveLength(3)
     }
   })
+
+  it('lists all eight user roles', () => {
+    const listBlocks = getInfrastructureMonitoringChat('ru').messages
+      .flatMap((m) => m.blocks)
+      .filter((b) => b.type === 'list')
+    const rolesBlock = listBlocks.find((b) => b.type === 'list' && b.items.length === 8)
+    expect(rolesBlock).toBeDefined()
+  })
 })

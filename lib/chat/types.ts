@@ -24,6 +24,12 @@ export interface ChatBlockChips {
   items: string[]
 }
 
+export interface ChatBlockList {
+  type: 'list'
+  heading?: string
+  items: string[]
+}
+
 export interface ChatBlockLinks {
   type: 'links'
   items: { label: string; href: string; variant: 'primary' | 'secondary' }[]
@@ -34,6 +40,7 @@ export type ChatBlock =
   | ChatBlockImage
   | ChatBlockMetrics
   | ChatBlockChips
+  | ChatBlockList
   | ChatBlockLinks
 
 export interface ChatMessage {

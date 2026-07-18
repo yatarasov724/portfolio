@@ -13,12 +13,26 @@ describe('getAgroChat', () => {
   })
 
   it('lists the five platform modules as chips', () => {
-    const chipsBlock = getAgroChat('ru').messages
+    const chipsBlocks = getAgroChat('ru').messages
       .flatMap((m) => m.blocks)
-      .find((b) => b.type === 'chips')
-    expect(chipsBlock).toBeDefined()
-    if (chipsBlock?.type === 'chips') {
-      expect(chipsBlock.items).toHaveLength(5)
-    }
+      .filter((b) => b.type === 'chips')
+    const modulesBlock = chipsBlocks.find((b) => b.type === 'chips' && b.items.length === 5)
+    expect(modulesBlock).toBeDefined()
+  })
+
+  it('lists the full team composition as chips', () => {
+    const chipsBlocks = getAgroChat('ru').messages
+      .flatMap((m) => m.blocks)
+      .filter((b) => b.type === 'chips')
+    const teamBlock = chipsBlocks.find((b) => b.type === 'chips' && b.items.length === 10)
+    expect(teamBlock).toBeDefined()
+  })
+
+  it('lists all six user roles', () => {
+    const listBlocks = getAgroChat('ru').messages
+      .flatMap((m) => m.blocks)
+      .filter((b) => b.type === 'list')
+    const rolesBlock = listBlocks.find((b) => b.type === 'list' && b.items.length === 6)
+    expect(rolesBlock).toBeDefined()
   })
 })
