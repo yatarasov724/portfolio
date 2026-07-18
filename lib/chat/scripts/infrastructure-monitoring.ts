@@ -1,12 +1,12 @@
 import { getTranslation, TranslationKey } from '@/i18n/translations'
 import type { ChatScript } from '@/lib/chat/types'
 
-export function getIsyChat(language: 'en' | 'ru'): ChatScript {
+export function getInfrastructureMonitoringChat(language: 'en' | 'ru'): ChatScript {
   const t = (key: TranslationKey) => getTranslation(language, key)
   const roleIds = ['ciso', 'departmentHead', 'itOperator', 'auditor'] as const
 
   return {
-    title: language === 'ru' ? 'ISY — дашборд для мониторинга инфраструктуры' : 'ISY — infrastructure monitoring dashboard',
+    title: language === 'ru' ? 'Дашборд для мониторинга инфраструктуры' : 'Infrastructure monitoring dashboard',
     tags: ['B2B', 'Analytics', 'Info sec', '2025'],
     messages: [
       {
@@ -19,8 +19,8 @@ export function getIsyChat(language: 'en' | 'ru'): ChatScript {
           {
             type: 'text',
             content: language === 'ru'
-              ? 'ISY (I See You) — внутренний B2B-продукт для мониторинга инфраструктуры. До него команда собирала статистику вручную: выгрузки в Excel, графики руками, часы на каждый отчёт.'
-              : 'ISY (I See You) is an internal B2B product for infrastructure monitoring. Before it, the team collected statistics manually: Excel exports, hand-built charts, hours per report.',
+              ? 'Это внутренний B2B-продукт для мониторинга инфраструктуры. До него команда собирала статистику вручную: выгрузки в Excel, графики руками, часы на каждый отчёт.'
+              : "It's an internal B2B product for infrastructure monitoring. Before it, the team collected statistics manually: Excel exports, hand-built charts, hours per report.",
           },
           {
             type: 'text',
@@ -30,7 +30,7 @@ export function getIsyChat(language: 'en' | 'ru'): ChatScript {
           },
           {
             type: 'image',
-            src: '/cases/isy-iseeyou/images/laptop-dashboard.png',
+            src: '/cases/infrastructure-monitoring/images/laptop-dashboard.png',
             alt: language === 'ru' ? 'Дашборд для топ-менеджмента' : 'Executive dashboard',
             caption: language === 'ru' ? 'Главный экран дашборда' : 'Dashboard main screen',
           },
@@ -57,7 +57,7 @@ export function getIsyChat(language: 'en' | 'ru'): ChatScript {
           },
           {
             type: 'image',
-            src: '/cases/isy-iseeyou/images/table_filter.png',
+            src: '/cases/infrastructure-monitoring/images/table_filter.png',
             alt: language === 'ru' ? 'Настройки таблицы' : 'Table settings',
           },
         ],

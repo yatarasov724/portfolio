@@ -89,7 +89,7 @@ export function getAgroChat(language: 'en' | 'ru'): ChatScript {
       },
     ],
     suggested: [
-      { label: language === 'ru' ? 'Кейс: мониторинг инфраструктуры →' : 'Case: infrastructure monitoring →', href: '/cases/isy-iseeyou' },
+      { label: language === 'ru' ? 'Кейс: мониторинг инфраструктуры →' : 'Case: infrastructure monitoring →', href: '/cases/infrastructure-monitoring' },
       { label: language === 'ru' ? 'Обо мне →' : 'About me →', href: '/' },
     ],
   }

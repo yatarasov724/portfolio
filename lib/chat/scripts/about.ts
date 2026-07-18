@@ -39,17 +39,11 @@ export function getAboutChat(language: 'en' | 'ru'): ChatScript {
           { type: 'text', content: `${t('skills.productDesign.title')} — ${t('skills.productDesign.description')}` },
           { type: 'text', content: `${t('skills.designSystems.title')} — ${t('skills.designSystems.description')}` },
           { type: 'text', content: `${t('skills.processes.title')} — ${t('skills.processes.description')}` },
-          {
-            type: 'chips',
-            items: language === 'ru'
-              ? ['UX/UI-дизайн', 'Пользовательские исследования', 'Дашборды', 'Дизайн-системы', 'Прототипирование', 'Информационная архитектура']
-              : ['UX/UI Design', 'User Research', 'Dashboards', 'Design Systems', 'Prototyping', 'Information Architecture'],
-          },
         ],
       },
     ],
     suggested: [
-      { label: language === 'ru' ? 'Кейс: мониторинг инфраструктуры →' : 'Case: infrastructure monitoring →', href: '/cases/isy-iseeyou' },
+      { label: language === 'ru' ? 'Кейс: мониторинг инфраструктуры →' : 'Case: infrastructure monitoring →', href: '/cases/infrastructure-monitoring' },
       { label: language === 'ru' ? 'Кейс: агроплатформа →' : 'Case: agricultural platform →', href: '/cases/agro-platform' },
       { label: language === 'ru' ? 'Как связаться →' : 'Get in touch →', href: '/contact' },
     ],

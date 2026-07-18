@@ -1,7 +1,7 @@
-export type NavIconName = 'about' | 'isy' | 'agro' | 'contact'
+export type NavIconName = 'about' | 'infra' | 'agro' | 'contact'
 
 export interface NavItem {
-  id: 'about' | 'isy' | 'agro' | 'contact'
+  id: 'about' | 'infra' | 'agro' | 'contact'
   href: string
   icon: NavIconName
 }
@@ -10,7 +10,7 @@ export const NAV_SECTIONS: { items: NavItem[] }[] = [
   { items: [{ id: 'about', href: '/', icon: 'about' }] },
   {
     items: [
-      { id: 'isy', href: '/cases/isy-iseeyou', icon: 'isy' },
+      { id: 'infra', href: '/cases/infrastructure-monitoring', icon: 'infra' },
       { id: 'agro', href: '/cases/agro-platform', icon: 'agro' },
     ],
   },

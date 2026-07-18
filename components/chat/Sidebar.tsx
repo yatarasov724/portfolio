@@ -12,7 +12,7 @@ import { AboutIcon, BarChartIcon, SproutIcon, MailIcon, MenuIcon, CloseIcon, Sun
 
 const ICON_COMPONENTS = {
   about: AboutIcon,
-  isy: BarChartIcon,
+  infra: BarChartIcon,
   agro: SproutIcon,
   contact: MailIcon,
 }
@@ -22,7 +22,7 @@ const NAV_COPY: Record<NavItem['id'], { ru: { title: string; meta: string }; en:
     ru: { title: 'Обо мне', meta: 'Кто я и что умею' },
     en: { title: 'About', meta: 'Who I am' },
   },
-  isy: {
+  infra: {
     ru: { title: 'Мониторинг инфраструктуры', meta: 'B2B · 2025' },
     en: { title: 'Infrastructure Monitoring', meta: 'B2B · 2025' },
   },
