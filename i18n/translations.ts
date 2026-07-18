@@ -145,7 +145,7 @@ export const translations = {
     'hero.description': 'Product Designer, specializing in B2B products and complex systems. I create interfaces that make complex workflows easier and team work more efficient.',
     // About
     'about.title': 'About',
-    'about.paragraph1': 'Product Designer with over 5 years of experience. I specialize in B2B products, complex systems, and enterprise tools. Previously worked at T1, currently working at Kaspersky Lab, where I design interfaces for dashboards, internal platforms, and applications with large data volumes.',
+    'about.paragraph1': 'Product Designer with over 5 years of experience. I specialize in B2B products, complex systems, and enterprise tools. Previously worked at T1, currently working at Kaspersky Lab on KICS for Networks — a product for monitoring and protecting industrial networks — where I design interfaces for dashboards and applications with large data volumes.',
     'about.paragraph1.company': 'Kaspersky Lab',
     'about.paragraph2': 'My main goal is to create structured and scalable UX for systems where clarity matters.',
     'about.paragraph3': 'I\'m used to working closely with product managers, developers, and stakeholders to align solutions and ensure technical feasibility. I create and maintain design systems, working with development teams on interface implementation.',
@@ -280,7 +280,7 @@ export const translations = {
     'hero.description': 'Продуктовый дизайнер, специализируюсь на B2B продуктах и сложных системах. Создаю интерфейсы, которые делают рабочие процессы легче, а работу команд эффективнее.',
     // About
     'about.title': 'О себе',
-    'about.paragraph1': 'Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в Лаборатории Касперского, где проектирую интерфейсы для дашбордов, внутренних платформ и приложений с большим объемом данных.',
+    'about.paragraph1': 'Продуктовый дизайнер с опытом работы более 5 лет. Специализируюсь на B2B продуктах, сложных системах и корпоративных инструментах. Работал в T1, сейчас работаю в Лаборатории Касперского над KICS for Networks — продуктом для мониторинга и защиты промышленных сетей, — где проектирую интерфейсы для дашбордов и приложений с большим объёмом данных.',
     'about.paragraph1.company': 'Лаборатории Касперского',
     'about.paragraph2': 'Моя основная задача — создавать структурированный и масштабируемый UX для систем, где важна ясность.',
     'about.paragraph3': 'Привык тесно сотрудничать с продакт-менеджерами, разработчиками и стейкхолдерами для согласования решений и обеспечения технической реализуемости. Создаю и поддерживаю дизайн-системы, работаю с командами разработки над реализацией интерфейсов.',
