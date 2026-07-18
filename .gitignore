@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Local scratch (subagent-driven-development ledger)
 .superpowers/
+
+# Git worktrees
+.worktrees/
