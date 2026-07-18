@@ -41,7 +41,9 @@ export function getAboutChat(language: 'en' | 'ru'): ChatScript {
           { type: 'text', content: `${t('skills.processes.title')} — ${t('skills.processes.description')}` },
           {
             type: 'chips',
-            items: ['UX/UI Design', 'User Research', 'Dashboards', 'Design Systems', 'Prototyping', 'Information Architecture'],
+            items: language === 'ru'
+              ? ['UX/UI-дизайн', 'Пользовательские исследования', 'Дашборды', 'Дизайн-системы', 'Прототипирование', 'Информационная архитектура']
+              : ['UX/UI Design', 'User Research', 'Dashboards', 'Design Systems', 'Prototyping', 'Information Architecture'],
           },
         ],
       },

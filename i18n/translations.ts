@@ -286,11 +286,11 @@ export const translations = {
     'about.paragraph3': 'Привык тесно сотрудничать с продакт-менеджерами, разработчиками и стейкхолдерами для согласования решений и обеспечения технической реализуемости. Создаю и поддерживаю дизайн-системы, работаю с командами разработки над реализацией интерфейсов.',
     // Skills
     'skills.title': 'Навыки и фокус',
-    'skills.productDesign.title': 'Product Design',
+    'skills.productDesign.title': 'Продуктовый дизайн',
     'skills.productDesign.description': 'Проектирование интерфейсов для корпоративных систем, дашбордов и приложений с большим объемом данных',
-    'skills.designSystems.title': 'Design Systems',
+    'skills.designSystems.title': 'Дизайн-системы',
     'skills.designSystems.description': 'Создание и поддержка библиотек компонентов для масштабируемой разработки продуктов',
-    'skills.processes.title': 'Processes',
+    'skills.processes.title': 'Процессы',
     'skills.processes.description': 'Работа со стейкхолдерами, координация между командами и проектирование внутренних инструментов',
     // Projects
     'projects.title': 'Проекты',
