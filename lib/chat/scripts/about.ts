@@ -13,11 +13,20 @@ export function getAboutChat(language: 'en' | 'ru'): ChatScript {
         blocks: [
           {
             type: 'text',
-            content: language === 'ru'
-              ? 'Привет! Меня зовут Ярослав Тарасов, это моё портфолио — в формате чата, чтобы было интереснее листать.'
-              : "Hi! I'm Yaroslav Tarasov, and this is my portfolio — in a chat format, to make it more interesting to browse.",
+            content: language === 'ru' ? 'Привет! Меня зовут Ярослав Тарасов.' : "Hi! I'm Yaroslav Tarasov.",
           },
           { type: 'text', content: t('about.paragraph1') },
+        ],
+      },
+      {
+        role: 'visitor',
+        blocks: [{ type: 'text', content: language === 'ru' ? 'Как ты подходишь к работе?' : 'How do you approach your work?' }],
+      },
+      {
+        role: 'author',
+        blocks: [
+          { type: 'text', content: t('about.paragraph2') },
+          { type: 'text', content: t('about.paragraph3') },
         ],
       },
       {
