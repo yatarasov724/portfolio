@@ -11,12 +11,6 @@ export type TranslationKey =
   | 'about.title'
   // Skills
   | 'skills.title'
-  | 'skills.productDesign.title'
-  | 'skills.productDesign.description'
-  | 'skills.designSystems.title'
-  | 'skills.designSystems.description'
-  | 'skills.processes.title'
-  | 'skills.processes.description'
   // Projects
   | 'projects.title'
   | 'projects.productRoadmap.title'
@@ -143,12 +137,6 @@ export const translations = {
     'about.title': 'About',
     // Skills
     'skills.title': 'Skills & Focus',
-    'skills.productDesign.title': 'Product Design',
-    'skills.productDesign.description': 'Designing interfaces for enterprise systems, dashboards, and applications with large data volumes',
-    'skills.designSystems.title': 'Design Systems',
-    'skills.designSystems.description': 'Creating and maintaining component libraries for scalable product development',
-    'skills.processes.title': 'Processes',
-    'skills.processes.description': 'Working with stakeholders, coordinating between teams, and designing internal tools',
     // Projects
     'projects.title': 'Projects',
     'projects.productRoadmap.title': 'Product Roadmap',
@@ -274,12 +262,6 @@ export const translations = {
     'about.title': 'О себе',
     // Skills
     'skills.title': 'Навыки и фокус',
-    'skills.productDesign.title': 'Продуктовый дизайн',
-    'skills.productDesign.description': 'Проектирование интерфейсов для корпоративных систем, дашбордов и приложений с большим объемом данных',
-    'skills.designSystems.title': 'Дизайн-системы',
-    'skills.designSystems.description': 'Создание и поддержка библиотек компонентов для масштабируемой разработки продуктов',
-    'skills.processes.title': 'Процессы',
-    'skills.processes.description': 'Работа со стейкхолдерами, координация между командами и проектирование внутренних инструментов',
     // Projects
     'projects.title': 'Проекты',
     'projects.productRoadmap.title': 'Product Roadmap',

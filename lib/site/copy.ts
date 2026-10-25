@@ -42,11 +42,27 @@ export function getSiteCopy(language: Language): SiteCopy {
       ? 'Продуктовый дизайнер. Более 5 лет делаю B2B-продукты: дашборды, внутренние продукты и сервисы со сложными пользовательскими сценариями, где интерфейс должен всё упростить. Сейчас работаю в Лаборатории Касперского.'
       : 'Product Designer. Over 5 years building B2B products: dashboards, internal products, and services with complex user flows, where the interface has to make things simple. Currently at Kaspersky Lab.',
     aboutPrevious: ru ? 'Раньше: T1' : 'Previously: T1',
-    skills: [
-      { title: t('skills.productDesign.title'), description: t('skills.productDesign.description') },
-      { title: t('skills.designSystems.title'), description: t('skills.designSystems.description') },
-      { title: t('skills.processes.title'), description: t('skills.processes.description') },
-    ],
+    skills: ru
+      ? [
+          { title: 'Продуктовый дизайн', description: 'Проектирую дашборды и сложные сценарии, есть опыт во внутренних продуктах.' },
+          { title: 'Исследования', description: 'Интервью, сегментация аудитории, проверка решений на пользователях.' },
+          { title: 'Дизайн-системы', description: 'Адаптирую и развиваю компоненты, чтобы продукты выглядели и работали единообразно.' },
+          {
+            title: 'Работа с командой',
+            description:
+              'Работаю с продактами, аналитиками, архитекторами, разработчиками и техническими писателями, чтобы решения были понятными и их можно было реализовать.',
+          },
+        ]
+      : [
+          { title: 'Product Design', description: 'I design dashboards and complex user flows, with experience in internal products.' },
+          { title: 'Research', description: 'Interviews, audience segmentation, validating solutions with users.' },
+          { title: 'Design Systems', description: 'I adapt and grow components so products look and work consistently.' },
+          {
+            title: 'Working with the team',
+            description:
+              'I work with product managers, analysts, architects, developers, and technical writers so solutions are clear and buildable.',
+          },
+        ],
     contactTitle: t('contact.title'),
     contactDescription: t('contact.description'),
     contactLabels: {

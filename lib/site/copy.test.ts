@@ -37,10 +37,26 @@ describe('site copy', () => {
     expect(getSiteCopy('en').aboutPrevious).toBe('Previously: T1')
   })
 
-  it('about has three skills', () => {
-    for (const language of ['ru', 'en'] as const) {
-      expect(getSiteCopy(language).skills).toHaveLength(3)
-    }
+  it('skills', () => {
+    expect(getSiteCopy('ru').skills).toEqual([
+      { title: 'Продуктовый дизайн', description: 'Проектирую дашборды и сложные сценарии, есть опыт во внутренних продуктах.' },
+      { title: 'Исследования', description: 'Интервью, сегментация аудитории, проверка решений на пользователях.' },
+      { title: 'Дизайн-системы', description: 'Адаптирую и развиваю компоненты, чтобы продукты выглядели и работали единообразно.' },
+      {
+        title: 'Работа с командой',
+        description:
+          'Работаю с продактами, аналитиками, архитекторами, разработчиками и техническими писателями, чтобы решения были понятными и их можно было реализовать.',
+      },
+    ])
+    expect(getSiteCopy('en').skills.map((skill) => skill.title)).toEqual([
+      'Product Design',
+      'Research',
+      'Design Systems',
+      'Working with the team',
+    ])
+    expect(getSiteCopy('en').skills[3].description).toBe(
+      'I work with product managers, analysts, architects, developers, and technical writers so solutions are clear and buildable.',
+    )
   })
 
   it('does not name the internal product (KICS) anywhere', () => {
