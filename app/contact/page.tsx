@@ -1,45 +1,39 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
-import { getTranslation } from '@/i18n/translations'
-import ChatHeader from '@/components/chat/ChatHeader'
-import ChatMessageList from '@/components/chat/ChatMessageList'
-import { MailIcon } from '@/components/chat/icons'
-import type { ChatMessage } from '@/lib/chat/types'
+import { getSiteCopy, CONTACT_LINKS } from '@/lib/site/copy'
 
 export default function ContactPage() {
-  const { language, t } = useLanguage()
+  const { language } = useLanguage()
+  const copy = getSiteCopy(language)
 
-  const messages: ChatMessage[] = [
-    {
-      role: 'author',
-      blocks: [
-        { type: 'text', content: t('contact.title') },
-        { type: 'text', content: t('contact.description') },
-        {
-          type: 'links',
-          items: [
-            { label: t('contact.telegram'), href: 'https://t.me/yatarasov', variant: 'primary' },
-            { label: t('contact.linkedin'), href: 'https://www.linkedin.com/in/yatarasov/', variant: 'secondary' },
-            {
-              label: language === 'ru' ? 'Скачать резюме (PDF)' : 'Download resume (PDF)',
-              href: '/Tarasov Yaroslav (4).pdf',
-              variant: 'secondary',
-            },
-          ],
-        },
-      ],
-    },
+  const links = [
+    { href: CONTACT_LINKS.telegram, label: copy.contactLabels.telegram, arrow: '↗', external: true },
+    { href: CONTACT_LINKS.linkedin, label: copy.contactLabels.linkedin, arrow: '↗', external: true },
+    { href: CONTACT_LINKS.resume, label: copy.contactLabels.resume, arrow: '↓', external: false },
   ]
 
   return (
-    <>
-      <ChatHeader
-        icon={<MailIcon className="w-full h-full" />}
-        title={getTranslation(language, 'nav.contact')}
-        tags={['Telegram', 'LinkedIn', 'CV']}
-      />
-      <ChatMessageList messages={messages} />
-    </>
+    <section className="sw-grid gap-y-6 pt-12 md:pt-20 pb-12">
+      <h1 className="col-span-12 md:col-span-9 text-[clamp(36px,7vw,96px)] font-bold leading-[1] tracking-[-0.045em]">
+        {copy.contactTitle}
+      </h1>
+      <p className="col-span-12 md:col-span-6 text-base text-[color:var(--muted)]">{copy.contactDescription}</p>
+
+      <ul className="col-span-12 mt-8 border-b border-[color:var(--ink)]">
+        {links.map((link) => (
+          <li key={link.href} className="border-t border-[color:var(--ink)]">
+            <a
+              href={link.href}
+              className="flex items-baseline justify-between gap-4 py-4 md:px-2 text-2xl md:text-4xl font-bold tracking-[-0.03em] hover:bg-[color:var(--ink)] hover:text-[color:var(--bg)] transition-colors"
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <span>{link.label}</span>
+              <span aria-hidden>{link.arrow}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
