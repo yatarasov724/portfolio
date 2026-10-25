@@ -51,7 +51,7 @@ export default function ImageModal({ src, alt, isOpen, onClose }: ImageModalProp
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-white/80 dark:bg-black/90 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-[#f4f4f2]/95"
             onClick={onClose}
           />
           
@@ -71,7 +71,7 @@ export default function ImageModal({ src, alt, isOpen, onClose }: ImageModalProp
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-10 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 border border-gray-200 dark:border-gray-800 rounded-full text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
+                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-10 w-10 h-10 flex items-center justify-center bg-[#f4f4f2] text-[#111] border border-[#111] hover:bg-[#111] hover:text-[#f4f4f2] transition-colors"
                 aria-label="Закрыть"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@ export default function ImageModal({ src, alt, isOpen, onClose }: ImageModalProp
               <img
                 src={src}
                 alt={alt}
-                className="block max-w-[90vw] max-h-[88vh] w-auto h-auto rounded-lg border border-gray-200 dark:border-gray-800 shadow-2xl bg-white dark:bg-gray-900"
+                className="block max-w-[90vw] max-h-[88vh] w-auto h-auto border border-[#111] bg-white"
               />
             </div>
           </motion.div>
