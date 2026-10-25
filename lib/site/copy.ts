@@ -39,8 +39,8 @@ export function getSiteCopy(language: Language): SiteCopy {
     workLabel: ru ? 'Избранные работы' : 'Selected work',
     aboutLabel: ru ? 'Обо мне' : 'About',
     aboutIntro: ru
-      ? 'Продуктовый дизайнер. Более 5 лет делаю B2B-продукты: дашборды, внутренние инструменты и сервисы со сложными пользовательскими сценариями, где интерфейс должен всё упростить. Сейчас работаю в Лаборатории Касперского.'
-      : 'Product Designer. Over 5 years building B2B products: dashboards, internal tools, and services with complex user flows, where the interface has to make things simple. Currently at Kaspersky Lab.',
+      ? 'Продуктовый дизайнер. Более 5 лет делаю B2B-продукты: дашборды, внутренние продукты и сервисы со сложными пользовательскими сценариями, где интерфейс должен всё упростить. Сейчас работаю в Лаборатории Касперского.'
+      : 'Product Designer. Over 5 years building B2B products: dashboards, internal products, and services with complex user flows, where the interface has to make things simple. Currently at Kaspersky Lab.',
     aboutPrevious: ru ? 'Раньше: T1' : 'Previously: T1',
     skills: [
       { title: t('skills.productDesign.title'), description: t('skills.productDesign.description') },

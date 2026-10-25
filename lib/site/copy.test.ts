@@ -28,10 +28,10 @@ describe('site copy', () => {
 
   it('about intro and previous workplace', () => {
     expect(getSiteCopy('ru').aboutIntro).toBe(
-      'Продуктовый дизайнер. Более 5 лет делаю B2B-продукты: дашборды, внутренние инструменты и сервисы со сложными пользовательскими сценариями, где интерфейс должен всё упростить. Сейчас работаю в Лаборатории Касперского.',
+      'Продуктовый дизайнер. Более 5 лет делаю B2B-продукты: дашборды, внутренние продукты и сервисы со сложными пользовательскими сценариями, где интерфейс должен всё упростить. Сейчас работаю в Лаборатории Касперского.',
     )
     expect(getSiteCopy('en').aboutIntro).toBe(
-      'Product Designer. Over 5 years building B2B products: dashboards, internal tools, and services with complex user flows, where the interface has to make things simple. Currently at Kaspersky Lab.',
+      'Product Designer. Over 5 years building B2B products: dashboards, internal products, and services with complex user flows, where the interface has to make things simple. Currently at Kaspersky Lab.',
     )
     expect(getSiteCopy('ru').aboutPrevious).toBe('Раньше: T1')
     expect(getSiteCopy('en').aboutPrevious).toBe('Previously: T1')
