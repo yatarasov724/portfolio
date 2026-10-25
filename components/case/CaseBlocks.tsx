@@ -46,14 +46,10 @@ export default function CaseBlocks({ blocks }: { blocks: ChatBlock[] }) {
             return (
               <div key={i} className="max-w-3xl">
                 {block.heading && <p className="text-sm font-bold mb-2">{block.heading}</p>}
-                <ul className="border-b border-[color:var(--ink)]">
+                <ul className="space-y-3">
                   {block.items.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="grid grid-cols-[1.5rem_1fr] gap-x-2 border-t border-[color:var(--ink)] py-2 text-base leading-snug"
-                    >
-                      <span aria-hidden>—</span>
-                      <span>{item}</span>
+                    <li key={itemIndex} className="text-base md:text-[17px] leading-relaxed">
+                      {item}
                     </li>
                   ))}
                 </ul>

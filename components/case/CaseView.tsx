@@ -20,11 +20,9 @@ export default function CaseView({ slug }: { slug: CaseSlug }) {
         <h1 className="col-span-12 md:col-span-8 text-[clamp(32px,6vw,84px)] font-bold leading-[1] tracking-[-0.045em]">
           {data.title}
         </h1>
-        <ul className="col-span-12 md:col-span-4 text-sm border-t border-[color:var(--ink)] pt-2 space-y-1">
-          {data.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
+        <p className="col-span-12 md:col-span-4 md:self-end text-sm text-[color:var(--muted)]">
+          {data.tags.join(' · ')}
+        </p>
       </header>
 
       <div className="sw-grid pb-10">
@@ -34,7 +32,8 @@ export default function CaseView({ slug }: { slug: CaseSlug }) {
       </div>
 
       {data.sections.map((section, index) => (
-        <section key={section.heading} className="sw-grid gap-y-4 py-8 border-t border-[color:var(--ink)] first:border-t-0">
+        <section key={section.heading} className="sw-grid gap-y-4 py-8">
+          <div aria-hidden className="col-span-12 border-t border-[color:var(--ink)]" />
           <h2 className="col-span-12 md:col-span-3 flex gap-3 items-baseline text-sm font-bold md:pr-4">
             <span className="sw-label">{String(index + 1).padStart(2, '0')}</span>
             <span>{section.heading}</span>
