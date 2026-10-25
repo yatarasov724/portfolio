@@ -26,11 +26,29 @@ describe('site copy', () => {
     expect(getSiteCopy('en').caseBack).toBe('← Work')
   })
 
-  it('about has three paragraphs and three skills', () => {
+  it('about intro and previous workplace', () => {
+    expect(getSiteCopy('ru').aboutIntro).toBe(
+      'Продуктовый дизайнер. Более 5 лет делаю B2B-продукты: дашборды, внутренние инструменты и сервисы со сложными пользовательскими сценариями, где интерфейс должен всё упростить. Сейчас работаю в Лаборатории Касперского.',
+    )
+    expect(getSiteCopy('en').aboutIntro).toBe(
+      'Product Designer. Over 5 years building B2B products: dashboards, internal tools, and services with complex user flows, where the interface has to make things simple. Currently at Kaspersky Lab.',
+    )
+    expect(getSiteCopy('ru').aboutPrevious).toBe('Раньше: T1')
+    expect(getSiteCopy('en').aboutPrevious).toBe('Previously: T1')
+  })
+
+  it('about has three skills', () => {
     for (const language of ['ru', 'en'] as const) {
-      const copy = getSiteCopy(language)
-      expect(copy.aboutParagraphs).toHaveLength(3)
-      expect(copy.skills).toHaveLength(3)
+      expect(getSiteCopy(language).skills).toHaveLength(3)
+    }
+  })
+
+  it('does not name the internal product (KICS) anywhere', () => {
+    for (const language of ['ru', 'en'] as const) {
+      const text = collectStrings(getSiteCopy(language)).join(' ').toLowerCase()
+      expect(text).not.toContain('kics')
+      expect(text).not.toContain('industrial')
+      expect(text).not.toContain('промышленн')
     }
   })
 

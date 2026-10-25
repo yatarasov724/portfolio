@@ -24,10 +24,9 @@ export default function Home() {
 
       <section id="about" className="sw-grid scroll-mt-4 mt-24 gap-y-6">
         <h2 className="sw-label col-span-12 md:col-span-3 border-t border-[color:var(--ink)] pt-3">{copy.aboutLabel}</h2>
-        <div className="col-span-12 md:col-span-9 md:border-t border-[color:var(--ink)] md:pt-3 space-y-4 text-base md:text-lg leading-snug max-w-3xl">
-          {copy.aboutParagraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+        <div className="col-span-12 md:col-span-9 md:border-t border-[color:var(--ink)] md:pt-3 max-w-3xl">
+          <p className="text-xl md:text-2xl leading-snug tracking-[-0.01em]">{copy.aboutIntro}</p>
+          <p className="mt-4 text-sm text-[color:var(--muted)]">{copy.aboutPrevious}</p>
         </div>
 
         <ul className="col-span-12 md:col-start-4 md:col-span-9 mt-6">
