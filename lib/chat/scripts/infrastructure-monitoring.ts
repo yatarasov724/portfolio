@@ -33,8 +33,8 @@ export function getInfrastructureMonitoringChat(language: 'en' | 'ru'): ChatScri
           {
             type: 'image',
             src: `${IMG}/laptop-dashboard-2.png`,
-            alt: language === 'ru' ? 'Дашборд для топ-менеджмента, альтернативный вид' : 'Executive dashboard, alternate view',
-            caption: language === 'ru' ? 'Альтернативный вид дашборда' : 'Alternate dashboard view',
+            alt: language === 'ru' ? 'Дашборд для топ-менеджмента, продолжение экрана' : 'Executive dashboard, continued',
+            caption: language === 'ru' ? 'Продолжение экрана дашборда' : 'Dashboard screen, continued',
           },
         ],
       },
@@ -165,12 +165,12 @@ export function getInfrastructureMonitoringChat(language: 'en' | 'ru'): ChatScri
               ? [
                   'Изначально сервис разрабатывался на Angular, но в связи с требованиями руководства встала задача перейти на единую B2B дизайн-систему на React.',
                   'Вместе с командой дизайн-системы адаптировал существующие компоненты под специфику дашборда: карточки статистики, диаграммы, таблицы и статусы инфраструктуры.',
-                  'Стиль: строгий, корпоративный, читаемый, ориентированный на данные. Единообразие с другими B2B-продуктами компании обеспечило быструю адаптацию пользователей.',
+                  'В итоге требование руководства о переходе на единую дизайн-систему было выполнено: интерфейс не отличается от других B2B-продуктов компании, что упростило и ускорило адаптацию пользователей.',
                 ]
               : [
                   'The service was initially built on Angular, but management required migrating to a unified B2B design system on React.',
                   'Together with the design system team, I adapted existing components to the dashboard specifics: stat cards, charts, tables, and infrastructure statuses.',
-                  'Style: strict, corporate, readable, data-oriented. Consistency with the company\'s other B2B products enabled fast user adaptation.',
+                  'As a result, management\'s requirement to migrate to a unified design system was fulfilled: the interface is consistent with the company\'s other B2B products, making user adaptation simpler and faster.',
                 ],
           },
         ],
@@ -204,8 +204,8 @@ export function getInfrastructureMonitoringChat(language: 'en' | 'ru'): ChatScri
           {
             type: 'text',
             content: language === 'ru'
-              ? 'Переработанный интерфейс карточки сервиса с улучшенной навигацией: вертикальная боковая панель заменила горизонтальные вкладки, что сделало интерфейс современнее и читаемее.'
-              : 'Redesigned service card interface with improved navigation: a vertical sidebar replaced horizontal tabs, making the interface more modern and readable.',
+              ? 'Карточка сервиса.'
+              : 'Service card.',
           },
           {
             type: 'image',
@@ -280,14 +280,6 @@ export function getInfrastructureMonitoringChat(language: 'en' | 'ru'): ChatScri
                   'Compliance and security staff started finding deviations faster thanks to automated visualization and detailed navigation from the big picture to specific data.',
                   'The interface became visually standardized and understandable for non-tech users.',
                 ],
-          },
-          {
-            type: 'metrics',
-            items: [
-              { value: language === 'ru' ? 'Часы → минуты' : 'Hours → minutes', label: language === 'ru' ? 'генерация отчётов' : 'report generation' },
-              { value: language === 'ru' ? '1 окно' : '1 window', label: language === 'ru' ? 'вместо ручных выгрузок' : 'instead of manual exports' },
-              { value: 'Real-time', label: language === 'ru' ? 'данные без ожидания' : 'data with no waiting' },
-            ],
           },
         ],
       },

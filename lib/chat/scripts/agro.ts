@@ -107,12 +107,10 @@ export function getAgroChat(language: 'en' | 'ru'): ChatScript {
               ? [
                   'Сегментировал аудиторию (фермеры, агрономы, управляющие) и зафиксировал их роли, цели и точки боли: разрозненные данные, планирование «в головах», отсутствие единой картины по полям и культурам.',
                   'Совместно с агрономом провёл интервью и наблюдал за реальными процессами: как принимают решения по севу и обработке, какие данные нужны в поле и в офисе, как работают с погодой и спутниковыми индексами.',
-                  'Сформулировал ключевые сценарии и базовый функционал первой итерации, опираясь на критичные для сезона задачи: мониторинг полей, планирование работ, анализ урожайности.',
                 ]
               : [
                   'Segmented the audience (farmers, agronomists, managers) and recorded their roles, goals, and pain points: fragmented data, planning "in their heads", no unified picture of fields and crops.',
                   'Together with an agronomist, conducted interviews and observed real processes: how sowing and treatment decisions are made, what data is needed in the field and office, how weather and satellite indices are used.',
-                  'Formulated key scenarios and the base functionality for the first iteration, based on season-critical tasks: field monitoring, work planning, yield analysis.',
                 ],
           },
         ],
@@ -130,30 +128,6 @@ export function getAgroChat(language: 'en' | 'ru'): ChatScript {
             items: language === 'ru'
               ? ['Выстроил структуру от целей пользователей: обзор хозяйства → поля и культуры → детали по полю (карты, индексы, погода, история) → планирование и аналитика.']
               : ['Built the structure from user goals: farm overview → fields and crops → field details (maps, indices, weather, history) → planning and analytics.'],
-          },
-        ],
-      },
-      {
-        role: 'visitor',
-        blocks: [{ type: 'text', content: language === 'ru' ? 'Как расставлял приоритеты?' : 'How did you prioritize?' }],
-      },
-      {
-        role: 'author',
-        blocks: [
-          {
-            type: 'list',
-            heading: language === 'ru' ? 'Анализ и приоритизация' : 'Analysis and prioritization',
-            items: language === 'ru'
-              ? [
-                  'Провёл сравнительный анализ аналогов и решений в AgTech: что уже решают пользователи, какие паттерны привычны, где есть разрывы.',
-                  'Приоритизировал бэклог под первый релиз: зафиксировал объём первой итерации и критерии «готово» для каждого блока.',
-                  'Разложил ключевые сценарии на описания и требования к экранам, чтобы валидация и дизайн опирались на одни и те же допущения.',
-                ]
-              : [
-                  'Conducted a comparative analysis of AgTech analogues and solutions: what users already solve, which patterns are familiar, where the gaps are.',
-                  'Prioritized the backlog for the first release: fixed the scope of the first iteration and "done" criteria for each block.',
-                  'Broke key scenarios down into descriptions and screen requirements, so validation and design relied on the same assumptions.',
-                ],
           },
         ],
       },

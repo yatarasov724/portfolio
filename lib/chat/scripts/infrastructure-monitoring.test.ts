@@ -23,16 +23,6 @@ describe('getInfrastructureMonitoringChat', () => {
     expect(text.toLowerCase()).not.toContain('i see you')
   })
 
-  it('includes the three result metrics', () => {
-    const metricsBlock = getInfrastructureMonitoringChat('ru').messages
-      .flatMap((m) => m.blocks)
-      .find((b) => b.type === 'metrics')
-    expect(metricsBlock).toBeDefined()
-    if (metricsBlock?.type === 'metrics') {
-      expect(metricsBlock.items).toHaveLength(3)
-    }
-  })
-
   it('lists all eight user roles', () => {
     const listBlocks = getInfrastructureMonitoringChat('ru').messages
       .flatMap((m) => m.blocks)
