@@ -1,0 +1,58 @@
+import type { CaseSlug, Language } from './types'
+
+export const CASE_HEADINGS: Record<CaseSlug, Record<Language, string[]>> = {
+  'infrastructure-monitoring': {
+    ru: [
+      'Проблема',
+      'Цели',
+      'Исследование',
+      'После исследования',
+      'Интерфейс',
+      'Аудитория',
+      'Экраны',
+      'Состояния интерфейса',
+      'Итоги',
+    ],
+    en: [
+      'Problem',
+      'Goals',
+      'Research',
+      'After the research',
+      'Interface',
+      'Audience',
+      'Screens',
+      'Interface states',
+      'Outcome',
+    ],
+  },
+  'agro-platform': {
+    ru: [
+      'Проблема',
+      'Цели',
+      'Исследование',
+      'Информационная архитектура',
+      'Валидация',
+      'Интерфейс и дизайн-система',
+      'Роль в команде',
+      'Аудитория',
+      'Что спроектировано',
+      'Управление полями',
+      'Состав платформы',
+      'Итоги',
+    ],
+    en: [
+      'Problem',
+      'Goals',
+      'Research',
+      'Information architecture',
+      'Validation',
+      'Interface and design system',
+      'Role on the team',
+      'Audience',
+      'What was designed',
+      'Field management',
+      'Platform scope',
+      'Outcome',
+    ],
+  },
+}
