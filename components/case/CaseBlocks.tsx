@@ -4,8 +4,12 @@ import { useState } from 'react'
 import ImageModal from '@/components/ImageModal'
 import type { ChatBlock } from '@/lib/chat/types'
 
-function assertNever(value: never): never {
-  throw new Error(`Unhandled block: ${JSON.stringify(value)}`)
+// Компилятор требует обработать все типы блоков; в рантайме неизвестный блок пропускаем, а не роняем страницу
+function skipUnknown(value: never): null {
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn('Unknown case block skipped:', value)
+  }
+  return null
 }
 
 export default function CaseBlocks({ blocks }: { blocks: ChatBlock[] }) {
@@ -88,7 +92,7 @@ export default function CaseBlocks({ blocks }: { blocks: ChatBlock[] }) {
               </p>
             )
           default:
-            return assertNever(block)
+            return skipUnknown(block)
         }
       })}
 
