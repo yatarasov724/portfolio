@@ -12,13 +12,13 @@ const scripts = {
 } as const
 
 describe('cases', () => {
-  it('infra: 9 sections, agro: 12 sections', () => {
-    expect(getCase('infrastructure-monitoring', 'ru').sections.length).toBe(9)
+  it('infra: 5 authored sections, agro: 12 sections', () => {
+    expect(getCase('infrastructure-monitoring', 'ru').sections.length).toBe(5)
     expect(getCase('agro-platform', 'ru').sections.length).toBe(12)
   })
 
   it('keeps every author block (no content loss)', () => {
-    for (const slug of Object.keys(scripts) as CaseSlug[]) {
+    for (const slug of ['agro-platform'] as CaseSlug[]) {
       for (const language of languages) {
         const authorBlocks = scripts[slug](language)
           .messages.filter((m) => m.role === 'author')
@@ -38,6 +38,14 @@ describe('cases', () => {
           if (language === 'en') expect(section.heading).not.toMatch(/[а-яё]/i)
         }
       }
+    }
+  })
+
+  it('infra case states role, team and outcome, never names the product', () => {
+    for (const language of languages) {
+      const data = getCase('infrastructure-monitoring', language)
+      expect(data.facts.length).toBe(4)
+      expect(JSON.stringify(data).toLowerCase()).not.toMatch(/kics|industrial|промышленн/)
     }
   })
 

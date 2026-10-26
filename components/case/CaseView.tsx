@@ -25,6 +25,17 @@ export default function CaseView({ slug }: { slug: CaseSlug }) {
         </p>
       </header>
 
+      {data.facts.length > 0 && (
+        <dl className="sw-grid gap-y-3 pb-10">
+          {data.facts.map((fact) => (
+            <div key={fact.label} className="col-span-12 grid grid-cols-subgrid items-baseline border-t border-[color:var(--ink)] pt-2">
+              <dt className="sw-label col-span-12 md:col-span-3">{fact.label}</dt>
+              <dd className="col-span-12 md:col-span-9 text-base md:text-[17px]">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
       <div className="sw-grid pb-10">
         <div className="col-span-12 md:col-start-4 md:col-span-9">
           <CaseBlocks blocks={data.intro} />

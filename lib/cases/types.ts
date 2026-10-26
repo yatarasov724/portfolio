@@ -9,6 +9,19 @@ export interface CaseSection {
   blocks: ChatBlock[]
 }
 
+export interface CaseFact {
+  label: string
+  value: string
+}
+
+export interface CaseContent {
+  title: string
+  tags: string[]
+  facts: CaseFact[]
+  intro: ChatBlock[]
+  sections: CaseSection[]
+}
+
 export interface CaseLink {
   slug: CaseSlug
   number: string
@@ -22,6 +35,7 @@ export interface CaseData {
   indexTitle: string
   indexMeta: string
   tags: string[]
+  facts: CaseFact[]
   intro: ChatBlock[]
   sections: CaseSection[]
   prev: CaseLink | null
