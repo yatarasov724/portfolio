@@ -50,6 +50,13 @@ describe('cases', () => {
     expect(agro.prev?.slug).toBe('infrastructure-monitoring')
   })
 
+  it('tags are translated', () => {
+    expect(getCase('infrastructure-monitoring', 'ru').tags).toEqual(['B2B', 'Аналитика', 'ИБ', '2025'])
+    expect(getCase('infrastructure-monitoring', 'en').tags).toEqual(['B2B', 'Analytics', 'Info sec', '2025'])
+    expect(getCase('agro-platform', 'ru').tags).toEqual(['B2B', 'Агротех', '2023–2024'])
+    expect(getCase('agro-platform', 'en').tags).toEqual(['B2B', 'AgTech', '2023–2024'])
+  })
+
   it('index meta', () => {
     expect(getCase('infrastructure-monitoring', 'ru').indexMeta).toBe('B2B · 2025')
     expect(getCase('agro-platform', 'ru').indexMeta).toBe('B2B · 2023–2024')
