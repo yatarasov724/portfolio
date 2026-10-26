@@ -15,8 +15,8 @@ describe('site copy', () => {
   })
 
   it('specialty', () => {
-    expect(getSiteCopy('ru').specialty).toBe('B2B · сложные системы · 5+ лет')
-    expect(getSiteCopy('en').specialty).toBe('B2B · complex systems · 5+ years')
+    expect(getSiteCopy('ru').specialty).toBe('Дашборды и платформы для B2B. Два кейса ниже.')
+    expect(getSiteCopy('en').specialty).toBe('Dashboards and platforms for B2B. Two case studies below.')
   })
 
   it('nav labels', () => {

@@ -30,7 +30,7 @@ export function getSiteCopy(language: Language): SiteCopy {
   return {
     name: 'Yaroslav Tarasov',
     headline: ru ? 'Продуктовый дизайнер' : 'Product Designer',
-    specialty: ru ? 'B2B · сложные системы · 5+ лет' : 'B2B · complex systems · 5+ years',
+    specialty: ru ? 'Дашборды и платформы для B2B. Два кейса ниже.' : 'Dashboards and platforms for B2B. Two case studies below.',
     nav: {
       work: ru ? 'Работы' : 'Work',
       about: ru ? 'Обо мне' : 'About',
