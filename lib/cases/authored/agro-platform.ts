@@ -17,7 +17,7 @@ export function getAgroPlatformCase(language: Language): CaseContent {
 
   return {
     title: pick('Агроплатформа', 'Agricultural platform'),
-    tags: ['B2B', 'AgTech', '2023–2024'],
+    tags: pick(['B2B', 'Агротех', '2023–2024'], ['B2B', 'AgTech', '2023–2024']),
     facts: [
       {
         label: pick('Роль', 'Role'),

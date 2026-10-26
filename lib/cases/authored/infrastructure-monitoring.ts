@@ -17,7 +17,7 @@ export function getInfrastructureMonitoringCase(language: Language): CaseContent
 
   return {
     title: pick('Дашборд для мониторинга инфраструктуры', 'Infrastructure monitoring dashboard'),
-    tags: ['B2B', 'Analytics', 'Info sec', '2025'],
+    tags: pick(['B2B', 'Аналитика', 'ИБ', '2025'], ['B2B', 'Analytics', 'Info sec', '2025']),
     facts: [
       {
         label: pick('Роль', 'Role'),
