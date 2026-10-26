@@ -1,29 +1,14 @@
-import { getAgroChat } from '@/lib/chat/scripts/agro'
-import { getInfrastructureMonitoringChat } from '@/lib/chat/scripts/infrastructure-monitoring'
-import type { ChatScript } from '@/lib/chat/types'
+import { getAgroPlatformCase } from './authored/agro-platform'
 import { getInfrastructureMonitoringCase } from './authored/infrastructure-monitoring'
-import { chatToCase } from './fromChat'
-import { CASE_HEADINGS } from './headings'
 import type { CaseContent, CaseData, CaseLink, CaseSlug, Language } from './types'
 
 export type { CaseContent, CaseData, CaseFact, CaseLink, CaseSection, CaseSlug, Language } from './types'
 
 export const CASE_SLUGS: readonly CaseSlug[] = ['infrastructure-monitoring', 'agro-platform']
 
-const SCRIPTS: Record<CaseSlug, (language: Language) => ChatScript> = {
-  'infrastructure-monitoring': getInfrastructureMonitoringChat,
-  'agro-platform': getAgroChat,
-}
-
-const AUTHORED: Partial<Record<CaseSlug, (language: Language) => CaseContent>> = {
+const CONTENT: Record<CaseSlug, (language: Language) => CaseContent> = {
   'infrastructure-monitoring': getInfrastructureMonitoringCase,
-}
-
-function loadContent(slug: CaseSlug, language: Language): CaseContent {
-  const authored = AUTHORED[slug]
-  if (authored) return authored(language)
-  const script = SCRIPTS[slug](language)
-  return { title: script.title, tags: script.tags, facts: [], ...chatToCase(script, CASE_HEADINGS[slug][language]) }
+  'agro-platform': getAgroPlatformCase,
 }
 
 const INDEX_TITLES: Record<CaseSlug, Record<Language, string>> = {
@@ -42,7 +27,7 @@ function toLink(slug: CaseSlug, language: Language): CaseLink {
 
 export function getCase(slug: CaseSlug, language: Language): CaseData {
   const index = CASE_SLUGS.indexOf(slug)
-  const content = loadContent(slug, language)
+  const content = CONTENT[slug](language)
   const prevSlug = CASE_SLUGS[index - 1]
   const nextSlug = CASE_SLUGS[index + 1]
 

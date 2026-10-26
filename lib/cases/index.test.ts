@@ -1,37 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import { getCase, getAllCases } from '@/lib/cases'
-import { chatToCase } from '@/lib/cases/fromChat'
-import { getAgroChat } from '@/lib/chat/scripts/agro'
-import { getInfrastructureMonitoringChat } from '@/lib/chat/scripts/infrastructure-monitoring'
 import type { CaseSlug, Language } from '@/lib/cases/types'
 
 const languages: Language[] = ['ru', 'en']
-const scripts = {
-  'infrastructure-monitoring': getInfrastructureMonitoringChat,
-  'agro-platform': getAgroChat,
-} as const
+const slugs: CaseSlug[] = ['infrastructure-monitoring', 'agro-platform']
 
 describe('cases', () => {
-  it('infra: 5 authored sections, agro: 12 sections', () => {
+  it('both cases: 5 authored sections', () => {
     expect(getCase('infrastructure-monitoring', 'ru').sections.length).toBe(5)
-    expect(getCase('agro-platform', 'ru').sections.length).toBe(12)
-  })
-
-  it('keeps every author block (no content loss)', () => {
-    for (const slug of ['agro-platform'] as CaseSlug[]) {
-      for (const language of languages) {
-        const authorBlocks = scripts[slug](language)
-          .messages.filter((m) => m.role === 'author')
-          .reduce((sum, m) => sum + m.blocks.length, 0)
-        const data = getCase(slug, language)
-        const caseBlocks = data.intro.length + data.sections.reduce((sum, s) => sum + s.blocks.length, 0)
-        expect(caseBlocks).toBe(authorBlocks)
-      }
-    }
+    expect(getCase('agro-platform', 'ru').sections.length).toBe(5)
   })
 
   it('headings exist in both languages', () => {
-    for (const slug of Object.keys(scripts) as CaseSlug[]) {
+    for (const slug of slugs) {
       for (const language of languages) {
         for (const section of getCase(slug, language).sections) {
           expect(section.heading.trim()).not.toBe('')
@@ -49,8 +30,15 @@ describe('cases', () => {
     }
   })
 
-  it('chatToCase throws on heading mismatch', () => {
-    expect(() => chatToCase(getAgroChat('ru'), ['x'])).toThrow()
+  it('agro case: five modules, six roles, no fabricated metrics, one designer', () => {
+    for (const language of languages) {
+      const data = getCase('agro-platform', language)
+      const blocks = [...data.intro, ...data.sections.flatMap((s) => s.blocks)]
+      expect(blocks.some((b) => b.type === 'metrics')).toBe(false)
+      expect(blocks.find((b) => b.type === 'chips' && b.items.length === 5)).toBeDefined()
+      expect(blocks.find((b) => b.type === 'list' && b.items.length === 6)).toBeDefined()
+      expect(data.facts.length).toBe(4)
+    }
   })
 
   it('prev/next', () => {
